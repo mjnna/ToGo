@@ -15,6 +15,8 @@ PODS:
     - FBSDKLoginKit/Login (= 9.1.0)
   - FBSDKLoginKit/Login (9.1.0):
     - FBSDKCoreKit (~> 9.1.0)
+  - Firebase/Analytics (5.20.1):
+    - Firebase/Core
   - Firebase/Core (5.20.1):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.8.0)
@@ -166,6 +168,7 @@ PODS:
 DEPENDENCIES:
   - Cosmos
   - FBSDKLoginKit
+  - Firebase/Analytics
   - Firebase/Core (= 5.20.1)
   - Firebase/Messaging
   - FirebaseInstanceID
@@ -248,6 +251,6 @@ SPEC CHECKSUMS:
   SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
   TransitionButton: 36283346e17c64775a1b3bc3a7a72940a367de1f
 
-PODFILE CHECKSUM: 28c5f46a9cd7a28febf3d96e9d31dbab8a2c64d2
+PODFILE CHECKSUM: 39acd7924148ae13629c11bbd17ce8ea1b5b9a2a
 
 COCOAPODS: 1.10.1
