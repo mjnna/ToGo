@@ -1,7 +1,31 @@
 PODS:
   - Alamofire (5.4.2)
+  - AppAuth (1.4.0):
+    - AppAuth/Core (= 1.4.0)
+    - AppAuth/ExternalUserAgent (= 1.4.0)
+  - AppAuth/Core (1.4.0)
+  - AppAuth/ExternalUserAgent (1.4.0)
   - Cosmos (23.0.0)
+  - FBSDKCoreKit (9.1.0):
+    - FBSDKCoreKit/Basics (= 9.1.0)
+    - FBSDKCoreKit/Core (= 9.1.0)
+  - FBSDKCoreKit/Basics (9.1.0)
+  - FBSDKCoreKit/Core (9.1.0):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (9.1.0):
+    - FBSDKLoginKit/Login (= 9.1.0)
+  - FBSDKLoginKit/Login (9.1.0):
+    - FBSDKCoreKit (~> 9.1.0)
+  - FloatingPanel (2.3.0)
   - FSPagerView (0.8.3)
+  - GoogleSignIn (5.0.2):
+    - AppAuth (~> 1.2)
+    - GTMAppAuth (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GTMAppAuth (1.2.1):
+    - AppAuth/Core (~> 1.4)
+    - GTMSessionFetcher/Core (~> 1.5)
+  - GTMSessionFetcher/Core (1.5.0)
   - IQKeyboardManagerSwift (6.5.6)
   - lottie-ios (3.2.1)
   - MaterialComponents/ActivityIndicator (124.1.1):
@@ -71,24 +95,36 @@ PODS:
   - SDWebImage (5.11.0):
     - SDWebImage/Core (= 5.11.0)
   - SDWebImage/Core (5.11.0)
+  - SwiftyGif (5.4.0)
   - TransitionButton (0.5.3)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
   - Cosmos
+  - FBSDKLoginKit
+  - FloatingPanel
   - FSPagerView
+  - GoogleSignIn
   - IQKeyboardManagerSwift
   - lottie-ios
   - MaterialComponents/ActivityIndicator
   - MaterialComponents/TextFields
   - SDWebImage
+  - SwiftyGif
   - TransitionButton
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - AppAuth
     - Cosmos
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FloatingPanel
     - FSPagerView
+    - GoogleSignIn
+    - GTMAppAuth
+    - GTMSessionFetcher
     - IQKeyboardManagerSwift
     - lottie-ios
     - MaterialComponents
@@ -97,12 +133,20 @@ SPEC REPOS:
     - MotionAnimator
     - MotionInterchange
     - SDWebImage
+    - SwiftyGif
     - TransitionButton
 
 SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
+  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
+  FBSDKCoreKit: a00fe2efd780c195a5e09201bf51c56106245b40
+  FBSDKLoginKit: d98498c598ec09de657385a9349a1f21119b7f86
+  FloatingPanel: 373478513a197cf140abd219ca9a9c049967332b
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
+  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
+  GTMAppAuth: 5b53231ef6920f149ab84b2969cb0ab572da3077
+  GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   lottie-ios: 106e92eaf11fbed0a76590b4cdb9b5ec26123ff7
   MaterialComponents: b9f58f24bf74588a83b2dce05802a11aaed5257d
@@ -111,8 +155,9 @@ SPEC CHECKSUMS:
   MotionAnimator: 5f99d7c9592928c0f28a66283eda9c3b657dc480
   MotionInterchange: 13adae439b377e31d1674cc165539d50e1d1566a
   SDWebImage: 7acbb57630ac7db4a495547fb73916ff3e432f6b
+  SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
   TransitionButton: 36283346e17c64775a1b3bc3a7a72940a367de1f
 
-PODFILE CHECKSUM: 6ad931e6baacfa995ae63b93837a05de811d2cf4
+PODFILE CHECKSUM: 6d5ff1e608aa2a4b17ee9723002e3cbf9995d547
 
 COCOAPODS: 1.10.1

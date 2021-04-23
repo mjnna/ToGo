@@ -30,9 +30,9 @@ pod 'lottie-ios'
 ##amr
 #pod 'Firebase/Analytics'
 pod 'Cosmos'
-#pod 'SwiftyGif'
+pod 'SwiftyGif'
 #
-#pod 'FloatingPanel'
-#pod 'GoogleSignIn'
-#pod 'FBSDKLoginKit'
+pod 'FloatingPanel'
+pod 'GoogleSignIn'
+pod 'FBSDKLoginKit'
 end
