@@ -15,23 +15,23 @@ target 'Mjnna_Delivery' do
 #pod 'Firebase/Messaging'
 #pod 'FirebaseInstanceID'
 #
-#pod 'MaterialComponents/ActivityIndicator'
+pod 'MaterialComponents/ActivityIndicator'
 #
-#pod 'IQKeyboardManagerSwift'
+pod 'IQKeyboardManagerSwift'
 #
-#pod 'FSPagerView'
+pod 'FSPagerView'
 ##pod 'WhatsNewKit'
 #
 pod 'TransitionButton'
 pod 'MaterialComponents/TextFields'
 pod 'SDWebImage'
 #
-#pod 'lottie-ios'
+pod 'lottie-ios'
 #pod 'RealmSwift'
 ##amr
 #pod 'Firebase/Analytics'
-#pod 'Cosmos'
-#pod 'SwiftyGif'
+pod 'Cosmos'
+pod 'SwiftyGif'
 #
 #pod 'FloatingPanel'
 #pod 'GoogleSignIn'
