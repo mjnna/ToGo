@@ -17,6 +17,9 @@ PODS:
     - FBSDKCoreKit (~> 9.1.0)
   - FloatingPanel (2.3.0)
   - FSPagerView (0.8.3)
+  - GoogleMaps/Base (3.9.0)
+  - GooglePlaces (3.9.0):
+    - GoogleMaps/Base (= 3.9.0)
   - GoogleSignIn (5.0.2):
     - AppAuth (~> 1.2)
     - GTMAppAuth (~> 1.0)
@@ -102,6 +105,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FloatingPanel
   - FSPagerView
+  - GooglePlaces (= 3.9.0)
   - GoogleSignIn
   - IQKeyboardManagerSwift
   - lottie-ios
@@ -119,6 +123,8 @@ SPEC REPOS:
     - FBSDKLoginKit
     - FloatingPanel
     - FSPagerView
+    - GoogleMaps
+    - GooglePlaces
     - GoogleSignIn
     - GTMAppAuth
     - GTMSessionFetcher
@@ -140,6 +146,8 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: d98498c598ec09de657385a9349a1f21119b7f86
   FloatingPanel: 373478513a197cf140abd219ca9a9c049967332b
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
+  GoogleMaps: 4b5346bddfe6911bb89155d43c903020170523ac
+  GooglePlaces: 1634d019549b969d40fe0ccb0b9513055adebe01
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GTMAppAuth: 5b53231ef6920f149ab84b2969cb0ab572da3077
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
