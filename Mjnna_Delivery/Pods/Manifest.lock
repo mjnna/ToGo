@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.4.2)
   - AppAuth (1.4.0):
     - AppAuth/Core (= 1.4.0)
     - AppAuth/ExternalUserAgent (= 1.4.0)
@@ -166,6 +167,7 @@ PODS:
   - TransitionButton (0.5.3)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.2)
   - Cosmos
   - FBSDKLoginKit
   - Firebase/Analytics
@@ -186,6 +188,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - AppAuth
     - Cosmos
     - FBSDKCoreKit
@@ -219,6 +222,7 @@ SPEC REPOS:
     - TransitionButton
 
 SPEC CHECKSUMS:
+  Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   FBSDKCoreKit: a00fe2efd780c195a5e09201bf51c56106245b40
@@ -251,6 +255,6 @@ SPEC CHECKSUMS:
   SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
   TransitionButton: 36283346e17c64775a1b3bc3a7a72940a367de1f
 
-PODFILE CHECKSUM: 39acd7924148ae13629c11bbd17ce8ea1b5b9a2a
+PODFILE CHECKSUM: 6f3f4918254807d947fc08b52596bb280bb53808
 
 COCOAPODS: 1.10.1

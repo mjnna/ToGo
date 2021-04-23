@@ -6,7 +6,7 @@ target 'Mjnna_Delivery' do
   use_frameworks!
 
   # Pods for Mjnna_Delivery
-#pod 'Alamofire', '~> 5.2'
+pod 'Alamofire', '~> 5.2'
 #
 #pod 'GoogleMaps', '= 3.9.0'
 pod 'GooglePlaces', '= 3.9.0'
