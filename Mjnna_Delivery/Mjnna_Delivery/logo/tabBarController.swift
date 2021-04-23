@@ -15,7 +15,7 @@ class tabBarController: UITabBarController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-    
+
         // setting the tabs titles
         self.tabBar.items?[0].title = "Home".localized
         self.tabBar.items?[1].title = "Shops".localized

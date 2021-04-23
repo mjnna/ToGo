@@ -885,6 +885,7 @@
 				358CC379244D94F100AE3A20 /* Frameworks */,
 				358CC37A244D94F100AE3A20 /* Resources */,
 				358CC73F244D985800AE3A20 /* Embed Frameworks */,
+				CE1DFB3D4AF250D386F0014C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -983,6 +984,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		CE1DFB3D4AF250D386F0014C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mjnna_Delivery/Pods-Mjnna_Delivery-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mjnna_Delivery/Pods-Mjnna_Delivery-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mjnna_Delivery/Pods-Mjnna_Delivery-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E9D75FFEDDA6BCBEC15BAA0A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
