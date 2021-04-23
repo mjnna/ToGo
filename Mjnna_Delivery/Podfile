@@ -9,7 +9,7 @@ target 'Mjnna_Delivery' do
 #pod 'Alamofire', '~> 5.2'
 #
 #pod 'GoogleMaps', '= 3.9.0'
-#pod 'GooglePlaces', '= 3.9.0'
+pod 'GooglePlaces', '= 3.9.0'
 #
 #pod 'Firebase/Core', '5.20.1'
 #pod 'Firebase/Messaging'
@@ -33,7 +33,8 @@ pod 'lottie-ios'
 pod 'Cosmos'
 pod 'SwiftyGif'
 #
-#pod 'FloatingPanel'
-#pod 'GoogleSignIn'
-#pod 'FBSDKLoginKit'
+pod 'FloatingPanel'
+
+pod 'GoogleSignIn'
+pod 'FBSDKLoginKit'
 end
