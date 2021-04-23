@@ -1592,6 +1592,14 @@ SOFTWARE.
 
 Copyright 2019 Google
 
+## GoogleMaps
+
+Copyright 2020 Google
+
+## GooglePlaces
+
+Copyright 2020 Google
+
 ## GoogleSignIn
 
 Copyright 2019 Google
