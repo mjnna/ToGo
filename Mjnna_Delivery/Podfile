@@ -6,7 +6,7 @@ target 'Mjnna_Delivery' do
   use_frameworks!
 
   # Pods for Mjnna_Delivery
-pod 'Alamofire', '~> 5.2'
+#pod 'Alamofire', '~> 5.2'
 #
 #pod 'GoogleMaps', '= 3.9.0'
 #pod 'GooglePlaces', '= 3.9.0'
@@ -19,14 +19,14 @@ pod 'Alamofire', '~> 5.2'
 #
 #pod 'IQKeyboardManagerSwift'
 #
-pod 'FSPagerView'
+#pod 'FSPagerView'
 ##pod 'WhatsNewKit'
 #
-pod 'TransitionButton'
+#pod 'TransitionButton'
 #pod 'MaterialComponents/TextFields'
 #pod 'SDWebImage'
 #
-pod 'lottie-ios'
+#pod 'lottie-ios'
 #pod 'RealmSwift'
 ##amr
 #pod 'Firebase/Analytics'
