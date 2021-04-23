@@ -1,20 +1,110 @@
 PODS:
   - Alamofire (5.4.2)
+  - FSPagerView (0.8.3)
   - IQKeyboardManagerSwift (6.5.6)
+  - MaterialComponents/ActivityIndicator (124.1.1):
+    - MaterialComponents/Palettes
+    - MaterialComponents/private/Application
+    - MDFInternationalization
+    - MotionAnimator (~> 4.0)
+  - MaterialComponents/AnimationTiming (124.1.1)
+  - MaterialComponents/Availability (124.1.1)
+  - MaterialComponents/Buttons (124.1.1):
+    - MaterialComponents/Elevation
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+    - MaterialComponents/Typography
+    - MDFInternationalization
+    - MDFTextAccessibility
+  - MaterialComponents/Elevation (124.1.1):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Ink (124.1.1):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Palettes (124.1.1)
+  - MaterialComponents/private/Application (124.1.1)
+  - MaterialComponents/private/Color (124.1.1):
+    - MaterialComponents/Availability
+  - MaterialComponents/private/Math (124.1.1)
+  - MaterialComponents/Ripple (124.1.1):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/ShadowElevations (124.1.1)
+  - MaterialComponents/ShadowLayer (124.1.1):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/ShapeLibrary (124.1.1):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (124.1.1):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/TextFields (124.1.1):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Buttons
+    - MaterialComponents/Elevation
+    - MaterialComponents/Palettes
+    - MaterialComponents/private/Math
+    - MaterialComponents/Typography
+    - MDFInternationalization
+  - MaterialComponents/Typography (124.1.1):
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/Math
+    - MDFTextAccessibility
+  - MDFInternationalization (2.0.0)
+  - MDFTextAccessibility (2.0.1)
+  - MotionAnimator (4.0.1):
+    - MotionInterchange (~> 3.0)
+  - MotionInterchange (3.0.0)
+  - SDWebImage (5.11.0):
+    - SDWebImage/Core (= 5.11.0)
+  - SDWebImage/Core (5.11.0)
+  - TransitionButton (0.5.3)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - FSPagerView
   - IQKeyboardManagerSwift
+  - MaterialComponents/ActivityIndicator
+  - MaterialComponents/TextFields
+  - SDWebImage
+  - TransitionButton
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - FSPagerView
     - IQKeyboardManagerSwift
+    - MaterialComponents
+    - MDFInternationalization
+    - MDFTextAccessibility
+    - MotionAnimator
+    - MotionInterchange
+    - SDWebImage
+    - TransitionButton
 
 SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
+  FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  MaterialComponents: b9f58f24bf74588a83b2dce05802a11aaed5257d
+  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
+  MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
+  MotionAnimator: 5f99d7c9592928c0f28a66283eda9c3b657dc480
+  MotionInterchange: 13adae439b377e31d1674cc165539d50e1d1566a
+  SDWebImage: 7acbb57630ac7db4a495547fb73916ff3e432f6b
+  TransitionButton: 36283346e17c64775a1b3bc3a7a72940a367de1f
 
-PODFILE CHECKSUM: 8dccaa4cedc149f27fad4115bee2a5c4f7f2b369
+PODFILE CHECKSUM: 9b8f1f99856ea5a8b76e89cc4f23ab71939e4016
 
 COCOAPODS: 1.10.1

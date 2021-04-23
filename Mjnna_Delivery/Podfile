@@ -15,15 +15,15 @@ pod 'Alamofire', '~> 5.2'
 #pod 'Firebase/Messaging'
 #pod 'FirebaseInstanceID'
 #
-#pod 'MaterialComponents/ActivityIndicator'
+pod 'MaterialComponents/ActivityIndicator'
 #
 pod 'IQKeyboardManagerSwift'
 #
-#pod 'FSPagerView'
+pod 'FSPagerView'
 #
-#pod 'TransitionButton'
-#pod 'MaterialComponents/TextFields'
-#pod 'SDWebImage'
+pod 'TransitionButton'
+pod 'MaterialComponents/TextFields'
+pod 'SDWebImage'
 #
 #pod 'lottie-ios'
 #pod 'RealmSwift'
