@@ -1,7 +1,9 @@
 PODS:
   - Alamofire (5.4.2)
+  - Cosmos (23.0.0)
   - FSPagerView (0.8.3)
   - IQKeyboardManagerSwift (6.5.6)
+  - lottie-ios (3.2.1)
   - MaterialComponents/ActivityIndicator (124.1.1):
     - MaterialComponents/Palettes
     - MaterialComponents/private/Application
@@ -73,8 +75,10 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - Cosmos
   - FSPagerView
   - IQKeyboardManagerSwift
+  - lottie-ios
   - MaterialComponents/ActivityIndicator
   - MaterialComponents/TextFields
   - SDWebImage
@@ -83,8 +87,10 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Cosmos
     - FSPagerView
     - IQKeyboardManagerSwift
+    - lottie-ios
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
@@ -95,8 +101,10 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
+  Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  lottie-ios: 106e92eaf11fbed0a76590b4cdb9b5ec26123ff7
   MaterialComponents: b9f58f24bf74588a83b2dce05802a11aaed5257d
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
@@ -105,6 +113,6 @@ SPEC CHECKSUMS:
   SDWebImage: 7acbb57630ac7db4a495547fb73916ff3e432f6b
   TransitionButton: 36283346e17c64775a1b3bc3a7a72940a367de1f
 
-PODFILE CHECKSUM: 9b8f1f99856ea5a8b76e89cc4f23ab71939e4016
+PODFILE CHECKSUM: 6ad931e6baacfa995ae63b93837a05de811d2cf4
 
 COCOAPODS: 1.10.1

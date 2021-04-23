@@ -25,11 +25,11 @@ pod 'TransitionButton'
 pod 'MaterialComponents/TextFields'
 pod 'SDWebImage'
 #
-#pod 'lottie-ios'
+pod 'lottie-ios'
 #pod 'RealmSwift'
 ##amr
 #pod 'Firebase/Analytics'
-#pod 'Cosmos'
+pod 'Cosmos'
 #pod 'SwiftyGif'
 #
 #pod 'FloatingPanel'
