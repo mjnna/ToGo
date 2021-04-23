@@ -22,9 +22,9 @@ target 'Mjnna_Delivery' do
 #pod 'FSPagerView'
 ##pod 'WhatsNewKit'
 #
-#pod 'TransitionButton'
-#pod 'MaterialComponents/TextFields'
-#pod 'SDWebImage'
+pod 'TransitionButton'
+pod 'MaterialComponents/TextFields'
+pod 'SDWebImage'
 #
 #pod 'lottie-ios'
 #pod 'RealmSwift'
