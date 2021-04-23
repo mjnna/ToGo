@@ -11,7 +11,7 @@ target 'Mjnna_Delivery' do
 #pod 'GoogleMaps', '= 3.9.0'
 pod 'GooglePlaces', '= 3.9.0'
 #
-#pod 'Firebase/Core', '5.20.1'
+pod 'Firebase/Core', '5.20.1'
 #pod 'Firebase/Messaging'
 #pod 'FirebaseInstanceID'
 #
