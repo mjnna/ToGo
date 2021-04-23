@@ -71,7 +71,6 @@
 		5DD9CE4325A5C01900864383 /* TrackOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD9CE4225A5C01900864383 /* TrackOrderViewController.swift */; };
 		5DD9CE4525AA48A500864383 /* CheckOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD9CE4425AA48A500864383 /* CheckOutViewController.swift */; };
 		5DD9CE4725AC008200864383 /* OrderRejectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD9CE4625AC008200864383 /* OrderRejectedViewController.swift */; };
-		65AF4E47D13C9BC07E29566A /* Pods_Mjnna_Delivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4213A32172827A040E6CF6 /* Pods_Mjnna_Delivery.framework */; };
 		98CFCBC02477A48E00CC7C88 /* ProductCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCA942477A48900CC7C88 /* ProductCollectionModel.swift */; };
 		98CFCBC12477A48E00CC7C88 /* Productcategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCA952477A48900CC7C88 /* Productcategory.swift */; };
 		98CFCBC22477A48E00CC7C88 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCA962477A48900CC7C88 /* ListCollectionViewCell.swift */; };
@@ -163,6 +162,7 @@
 		98CFCCB22477A48E00CC7C88 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCBBA2477A48E00CC7C88 /* HomeModel.swift */; };
 		98CFCCB32477A48E00CC7C88 /* EmptyNewAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCBBC2477A48E00CC7C88 /* EmptyNewAddressView.swift */; };
 		98CFCCB42477A48E00CC7C88 /* EmptyNewAddress.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CFCBBD2477A48E00CC7C88 /* EmptyNewAddress.xib */; };
+		F80B92333C3F17C936D625CC /* Pods_Mjnna_Delivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C5EEED6F3A47ABF30625AD /* Pods_Mjnna_Delivery.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -179,6 +179,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0878828DC1F23D365F00D5B5 /* Pods-Mjnna_Delivery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mjnna_Delivery.debug.xcconfig"; path = "Target Support Files/Pods-Mjnna_Delivery/Pods-Mjnna_Delivery.debug.xcconfig"; sourceTree = "<group>"; };
 		185198D3261229B000369405 /* SocialAccounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccounts.swift; sourceTree = "<group>"; };
 		185198D526122B6900369405 /* ApisServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApisServices.swift; sourceTree = "<group>"; };
 		185198D72612488B00369405 /* Signin&upView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Signin&upView.swift"; sourceTree = "<group>"; };
@@ -215,9 +216,6 @@
 		358CC503244D968A00AE3A20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		358CC745244D989100AE3A20 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		35AE7D8F244EDF2800EE3EAA /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
-		457E95A45DCBD79E3D39FC15 /* Pods-Mjnna_Delivery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mjnna_Delivery.debug.xcconfig"; path = "Target Support Files/Pods-Mjnna_Delivery/Pods-Mjnna_Delivery.debug.xcconfig"; sourceTree = "<group>"; };
-		4B4213A32172827A040E6CF6 /* Pods_Mjnna_Delivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mjnna_Delivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4FFE13D713CF94A11068FD5E /* Pods-Mjnna_Delivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mjnna_Delivery.release.xcconfig"; path = "Target Support Files/Pods-Mjnna_Delivery/Pods-Mjnna_Delivery.release.xcconfig"; sourceTree = "<group>"; };
 		5D02228725F291DD00DE2B9F /* To Go KSA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "To Go KSA.entitlements"; sourceTree = "<group>"; };
 		5D54E34B24CD3296008C9995 /* SignInUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUpViewController.swift; sourceTree = "<group>"; };
 		5D54E36124CE8D8E008C9995 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
@@ -251,6 +249,7 @@
 		5DD9CE4225A5C01900864383 /* TrackOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackOrderViewController.swift; sourceTree = "<group>"; };
 		5DD9CE4425AA48A500864383 /* CheckOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutViewController.swift; sourceTree = "<group>"; };
 		5DD9CE4625AC008200864383 /* OrderRejectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRejectedViewController.swift; sourceTree = "<group>"; };
+		8A653E1F816D20AD8434D1D2 /* Pods-Mjnna_Delivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mjnna_Delivery.release.xcconfig"; path = "Target Support Files/Pods-Mjnna_Delivery/Pods-Mjnna_Delivery.release.xcconfig"; sourceTree = "<group>"; };
 		98CFCA762476CC0900CC7C88 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		98CFCA942477A48900CC7C88 /* ProductCollectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionModel.swift; sourceTree = "<group>"; };
 		98CFCA952477A48900CC7C88 /* Productcategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Productcategory.swift; sourceTree = "<group>"; };
@@ -347,6 +346,7 @@
 		98CFCBBA2477A48E00CC7C88 /* HomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		98CFCBBC2477A48E00CC7C88 /* EmptyNewAddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyNewAddressView.swift; sourceTree = "<group>"; };
 		98CFCBBD2477A48E00CC7C88 /* EmptyNewAddress.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyNewAddress.xib; sourceTree = "<group>"; };
+		A8C5EEED6F3A47ABF30625AD /* Pods_Mjnna_Delivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mjnna_Delivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -366,7 +366,7 @@
 				5DD9CE23259CC71000864383 /* CoreLocation.framework in Frameworks */,
 				5DD9CE21259CC70400864383 /* CoreData.framework in Frameworks */,
 				5DD9CE1F259CC6F300864383 /* AVFoundation.framework in Frameworks */,
-				65AF4E47D13C9BC07E29566A /* Pods_Mjnna_Delivery.framework in Frameworks */,
+				F80B92333C3F17C936D625CC /* Pods_Mjnna_Delivery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -847,8 +847,8 @@
 		D204FEB6BE1D917611D8F57D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				457E95A45DCBD79E3D39FC15 /* Pods-Mjnna_Delivery.debug.xcconfig */,
-				4FFE13D713CF94A11068FD5E /* Pods-Mjnna_Delivery.release.xcconfig */,
+				0878828DC1F23D365F00D5B5 /* Pods-Mjnna_Delivery.debug.xcconfig */,
+				8A653E1F816D20AD8434D1D2 /* Pods-Mjnna_Delivery.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -868,7 +868,7 @@
 				5DD9CE22259CC71000864383 /* CoreLocation.framework */,
 				5DD9CE20259CC70400864383 /* CoreData.framework */,
 				5DD9CE1C259CC6F300864383 /* AVFoundation.framework */,
-				4B4213A32172827A040E6CF6 /* Pods_Mjnna_Delivery.framework */,
+				A8C5EEED6F3A47ABF30625AD /* Pods_Mjnna_Delivery.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -880,13 +880,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 358CC390244D94F500AE3A20 /* Build configuration list for PBXNativeTarget "Mjnna_Delivery" */;
 			buildPhases = (
-				E9D75FFEDDA6BCBEC15BAA0A /* [CP] Check Pods Manifest.lock */,
+				95C6CAEFD60AB9093654D669 /* [CP] Check Pods Manifest.lock */,
 				358CC378244D94F100AE3A20 /* Sources */,
 				358CC379244D94F100AE3A20 /* Frameworks */,
 				358CC37A244D94F100AE3A20 /* Resources */,
 				358CC73F244D985800AE3A20 /* Embed Frameworks */,
-				CE1DFB3D4AF250D386F0014C /* [CP] Embed Pods Frameworks */,
-				EE7176072DEA62F2FD9ABBD5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -985,24 +983,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CE1DFB3D4AF250D386F0014C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Mjnna_Delivery/Pods-Mjnna_Delivery-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Mjnna_Delivery/Pods-Mjnna_Delivery-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mjnna_Delivery/Pods-Mjnna_Delivery-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E9D75FFEDDA6BCBEC15BAA0A /* [CP] Check Pods Manifest.lock */ = {
+		95C6CAEFD60AB9093654D669 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1022,23 +1003,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EE7176072DEA62F2FD9ABBD5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Mjnna_Delivery/Pods-Mjnna_Delivery-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Mjnna_Delivery/Pods-Mjnna_Delivery-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mjnna_Delivery/Pods-Mjnna_Delivery-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1289,7 +1253,7 @@
 		};
 		358CC391244D94F500AE3A20 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 457E95A45DCBD79E3D39FC15 /* Pods-Mjnna_Delivery.debug.xcconfig */;
+			baseConfigurationReference = 0878828DC1F23D365F00D5B5 /* Pods-Mjnna_Delivery.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1335,7 +1299,7 @@
 		};
 		358CC392244D94F500AE3A20 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4FFE13D713CF94A11068FD5E /* Pods-Mjnna_Delivery.release.xcconfig */;
+			baseConfigurationReference = 8A653E1F816D20AD8434D1D2 /* Pods-Mjnna_Delivery.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
