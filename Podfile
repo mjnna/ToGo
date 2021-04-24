@@ -21,6 +21,8 @@ pod 'IQKeyboardManagerSwift'
 
 pod 'FSPagerView'
 #pod 'WhatsNewKit'
+pod 'SwiftMessages'
+
 
 pod 'TransitionButton'
 pod 'MaterialComponents/TextFields'

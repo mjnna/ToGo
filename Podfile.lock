@@ -172,6 +172,9 @@ PODS:
   - SDWebImage (5.11.0):
     - SDWebImage/Core (= 5.11.0)
   - SDWebImage/Core (5.11.0)
+  - SwiftMessages (9.0.2):
+    - SwiftMessages/App (= 9.0.2)
+  - SwiftMessages/App (9.0.2)
   - SwiftyGif (5.4.0)
   - TransitionButton (0.5.3)
 
@@ -194,6 +197,7 @@ DEPENDENCIES:
   - MaterialComponents/TextFields
   - RealmSwift
   - SDWebImage
+  - SwiftMessages
   - SwiftyGif
   - TransitionButton
 
@@ -231,6 +235,7 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SDWebImage
+    - SwiftMessages
     - SwiftyGif
     - TransitionButton
 
@@ -267,9 +272,10 @@ SPEC CHECKSUMS:
   Realm: e523da9ade306c5ae87e85dc09fdef148d3e1cc1
   RealmSwift: 4f6758c3adbdcc87f7b7777107226532a077f61c
   SDWebImage: 7acbb57630ac7db4a495547fb73916ff3e432f6b
+  SwiftMessages: 77b847d1405f99046ffbd0d856bc7d73e6892686
   SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
   TransitionButton: 36283346e17c64775a1b3bc3a7a72940a367de1f
 
-PODFILE CHECKSUM: 85671ccce845e925c9846d972d6d40ca24970cd4
+PODFILE CHECKSUM: 1a24c23990cf8771420869b0a99ba55602b0d4b9
 
 COCOAPODS: 1.10.1

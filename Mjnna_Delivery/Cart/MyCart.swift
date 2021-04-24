@@ -45,9 +45,7 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //hi khaled
-        
+                
         self.navigationItem.title = NetworkManager.sharedInstance.language(key: "Cart")
         self.navigationController?.isNavigationBarHidden = false
         

@@ -365,7 +365,7 @@ class NetworkManager:NSObject{
         info.configureContent(title: NetworkManager.sharedInstance.language(key: "success"), body: msg)
         var infoConfig = SwiftMessages.defaultConfig
         infoConfig.presentationStyle = .top
-        infoConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar.rawValue)
+        infoConfig.presentationContext = .window(windowLevel: UIWindow.Level(rawValue: UIWindow.Level.statusBar.rawValue))
         infoConfig.duration = .automatic
         SwiftMessages.show(config: infoConfig, view: info)
     }
@@ -376,7 +376,7 @@ class NetworkManager:NSObject{
         info.button?.isHidden = true
         info.configureContent(title: NetworkManager.sharedInstance.language(key: "error"), body: msg)
         var infoConfig = SwiftMessages.defaultConfig
-        infoConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar.rawValue)
+        infoConfig.presentationContext = .window(windowLevel: UIWindow.Level(rawValue: UIWindow.Level.statusBar.rawValue))
         infoConfig.presentationStyle = .top
         infoConfig.dimMode = .gray(interactive: true)
         infoConfig.duration = .forever
@@ -389,7 +389,7 @@ class NetworkManager:NSObject{
         info.button?.isHidden = true
         info.configureContent(title: NetworkManager.sharedInstance.language(key: "warning"), body: msg)
         var infoConfig = SwiftMessages.defaultConfig
-        infoConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar.rawValue)
+        infoConfig.presentationContext = .window(windowLevel: UIWindow.Level(rawValue: UIWindow.Level.statusBar.rawValue))
         infoConfig.presentationStyle = .top
         //infoConfig.dimMode = .gray(interactive: true)
         infoConfig.duration = .automatic
@@ -402,7 +402,7 @@ class NetworkManager:NSObject{
         info.button?.isHidden = true
         info.configureContent(title: NetworkManager.sharedInstance.language(key: "info"), body: msg)
         var infoConfig = SwiftMessages.defaultConfig
-        infoConfig.presentationContext = .window(windowLevel:UIWindow.Level.statusBar.rawValue)
+        infoConfig.presentationContext = .window(windowLevel:UIWindow.Level(rawValue: UIWindow.Level.statusBar.rawValue))
         infoConfig.presentationStyle = .top
         infoConfig.duration = .automatic
         SwiftMessages.show(config: infoConfig, view: info)
@@ -414,7 +414,7 @@ class NetworkManager:NSObject{
         info.button?.isHidden = true
         info.configureContent(title: NetworkManager.sharedInstance.language(key: "info"), body: msg)
         var infoConfig = SwiftMessages.defaultConfig
-        infoConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar.rawValue)
+        infoConfig.presentationContext = .window(windowLevel: UIWindow.Level(rawValue: UIWindow.Level.statusBar.rawValue))
         infoConfig.presentationStyle = .top
         infoConfig.duration = .forever
         SwiftMessages.show(config: infoConfig, view: info)
@@ -426,7 +426,7 @@ class NetworkManager:NSObject{
         info.button?.isHidden = true
         info.configureContent(title: NetworkManager.sharedInstance.language(key: "info"), body: msg)
         var infoConfig = SwiftMessages.defaultConfig
-        infoConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar.rawValue)
+        infoConfig.presentationContext = .window(windowLevel: UIWindow.Level(rawValue: UIWindow.Level.statusBar.rawValue))
         infoConfig.presentationStyle = .bottom
         infoConfig.duration = .automatic
         SwiftMessages.show(config: infoConfig, view: info)
