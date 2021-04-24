@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="extracell" rowHeight="311" id="KGk-i7-Jjw" customClass="ExtraCartTableViewCell" customModule="Mjnna_Delivery" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="580" height="311"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="580" height="311"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zKE-SZ-57J">
+                        <rect key="frame" x="10" y="10" width="560" height="270"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lMG-6b-VJB">
+                                <rect key="frame" x="0.0" y="0.0" width="560" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKn-ge-O9q">
+                                        <rect key="frame" x="176.5" y="8" width="207" height="34"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="APPLY VOUCHAR CODE"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="4FZ-Re-KCd"/>
+                                    <constraint firstItem="UKn-ge-O9q" firstAttribute="centerX" secondItem="lMG-6b-VJB" secondAttribute="centerX" id="FDa-vv-Pms"/>
+                                    <constraint firstItem="UKn-ge-O9q" firstAttribute="centerY" secondItem="lMG-6b-VJB" secondAttribute="centerY" id="i4Q-Tp-Dvp"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KCd-OO-C4L">
+                                <rect key="frame" x="0.0" y="55" width="560" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o4Y-q3-mHx">
+                                        <rect key="frame" x="227.5" y="10" width="105" height="30"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="UPDATE CART"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="o4Y-q3-mHx" firstAttribute="centerY" secondItem="KCd-OO-C4L" secondAttribute="centerY" id="afn-Lu-MOC"/>
+                                    <constraint firstItem="o4Y-q3-mHx" firstAttribute="centerX" secondItem="KCd-OO-C4L" secondAttribute="centerX" id="xwv-YF-Tqt"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dom-9Q-DrP">
+                                <rect key="frame" x="0.0" y="110" width="560" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mih-Pg-6mh">
+                                        <rect key="frame" x="197.5" y="10" width="165" height="30"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="APPLY COUPON CODE"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="mih-Pg-6mh" firstAttribute="centerY" secondItem="dom-9Q-DrP" secondAttribute="centerY" id="JzS-Rm-2Sk"/>
+                                    <constraint firstItem="mih-Pg-6mh" firstAttribute="centerX" secondItem="dom-9Q-DrP" secondAttribute="centerX" id="f4Y-bg-1JK"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MAW-ch-3gh">
+                                <rect key="frame" x="0.0" y="165" width="560" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimate Shipping &amp; Taxes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIO-nl-6x2">
+                                        <rect key="frame" x="8" y="0.0" width="204.5" height="50"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VlK-TV-V5Y">
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="50"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="VlK-TV-V5Y" secondAttribute="trailing" id="6z0-e2-ZdO"/>
+                                    <constraint firstItem="VlK-TV-V5Y" firstAttribute="leading" secondItem="MAW-ch-3gh" secondAttribute="leading" id="DLM-Ez-yDd"/>
+                                    <constraint firstItem="VlK-TV-V5Y" firstAttribute="centerY" secondItem="MAW-ch-3gh" secondAttribute="centerY" id="EgO-kt-pvQ"/>
+                                    <constraint firstItem="tIO-nl-6x2" firstAttribute="leading" secondItem="MAW-ch-3gh" secondAttribute="leading" constant="8" id="JXG-5G-uU6"/>
+                                    <constraint firstAttribute="bottom" secondItem="VlK-TV-V5Y" secondAttribute="bottom" id="cfk-eo-Ids"/>
+                                    <constraint firstAttribute="bottom" secondItem="tIO-nl-6x2" secondAttribute="bottom" id="eZZ-Pk-zsf"/>
+                                    <constraint firstItem="VlK-TV-V5Y" firstAttribute="top" secondItem="MAW-ch-3gh" secondAttribute="top" id="iaP-Pu-W0c"/>
+                                    <constraint firstItem="tIO-nl-6x2" firstAttribute="top" secondItem="MAW-ch-3gh" secondAttribute="top" id="n66-hi-AX2"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yKl-wb-6jm">
+                                <rect key="frame" x="0.0" y="220" width="560" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEf-WD-HT1">
+                                        <rect key="frame" x="221.5" y="10" width="117" height="30"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="APPLY REWARD"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="TEf-WD-HT1" firstAttribute="centerX" secondItem="yKl-wb-6jm" secondAttribute="centerX" id="ASW-gc-C1x"/>
+                                    <constraint firstItem="TEf-WD-HT1" firstAttribute="centerY" secondItem="yKl-wb-6jm" secondAttribute="centerY" id="Pr2-GA-N3L"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="zKE-SZ-57J" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Mmr-qP-X9w"/>
+                    <constraint firstAttribute="bottom" secondItem="zKE-SZ-57J" secondAttribute="bottom" constant="10" id="Qc7-m3-ErX"/>
+                    <constraint firstAttribute="trailing" secondItem="zKE-SZ-57J" secondAttribute="trailing" constant="10" id="TY6-cV-D00"/>
+                    <constraint firstItem="zKE-SZ-57J" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="tiC-xd-BMF"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="applyCoupanCodeButton" destination="mih-Pg-6mh" id="xdu-1f-CkN"/>
+                <outlet property="applyVoucharCode" destination="UKn-ge-O9q" id="adS-m8-cga"/>
+                <outlet property="applyrewardButton" destination="TEf-WD-HT1" id="HMz-f8-bBo"/>
+                <outlet property="estimateShippingandtaxes" destination="tIO-nl-6x2" id="nx0-cC-xQp"/>
+                <outlet property="mainView" destination="zKE-SZ-57J" id="u8t-UM-P8r"/>
+                <outlet property="shippingandTaxButton" destination="VlK-TV-V5Y" id="oXm-mb-ixb"/>
+                <outlet property="updateCartButton" destination="o4Y-q3-mHx" id="lN1-F6-hcf"/>
+                <outlet property="view1" destination="lMG-6b-VJB" id="7Gh-z8-Oev"/>
+                <outlet property="view2" destination="KCd-OO-C4L" id="Kwt-P3-iOv"/>
+                <outlet property="view3" destination="dom-9Q-DrP" id="OLK-bB-Bzb"/>
+                <outlet property="view4" destination="yKl-wb-6jm" id="gel-zW-gZt"/>
+            </connections>
+            <point key="canvasLocation" x="-390.39999999999998" y="-56.221889055472268"/>
+        </tableViewCell>
+    </objects>
+</document>
