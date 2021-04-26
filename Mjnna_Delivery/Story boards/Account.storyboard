@@ -9,11 +9,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Account-->
         <scene sceneID="8Lc-c1-fPh">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sKQ-Yw-rdM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="account" id="YvD-3C-ch0"/>
+                    <tabBarItem key="tabBarItem" title="Account" image="account" id="YvD-3C-ch0"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1bQ-G3-Fgb">

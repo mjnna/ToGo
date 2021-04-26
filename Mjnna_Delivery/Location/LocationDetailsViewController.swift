@@ -102,10 +102,9 @@ class LocationDetailsViewController: UIViewController {
                     self.BuildingVal.text = location.building
                     self.AppartmentVal.text = location.appartment
                     self.StoreyVal.text = location.storey
-                    let selectedLocation = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-                    let region = MKCoordinateRegion( center: selectedLocation, latitudinalMeters: CLLocationDistance(exactly: 5000)!, longitudinalMeters: CLLocationDistance(exactly: 5000)!)
-                    self.map.setRegion(self.map.regionThatFits(region), animated: true)
-                    //self.map.setCenter(selectedLocation, animated: true)
+                    
+               
+                    self.addPin(lat: location.latitude, long: location.longitude, title: location.street, subtitle: location.building )
                    }
                    
                }else{
@@ -114,8 +113,18 @@ class LocationDetailsViewController: UIViewController {
                }
         }
     }
-
-func callingSetHttppApi(){
+    
+    func addPin(lat:Double,long:Double,title:String,subtitle:String){
+        let annotation = MKPointAnnotation()
+        annotation.title = title
+        annotation.subtitle = subtitle
+        annotation.coordinate = CLLocationCoordinate2D(latitude:lat , longitude: long)
+        let region = MKCoordinateRegion( center: annotation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
+        self.map.setRegion(region, animated: true)
+        map.addAnnotation(annotation)
+    }
+    
+    func callingSetHttppApi(){
         let sessionId = sharedPrefrence.object(forKey:"token") as! String;
         var requstParams = [String:String]()
         requstParams["token"] = sessionId

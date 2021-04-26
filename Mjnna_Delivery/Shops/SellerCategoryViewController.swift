@@ -81,8 +81,13 @@ class SellerCategoryViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        //super.viewWillDisappear(_animated)
+        super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = "Stores".localized
+
     }
     
     func setupVeiw(){
@@ -97,7 +102,6 @@ class SellerCategoryViewController: UIViewController {
         ])
     }
     func designNavigationBar(){
-        self.title = "Stores".localized
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.gray.cgColor
         self.navigationController?.navigationBar.layer.shadowOffset = CGSize(1.0, 2.0)
         self.navigationController?.navigationBar.layer.shadowRadius = 1.0

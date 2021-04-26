@@ -214,11 +214,11 @@
             </objects>
             <point key="canvasLocation" x="321.73913043478262" y="-7127.0089285714284"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Home-->
         <scene sceneID="TXh-fA-zcx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HIi-je-E0C" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="home" id="uSv-XQ-GRE">
+                    <tabBarItem key="tabBarItem" title="Home" image="home" id="uSv-XQ-GRE">
                         <inset key="imageInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -414,7 +414,7 @@
         <!--Order Details View Controller-->
         <scene sceneID="MME-lI-ezj">
             <objects>
-                <viewController id="VXB-lX-J5p" customClass="OrderDetailsViewController" customModule="To_Go_KSA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="orderDetails" id="VXB-lX-J5p" customClass="OrderDetailsViewController" customModule="To_Go_KSA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pz8-mo-p3L">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -425,7 +425,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xt6-7S-bX2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2757.971014492754" y="-6358.2589285714284"/>
+            <point key="canvasLocation" x="2758" y="-6370"/>
         </scene>
         <!--Order History-->
         <scene sceneID="x2G-wk-nFW">

@@ -47,17 +47,6 @@ class OrderDetailsViewController: UIViewController {
         shwoLoder(show: true)
 
     }
-    //MARK:-Action
-    
-    @objc
-    func trackOrderPressed(_ sender:UIButton){
-        if let orderId = orderId {
-        let storyBoard = UIStoryboard(name: "Cart", bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "trackOrder") as! TrackOrderViewController
-        vc.callingHttppApi(orderId: "\(orderId)")
-        self.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
     
     //MARK: - Net Working
     func loginRequest(){
@@ -88,6 +77,9 @@ class OrderDetailsViewController: UIViewController {
         var requstParams = [String:String]()
         requstParams["token"] = sessionId
         requstParams["order_id"] = orderId
+        if let lang = sharedPrefrence.object(forKey: "language") as? String{
+            requstParams["lang"] = lang
+        }
         
         NetworkManager.sharedInstance.callingHttpRequest(params:requstParams, apiname:"order/details",cuurentView: self){val,responseObject in
                if val == 1 {
@@ -103,6 +95,7 @@ class OrderDetailsViewController: UIViewController {
                    else{
                     self.shwoLoder(show: false)
                     // go to the details page
+                    print(dict)
                     let order = Order(data: dict)
                     self.recivedOrder = order
                     self.orderProducts = order.orderProducts
@@ -150,10 +143,9 @@ extension OrderDetailsViewController : UITableViewDelegate,UITableViewDataSource
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "invoiceCell", for: indexPath) as! InvoiceInfoCell
             cell.contentView.isUserInteractionEnabled = true
-            cell.trackOrderButton.tag = indexPath.row
-            cell.trackOrderButton.addTarget(self, action: #selector(trackOrderPressed(_:)), for: .touchUpInside)
             if let order = recivedOrder {
-            cell.configure(InoviceNo: order.id, total: order.total_price)
+                cell.configure(storeName: order.store, InoviceNo: order.id, statusId: order.order_status_id, total: order.total_price)
+                cell.getStatus(viewController: self)
             }
             
             return  cell
@@ -167,7 +159,7 @@ extension OrderDetailsViewController : UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0{
-            return 250
+            return 270
         }else{
             return 140
         }

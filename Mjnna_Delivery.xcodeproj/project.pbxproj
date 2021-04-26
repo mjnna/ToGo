@@ -31,6 +31,9 @@
 		18E0E52B2618E9FA00D411F1 /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18E0E52A2618E9FA00D411F1 /* Cart.storyboard */; };
 		18E0E5302618EF7300D411F1 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18E0E52F2618EF7300D411F1 /* Account.storyboard */; };
 		18E0E5332619096800D411F1 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18E0E5322619096800D411F1 /* Home.storyboard */; };
+		18E99A452634F42C00222AA5 /* StepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E99A442634F42C00222AA5 /* StepperView.swift */; };
+		18E99A472635CF8600222AA5 /* CartApis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E99A462635CF8600222AA5 /* CartApis.swift */; };
+		18E99A49263610CD00222AA5 /* EmptyCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E99A48263610CD00222AA5 /* EmptyCartView.swift */; };
 		18EEA629261CEE3500F235CB /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EEA628261CEE3500F235CB /* SearchBarView.swift */; };
 		18EEA62D261E1CB200F235CB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EEA62C261E1CB100F235CB /* SettingsViewController.swift */; };
 		18F941792628789B00FE4889 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F941782628789B00FE4889 /* Notifications.swift */; };
@@ -68,7 +71,6 @@
 		5DD9CE33259CC79400864383 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD9CE32259CC79400864383 /* QuartzCore.framework */; };
 		5DD9CE35259CC79E00864383 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD9CE34259CC79E00864383 /* SystemConfiguration.framework */; };
 		5DD9CE3E25A0801200864383 /* LocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD9CE3D25A0801200864383 /* LocationDetailsViewController.swift */; };
-		5DD9CE4325A5C01900864383 /* TrackOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD9CE4225A5C01900864383 /* TrackOrderViewController.swift */; };
 		5DD9CE4525AA48A500864383 /* CheckOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD9CE4425AA48A500864383 /* CheckOutViewController.swift */; };
 		5DD9CE4725AC008200864383 /* OrderRejectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD9CE4625AC008200864383 /* OrderRejectedViewController.swift */; };
 		65AF4E47D13C9BC07E29566A /* Pods_Mjnna_Delivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4213A32172827A040E6CF6 /* Pods_Mjnna_Delivery.framework */; };
@@ -203,6 +205,9 @@
 		18E0E52A2618E9FA00D411F1 /* Cart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cart.storyboard; sourceTree = "<group>"; };
 		18E0E52F2618EF7300D411F1 /* Account.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
 		18E0E5322619096800D411F1 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		18E99A442634F42C00222AA5 /* StepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperView.swift; sourceTree = "<group>"; };
+		18E99A462635CF8600222AA5 /* CartApis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartApis.swift; sourceTree = "<group>"; };
+		18E99A48263610CD00222AA5 /* EmptyCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCartView.swift; sourceTree = "<group>"; };
 		18EEA628261CEE3500F235CB /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		18EEA62C261E1CB100F235CB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		18F941782628789B00FE4889 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -248,7 +253,6 @@
 		5DD9CE32259CC79400864383 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5DD9CE34259CC79E00864383 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5DD9CE3D25A0801200864383 /* LocationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsViewController.swift; sourceTree = "<group>"; };
-		5DD9CE4225A5C01900864383 /* TrackOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackOrderViewController.swift; sourceTree = "<group>"; };
 		5DD9CE4425AA48A500864383 /* CheckOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutViewController.swift; sourceTree = "<group>"; };
 		5DD9CE4625AC008200864383 /* OrderRejectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRejectedViewController.swift; sourceTree = "<group>"; };
 		98CFCA762476CC0900CC7C88 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -475,6 +479,43 @@
 			path = "Story boards";
 			sourceTree = "<group>";
 		};
+		18E99A4A2636357000222AA5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18E99A4B263635D200222AA5 /* Cells */,
+				18E99A48263610CD00222AA5 /* EmptyCartView.swift */,
+				18E99A442634F42C00222AA5 /* StepperView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		18E99A4B263635D200222AA5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				98CFCAB62477A48A00CC7C88 /* CartTableViewCell.swift */,
+				98CFCAAF2477A48A00CC7C88 /* CartShipmentApplyCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		18E99A4C263635F900222AA5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				98CFCAB22477A48A00CC7C88 /* CartModel.swift */,
+				98CFCAAC2477A48A00CC7C88 /* CartShipmentModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		18E99A4D2636360F00222AA5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				98CFCAB42477A48A00CC7C88 /* MyCart.swift */,
+				98CFCAB02477A48A00CC7C88 /* CartShipmentController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		18EEA620261BCB8900F235CB /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,6 +586,7 @@
 				98CFCA932477A48900CC7C88 /* Product Cataegory */,
 				98CFCB242477A48B00CC7C88 /* Catalog product */,
 				185511E9262CA3B00015E8CD /* Order */,
+				98CFCBBB2477A48E00CC7C88 /* Empty View */,
 				98CFCAAB2477A48A00CC7C88 /* Cart */,
 				5DD9CE09259B138300864383 /* Location */,
 				98CFCB652477A48D00CC7C88 /* NetworkManager.swift */,
@@ -590,7 +632,6 @@
 		5DD9CE09259B138300864383 /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				98CFCBBB2477A48E00CC7C88 /* Empty View */,
 				5DD9CE0C259B150400864383 /* LocationViewController.swift */,
 				5DD9CE0E259B165C00864383 /* LocationTableViewCell.swift */,
 				5DD9CE0F259B165C00864383 /* LocationTableViewCell.xib */,
@@ -606,7 +647,6 @@
 			children = (
 				5DD9CE4625AC008200864383 /* OrderRejectedViewController.swift */,
 				5DD9CE4425AA48A500864383 /* CheckOutViewController.swift */,
-				5DD9CE4225A5C01900864383 /* TrackOrderViewController.swift */,
 			);
 			path = "Track Order";
 			sourceTree = "<group>";
@@ -658,12 +698,10 @@
 		98CFCAAB2477A48A00CC7C88 /* Cart */ = {
 			isa = PBXGroup;
 			children = (
-				98CFCAB42477A48A00CC7C88 /* MyCart.swift */,
-				98CFCAB62477A48A00CC7C88 /* CartTableViewCell.swift */,
-				98CFCAAC2477A48A00CC7C88 /* CartShipmentModel.swift */,
-				98CFCAAF2477A48A00CC7C88 /* CartShipmentApplyCell.swift */,
-				98CFCAB02477A48A00CC7C88 /* CartShipmentController.swift */,
-				98CFCAB22477A48A00CC7C88 /* CartModel.swift */,
+				18E99A462635CF8600222AA5 /* CartApis.swift */,
+				18E99A4C263635F900222AA5 /* Model */,
+				18E99A4D2636360F00222AA5 /* Controller */,
+				18E99A4A2636357000222AA5 /* View */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -1048,6 +1086,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E99A472635CF8600222AA5 /* CartApis.swift in Sources */,
 				5D54E36224CE8D8E008C9995 /* tabBarController.swift in Sources */,
 				1865397B2619C95C00B198C5 /* AllShopsApi.swift in Sources */,
 				98CFCC8F2477A48E00CC7C88 /* ChangePassword.swift in Sources */,
@@ -1069,10 +1108,12 @@
 				185198D4261229B000369405 /* SocialAccounts.swift in Sources */,
 				188786E2262F3A4600E3489F /* OrderDetailsViewController.swift in Sources */,
 				98CFCC7E2477A48E00CC7C88 /* NotificationModel.swift in Sources */,
+				18E99A49263610CD00222AA5 /* EmptyCartView.swift in Sources */,
 				98CFCBCB2477A48E00CC7C88 /* OrderHistoryModel.swift in Sources */,
 				5DD9CE4725AC008200864383 /* OrderRejectedViewController.swift in Sources */,
 				98CFCC072477A48E00CC7C88 /* RadioButton.m in Sources */,
 				98CFCC6A2477A48E00CC7C88 /* NetworkManager.swift in Sources */,
+				18E99A452634F42C00222AA5 /* StepperView.swift in Sources */,
 				98CFCCA12477A48E00CC7C88 /* StoresCategoryCell.swift in Sources */,
 				98CFCBFE2477A48E00CC7C88 /* UIFloatLabelTextField.m in Sources */,
 				98CFCBCF2477A48E00CC7C88 /* DataBaseClass.swift in Sources */,
@@ -1145,7 +1186,6 @@
 				98CFCBC02477A48E00CC7C88 /* ProductCollectionModel.swift in Sources */,
 				18878712262F3FBB00E3489F /* OrderInfoModel.swift in Sources */,
 				98CFCC102477A48E00CC7C88 /* GradientView.swift in Sources */,
-				5DD9CE4325A5C01900864383 /* TrackOrderViewController.swift in Sources */,
 				18878718262F555100E3489F /* OrderProductCell.swift in Sources */,
 				18A145C52608D0C000643617 /* Constraint.swift in Sources */,
 				98CFCC452477A48E00CC7C88 /* NormalTextField.swift in Sources */,

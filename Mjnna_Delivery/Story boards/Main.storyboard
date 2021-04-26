@@ -790,6 +790,11 @@
             <point key="canvasLocation" x="-9391" y="-9851"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="gC3-k4-Dmg">
+            <size key="intrinsicContentSize" width="240" height="44"/>
+        </designable>
+    </designables>
     <resources>
         <image name="ic_filter" width="84" height="84"/>
         <image name="ic_grid" width="84" height="84"/>

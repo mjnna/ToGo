@@ -314,7 +314,7 @@ changeaddress = "تغيير / إضافة عنوان";
 billingadd = "الفواتير إضافة";
 shippingadd = "الشحن إضافة";
 itemlist = "البند قائمة";
-cartempty = "عربة التسوق فارغة. لم يكن أي إضافة المنتجات إلى عربة حتى الآن.";
+cartempty = "السلة فارغة، يمكنك تصفح المتاجر واضافة منتجات";
 browsecategory = "تصفح الفئات";
 aboutstore = "حول متجر";
 productreviews = "مراجعات المنتج";
@@ -664,18 +664,20 @@ empty = "فارغة";
 //MARK: - OrderDetails
 "Invoice No." = "رقم الفاتورة.";
 " SAR" = " ر.س";
+"SAR" = " ر.س";
 "Track order" = "تتبع الطلب";
 "Quantity: " = "الكمية: ";
 "Weight: " = "الوزن: ";
 //MARK: - TrackOrder
 
 "Pending" = "قيد انتظار";
-"Accepted by the store" = "موافقة المتجر";
-"Accepted by the driver" = "موافقة السائق";
-"Out to delivery" = "في الطريق";
+"Accepted by store" = "موافقة المتجر";
+"Accepted by driver" = "موافقة السائق";
+"In transit" = "في الطريق";
 "Deliverd" = "تم التوصيل";
 
 "Store"= "المتجر";
 "Price" = "السعر";
 "Delivery price" = "سعر التوصيل";
 "Total" = "الإجمالي";
+

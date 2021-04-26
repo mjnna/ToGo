@@ -165,6 +165,7 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         NotificationCenter.default.addObserver(self, selector: #selector(subMenuPressed(_:)), name: .subMenu, object: nil)
         setupMainTableView()
     }
+ 
     
     func setupMainTableView(){
         homeViewModel  = HomeViewModel()

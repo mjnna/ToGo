@@ -164,10 +164,9 @@ class CheckOutViewController: UIViewController {
                                 NetworkManager.sharedInstance.dismissLoader()
                                 // go to order page
                                 NetworkManager.sharedInstance.showSuccessSnackBar(msg:"your order has been placed successfully".localized)
-                                let storyBoard: UIStoryboard = UIStoryboard(name: "Cart", bundle: nil)
-                                let orderViewController = storyBoard.instantiateViewController(withIdentifier: "trackOrder") as! TrackOrderViewController
-                                orderViewController.trackOrder(statusId: 1)
-                                orderViewController.callingHttppApi(orderId: dict["id"].stringValue)
+                                let storyBoard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
+                                let orderViewController = storyBoard.instantiateViewController(withIdentifier: "orderDetails") as! OrderDetailsViewController
+                                orderViewController.orderId = dict["id"].stringValue
                                 orderViewController.modalPresentationStyle = .overFullScreen
                                 self.navigationController?.pushViewController(orderViewController, animated: true)
                                }

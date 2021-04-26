@@ -17,7 +17,7 @@ class CartModel: NSObject {
     var weight:String = ""
     var totalWeight:String = ""
     var productImgUrl:String = ""
-    var priductId:String = ""
+    var productId:String = ""
     var optionData:Array<JSON>
     var quantity:String!
     var key:String!
@@ -30,7 +30,7 @@ class CartModel: NSObject {
         self.price = data["price"].stringValue
         self.subTotal = data["total_price"].stringValue
         self.productImgUrl = data["thumb"].stringValue
-        self.priductId = data["products_id"].stringValue
+        self.productId = data["products_id"].stringValue
         self.optionData = data["options"].arrayValue
         self.quantity = data["quantity"].stringValue
         self.weight = data["weight"].stringValue
@@ -68,7 +68,6 @@ class CartViewModel{
         for i in 0..<data["cart_products"].count{
             let dict = data["cart_products"][i];
             cartproductDataModel.append(CartModel(data: dict))
-            print("How many item we got in here??>>>>>>>>>>>>>>>>>>>>> \(cartproductDataModel.count)")
         }
         
         fastDelivery = data["fast_delivery"].intValue

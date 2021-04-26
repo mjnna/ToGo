@@ -23,6 +23,7 @@ pod 'FSPagerView'
 #pod 'WhatsNewKit'
 pod 'SwiftMessages'
 
+pod 'StepIndicator', '~> 1.0.8'
 
 pod 'TransitionButton'
 pod 'MaterialComponents/TextFields'

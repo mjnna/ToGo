@@ -55,13 +55,10 @@ class Productcategory: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         SellerLabel.text = storeName
         DeliveryLabel.text = "KSADelivery".localized
         AvailabilityLabel.text = "KSAAvailable".localized
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+     
         self.navigationItem.title = ""
         //self.navigationItem.backBarButtonItem?.tintColor = .white
         whichApiToProcess = ""
@@ -74,8 +71,6 @@ class Productcategory: UIViewController {
         
         
         callingHttppStoreApi()
-        //callingHttppProductsApi()
-        
         setupView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateCartBadge(_:)), name: .cartBadge, object: nil)
@@ -90,10 +85,18 @@ class Productcategory: UIViewController {
         NetworkManager.sharedInstance.dismissLoader()
         
     }
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        self.navigationController?.isNavigationBarHidden = false
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+
+    }
+     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.isTranslucent = false
     }
     
     func setupView(){
@@ -186,7 +189,7 @@ class Productcategory: UIViewController {
             cartButton.badgeLabel.text = badge
         }
     }
-    
+   
     func callingHttppStoreApi(){
         //let sessionId = sharedPrefrence.object(forKey:"token") as! String;
             var requstParams = [String:String]()

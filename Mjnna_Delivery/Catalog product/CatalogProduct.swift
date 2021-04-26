@@ -296,7 +296,7 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDel
                                 //NetworkManager.sharedInstance.showSuccessSnackBar(msg: dict.object(forKey: "message") as! String)
                             let dict = JSON(dict1)
                             let data = dict["cart"]["quantity"].stringValue
-                            self.tabBarController!.tabBar.items?[1].badgeValue = data
+                            NotificationCenter.default.post(name: .cartBadge, object: data)
                             
                             NetworkManager.sharedInstance.showSuccessSnackBar(msg: "product added to cart successfully".localized)
                                                        }

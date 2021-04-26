@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Title-->
+        <!--Productcategory-->
         <scene sceneID="BTX-7a-qUf">
             <objects>
                 <viewController id="mtA-hC-NGh" customClass="Productcategory" customModule="To_Go_KSA" customModuleProvider="target" sceneMemberID="viewController">
@@ -167,9 +167,6 @@
                             <constraint firstItem="MqT-QR-rFt" firstAttribute="leading" secondItem="mfq-6t-XYK" secondAttribute="leading" id="zgP-Yw-tAs"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="1rr-bK-xiv">
-                        <barButtonItem key="backBarButtonItem" title=" " id="4sa-Us-C4j"/>
-                    </navigationItem>
                     <connections>
                         <outlet property="AvailabilityLabel" destination="7Ok-vs-LRr" id="kov-f7-rpu"/>
                         <outlet property="DeliveryLabel" destination="fak-bK-7cb" id="WkZ-IZ-3rW"/>
@@ -197,7 +194,7 @@
                 </tapGestureRecognizer>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpA-Jc-rMe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="487" y="-5588"/>
+            <point key="canvasLocation" x="486.95652173913049" y="-5588.1696428571422"/>
         </scene>
         <!--Catalog Product-->
         <scene sceneID="Qk3-OD-tqH">
@@ -447,7 +444,7 @@
             </objects>
             <point key="canvasLocation" x="1772" y="-5757"/>
         </scene>
-        <!--Seller Category View Controller-->
+        <!--Stores-->
         <scene sceneID="aGL-TA-W9F">
             <objects>
                 <viewController id="wc9-jI-RCD" customClass="SellerCategoryViewController" customModule="To_Go_KSA" customModuleProvider="target" sceneMemberID="viewController">
@@ -457,7 +454,7 @@
                         <viewLayoutGuide key="safeArea" id="vhA-zP-IHe"/>
                         <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="shop" id="icG-2Y-APz"/>
+                    <tabBarItem key="tabBarItem" title="Stores" image="shop" id="icG-2Y-APz"/>
                     <navigationItem key="navigationItem" id="BTH-Ny-Y0p"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

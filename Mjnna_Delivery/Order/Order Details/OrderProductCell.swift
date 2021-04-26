@@ -15,15 +15,13 @@ class OrderProductCell: UITableViewCell {
     lazy var productImageView: UIImageView = {
        let iv = UIImageView()
         iv.anchor(width:110 )
+        iv.contentMode = .scaleAspectFit
        return iv
     }()
     
     lazy var nameLabel: UILabel = {
        let lb = UILabel()
         lb.textColor = .black
-//        let relativeFontConstant:CGFloat = 0.04
-//        let fontSize = self.superview.frame.width * relativeFontConstant
-//        print("Fontsize : \(fontSize)")
         lb.font = UIFont.boldSystemFont(ofSize: 18)
         lb.anchor(height:20)
 
@@ -133,7 +131,8 @@ class OrderProductCell: UITableViewCell {
         weightLabel.text = weightWord + whight
         let fullString = "\(quantityWord)\(quantity)"
         quantityLabel.attributedText = boldSpacificWrod(fullString: fullString, boldWord: "\(quantity)", fontSize: 13)
-        priceLabel.text = price 
+        let currencyWord = " SAR".localized
+        priceLabel.text = price + currencyWord
     }
     
 }
