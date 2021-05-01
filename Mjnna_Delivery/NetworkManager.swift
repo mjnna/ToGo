@@ -150,13 +150,6 @@ class NetworkManager:NSObject{
         print("params", params)
         AF.request(urlString,method: requestType,parameters:params, headers: headers).validate().responseJSON { response in
             
-            //MARK: Headers & Cookies
-            //            if let headerFields = response.response?.allHeaderFields as? [String: String], let URL = response.response?.url {
-            //              print("header ", headerFields)
-            //              let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: URL)
-            //                print("cookies ", cookies)
-            //            }
-            
             switch response.result {
             case .success(let resultData):
                 debugPrint(resultData)
@@ -616,11 +609,7 @@ class NetworkManager:NSObject{
         }
     }
     
-//    func ApplyPulseAnimation(parentView:UIView,childView:UIView){
-//        let pulseEffect = LFTPulseAnimation(repeatCount: Float.infinity, radius:20, position:childView.center)
-//        parentView.layer.insertSublayer(pulseEffect, below: childView.layer)
-//        pulseEffect.radius = 20
-//    }
+
 }
 
 class Connectivity {
@@ -638,53 +627,7 @@ extension Date {
 
 //MARK: -  AR related methods
 extension NetworkManager{
-    /*
-    func downloadARFile(filename:String,arUrl:String , taskCallback: @escaping (Bool,
-        URL?) -> Void){
-        if !self.containsFileInDirectory(imageFileName: filename){
-            self.downloadUsingAlmofire(url: URL(string:arUrl)!, fileName: filename) { (value, fileURL) in
-                if value{
-                    taskCallback(true,fileURL)
-                }else{
-                    taskCallback(false,fileURL)
-                }
-            }
-        }else{
-            let data = self.returnFilePath(imageFileName: filename)
-            taskCallback(true,data)
-        }
-    }
-    
-    func downloadUsingAlmofire(url: URL, fileName:String,taskCallback: @escaping (Bool,
-        URL?) -> Void) {
-        let manager = AF
-        var documentsURL: URL!
-        let destination: DownloadRequest.Destination = { _, _ in
-            documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            documentsURL.appendPathComponent(fileName)
-            return (documentsURL, [.removePreviousFile])
-        }
-        manager.download(url, to: destination)
-            
-            .downloadProgress(queue: .main, closure: { (progress) in
-            })
-            .validate { request, response, destinationURL in
-                return
-        }
-        .responseData { response in
-            if let destinationUrl = response.destinationURL {
-                if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                    print("Success: \(statusCode)")
-                }
-                let  documentPathUrl = response.destinationURL
-                print("Success URL:",documentPathUrl)
-                taskCallback(true,response.destinationURL)
-            }else{
-                taskCallback(false,response.destinationURL)
-            }
-        }
-    }
-    */
+
     func containsFileInDirectory(imageFileName:String)->Bool{
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let url = NSURL(fileURLWithPath: path)

@@ -13,14 +13,13 @@ class Productcategory: UIViewController {
     
     //MARK:- Outlet
 
-    @IBOutlet weak var productCollectionView: UICollectionView!
+    @IBOutlet weak var productTableView: UITableView!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var HeaderView: UIView!
     @IBOutlet weak var SellerLabel: UILabel!
     @IBOutlet weak var DeliveryLabel: UILabel!
     @IBOutlet weak var AvailabilityLabel: UILabel!
     @IBOutlet weak var HeaderImage: UIImageView!
-    @IBOutlet weak var ProductsCollectionView: UICollectionView!
     @IBOutlet weak var HeaderImageHeight: NSLayoutConstraint!
     @IBOutlet weak var categoryTopConstraint: NSLayoutConstraint!
     
@@ -64,11 +63,10 @@ class Productcategory: UIViewController {
         whichApiToProcess = ""
         
         categoryCollectionView.register(StoreCategoryCollectionViewCell.nib(), forCellWithReuseIdentifier: "StoreCategoryCollectionViewCell")
+        categoryCollectionView.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
+        productTableView.register(ProductTableViewCell.self, forCellReuseIdentifier: "cell")
         
-        productCollectionView.register(UINib(nibName: "ProductImageCell", bundle: nil), forCellWithReuseIdentifier: "productimagecell")
-        productCollectionView.register(UINib(nibName: "SortCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "sortCollectionViewCell")
-        productCollectionView.register(UINib(nibName: "ListCollectionViewCell", bundle:nil), forCellWithReuseIdentifier: "listcollectionview")
-        
+        productTableView.separatorStyle = .none
         
         callingHttppStoreApi()
         setupView()
@@ -251,9 +249,9 @@ class Productcategory: UIViewController {
                     else{
                         NetworkManager.sharedInstance.dismissLoader()
                         self.productCollectionViewModel = ProductCollectionViewModel(data:JSON(responseObject as! NSDictionary))
-                        self.productCollectionView.delegate = self
-                        self.productCollectionView.dataSource = self
-                        self.productCollectionView.reloadData()
+                        self.productTableView.delegate = self
+                        self.productTableView.dataSource = self
+                        self.productTableView.reloadData()
                     }
                     
                 }
@@ -287,7 +285,7 @@ extension Productcategory: UIScrollViewDelegate{
             //self.HeaderImageHeight.constant = 100
             self.HeaderView.transform = CGAffineTransform(translationX: 0, y: -35)
             self.categoryCollectionView.transform = CGAffineTransform(translationX: 0, y: -35)
-            self.ProductsCollectionView.transform = CGAffineTransform(translationX: 0, y: -35)
+            self.productTableView.transform = CGAffineTransform(translationX: 0, y: -35)
             self.HeaderImage.image = UIImage()
             self.HeaderImage.backgroundColor = .white
             })
@@ -301,7 +299,7 @@ extension Productcategory: UIScrollViewDelegate{
                 //self.HeaderImageHeight.constant = 200
                 self.HeaderView.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.categoryCollectionView.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.ProductsCollectionView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.productTableView.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.HeaderImage.loadImageFrom(url: self.storeImage)
                 })
             count -= 1
@@ -316,92 +314,77 @@ extension Productcategory:UICollectionViewDelegate,UICollectionViewDataSource,UI
     }
     
     func collectionView(_ view: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if view == self.categoryCollectionView {
-            return categoryCollectionViewModel.getStoreCategoryCollectionData.count
-        }
-        else{
-            if productCollectionViewModel.getProductCollectionData.count == 0{
-                return 0
-            }
-            else {
-                view.backgroundView = nil
-                return productCollectionViewModel.getProductCollectionData.count
-            }
-            
-        }
+        return categoryCollectionViewModel.getStoreCategoryCollectionData.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-            if collectionView == self.categoryCollectionView {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoreCategoryCollectionViewCell", for: indexPath) as! StoreCategoryCollectionViewCell
-                cell.configure(with: categoryCollectionViewModel.storeCategoryCollectionModel[indexPath.row].name, url: categoryCollectionViewModel.storeCategoryCollectionModel[indexPath.row].image
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoreCategoryCollectionViewCell", for: indexPath) as! StoreCategoryCollectionViewCell
+            cell.configure(with: categoryCollectionViewModel.storeCategoryCollectionModel[indexPath.row].name, url: categoryCollectionViewModel.storeCategoryCollectionModel[indexPath.row].image
                 )
-                return cell
-            }
-            else{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "listcollectionview", for: indexPath) as! ListCollectionViewCell
-            cell.layer.borderColor = UIColor().HexToColor(hexString: GlobalData.LIGHTGREY).cgColor
-            cell.layer.borderWidth = 0.5
-            cell.productId = productCollectionViewModel.getProductCollectionData[indexPath.row ].id
-            cell.name.text = productCollectionViewModel.getProductCollectionData[indexPath.row ].productName
-            cell.price.text =  productCollectionViewModel.getProductCollectionData[indexPath.row ].price
-            cell.descriptionData.text = productCollectionViewModel.getProductCollectionData[indexPath.row ].descriptionData
-            
-            cell.imageView.loadImageFrom(url:productCollectionViewModel.getProductCollectionData[indexPath.row].productImage , dominantColor: "ffffff")
-            
-            cell.imageView.tag = indexPath.row
-            let Gesture2 = UITapGestureRecognizer(target: self, action: #selector(self.viewProducts))
-            Gesture2.numberOfTapsRequired = 1
-            cell.imageView.isUserInteractionEnabled = true;
-            cell.imageView.addGestureRecognizer(Gesture2)
-            cell.price.textColor = UIColor().HexToColor(hexString: GlobalData.GREEN_COLOR
-            )
-            
-            
-            if productCollectionViewModel.getProductCollectionData[indexPath.row].isFeatured > 0  {
-                cell.specialPriceLabel.isHidden = false;
-                cell.price.text =  productCollectionViewModel.getProductCollectionData[indexPath.row ].specialPrice.description
-                let attributeString = NSMutableAttributedString(string: productCollectionViewModel.getProductCollectionData[indexPath.row ].price)
-                attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 1, range: NSRange(location: 0, length: attributeString.length))
-                cell.specialPriceLabel.attributedText = attributeString
-            }
-            
-            return cell
-        }
-        
+        return cell
 
     }
-    
-    
-  
-  
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.categoryCollectionView{
-            self.categoryId = self.categoryCollectionViewModel.storeCategoryCollectionModel[indexPath.row].id
-            self.callingHttppProductsApi()
-        }
-        else{
-            
-            productId =    productCollectionViewModel.getProductCollectionData[indexPath.row].id;
-            productName = productCollectionViewModel.getProductCollectionData[indexPath.row].productName;
-            ImageIurl = productCollectionViewModel.getProductCollectionData[indexPath.row].productImage;
-            //productprice = productCollectionViewModel.getProductCollectionData[(recognizer.view?.tag)!].price;
-            self.performSegue(withIdentifier: "productpage", sender: self)
-        }
+        self.categoryId = self.categoryCollectionViewModel.storeCategoryCollectionModel[indexPath.row].id
+        self.callingHttppProductsApi()
+              
     }
-    
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == self.categoryCollectionView{
-            return CGSize(width: 100, height:100)
+    return CGSize(width: 70, height:70)
 
-        }else{
-            return CGSize(width: self.view.frame.width, height:170)
-        }
     }
 
+}
+
+extension Productcategory:UITableViewDelegate,UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if productCollectionViewModel.getProductCollectionData.count == 0{
+            return 0
+        }else {
+            tableView.backgroundView = nil
+            return productCollectionViewModel.getProductCollectionData.count
+        }
+            
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: ProductTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProductTableViewCell
+        let product = productCollectionViewModel.getProductCollectionData[indexPath.row]
+        
+        var isFeatured: Bool = false
+        if product.isFeatured == 0 {
+            isFeatured = false
+        }else{
+            isFeatured = true
+        }
+        cell.configure(image: product.productImage, name: product.productName, describtion: product.descriptionData, price: product.price, isFeatured:isFeatured , id: product.id)
+
+        cell.productImageView.tag = indexPath.row
+        let Gesture2 = UITapGestureRecognizer(target: self, action: #selector(self.viewProducts))
+        Gesture2.numberOfTapsRequired = 1
+        
+        cell.productImageView.isUserInteractionEnabled = true
+        cell.productImageView.addGestureRecognizer(Gesture2)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let product = productCollectionViewModel.getProductCollectionData[indexPath.row]
+            productId =  product.id
+            productName = product.productName
+            ImageIurl = product.productImage
+            //productprice = productCollectionViewModel.getProductCollectionData[(recognizer.view?.tag)!].price;
+            self.performSegue(withIdentifier: "productpage", sender: self)
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 140
+    }
+    
+    
 }
 extension Notification.Name {
     static let cartBadge = Notification.Name("cartBadge")

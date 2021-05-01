@@ -6,8 +6,6 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-
-
 class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControllerHandlerDelegate,bannerViewControllerHandlerDelegate,UITabBarControllerDelegate, UICollectionViewDelegate{
     
     
@@ -19,6 +17,7 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         self.performSegue(withIdentifier: "sellerCategory", sender: self)
     }
     
+ 
     
     //MARK:- Outlet
     @IBOutlet weak var homeTableView: UITableView!
@@ -101,12 +100,13 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
     var sideMenuOpen = false
     var productModel = ProductViewModel()
     var showSubStore:Bool = false
-    
+
 
     //MARK:- Init
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
+        localizeTabBar()
         
         searchBar.isHidden = true
         
@@ -114,7 +114,7 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         dataBaseObject = AllDataCollection()
         
         searchBar.delegate = self
-        RefreshView.layer.cornerRadius = 10;
+        RefreshView.layer.cornerRadius = 10
         RefreshView.layer.masksToBounds = true
         RefreshView.isHidden = true
 //        self.navigationController?.isNavigationBarHidden = true
@@ -127,6 +127,7 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
 //            }
 //        }
 //
+    
         self.tabBarController?.delegate = self
         
         refreshControl = UIRefreshControl()
@@ -164,9 +165,14 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         self.setupView()
         NotificationCenter.default.addObserver(self, selector: #selector(subMenuPressed(_:)), name: .subMenu, object: nil)
         setupMainTableView()
+        
     }
- 
-    
+    func localizeTabBar() {
+        let items = self.tabBarController?.tabBar.items
+        items?[0].title = "Home".localized
+        items?[1].title = "Stores".localized
+        items?[2].title = "Account".localized
+    }
     func setupMainTableView(){
         homeViewModel  = HomeViewModel()
         self.homeViewModel.homeViewController = self
@@ -184,7 +190,6 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
     }
     
     func setupView(){
-        self.title = "Home".localized
         navigationItem.leftBarButtonItem = menuNavigationButtonItem
         navigationItem.rightBarButtonItem = settingNavigationButtonItem
         

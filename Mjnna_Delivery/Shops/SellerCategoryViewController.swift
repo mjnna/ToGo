@@ -86,7 +86,6 @@ class SellerCategoryViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.title = "Stores".localized
 
     }
     
@@ -155,8 +154,7 @@ class SellerCategoryViewController: UIViewController {
     func detectSelectedBarItem(){
         if let index = self.tabBarController?.selectedIndex {
             if index == 1 {
-                self.navigationItem.title = "Stores".localized
-
+                self.title = "Account".localized
                 searchBarView.isHidden = false
                 getAllshops(filter: StoresFilter(minOrder: 0, fastDelivery: true, page: 0, pageLength: 5, rate: 0, name: ""))
             }

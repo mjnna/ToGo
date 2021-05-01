@@ -33,10 +33,12 @@ pod 'lottie-ios'
 pod 'RealmSwift'
 #amr
 pod 'Firebase/Analytics'
-pod 'Cosmos'
+pod 'Cosmos', '~> 11.0'
 pod 'SwiftyGif'
 
 pod 'FloatingPanel'
 pod 'GoogleSignIn'
 pod 'FBSDKLoginKit'
+
+pod 'ReachabilitySwift'
 end

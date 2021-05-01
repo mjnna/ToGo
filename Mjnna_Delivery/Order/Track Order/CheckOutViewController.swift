@@ -71,23 +71,21 @@ class CheckOutViewController: UIViewController {
         DeliveryDateText.text = "Delivery Date".localized
         ChangeAddresButton.setTitle("change".localized, for: .normal)
         
-       
+       setupDatePicker()
         //Notes view
         NotesText.text = "Notes".localized
         if(fastDelivery == 1){
-//            DeliveryDateText.isHidden = true
-//            DeliveryDatePicker.isHidden = true
+            DateView.isHidden = true
+        }else{
+            DateView.isHidden = false
         }
+        
     }
     func setupDatePicker(){
-        let toolBar = UIToolbar()
-        let toolbarItem = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
-        toolBar.setItems([toolbarItem], animated: true)
-        //delivery date
+        datePicker.addTarget(self, action: #selector(dateDidChanged), for: .valueChanged)
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
         deliveryDateTextField.inputView = datePicker
-        deliveryDateTextField.inputAccessoryView = toolBar
     }
     
     //MARK:- Actions
@@ -109,14 +107,12 @@ class CheckOutViewController: UIViewController {
         
     }
     @objc
-    func donePressed(){
+    func dateDidChanged(){
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         deliveryDateTextField.text = formatter.string(from: datePicker.date)
     }
- 
-
     //MAR:- Handler
  
 
@@ -149,6 +145,8 @@ class CheckOutViewController: UIViewController {
         // this is for the cod method
         requstParams["payment_method_id"] = "1"
         requstParams["note"] = NotesValue.text
+//        requesParms["date"] =
+        
         
         NetworkManager.sharedInstance.callingNewHttpRequest(params:requstParams, apiname:"order/checkout",cuurentView: self){val,responseObject in
                            if val == 1 {

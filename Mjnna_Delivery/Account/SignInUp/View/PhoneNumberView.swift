@@ -16,9 +16,10 @@ class PhoneNumberView:UIView  {
     lazy var label: UILabel = {
        let lb = UILabel()
         lb.numberOfLines = 0
+        lb.lineBreakMode = .byWordWrapping
         lb.font = UIFont.systemFont(ofSize: 15)
         lb.textColor = #colorLiteral(red: 0.1728341281, green: 0.2500136793, blue: 0.4368206263, alpha: 1)
-        lb.text = "Enter your phone Number to continue Registring"
+        lb.text = "Enter your phone Number to continue Registring".localized
         return lb
     }()
     lazy var phonTextField:MDCTextField = {
@@ -34,7 +35,7 @@ class PhoneNumberView:UIView  {
     lazy var continueButton: UIButton = {
        let btn = UIButton()
         btn.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-        btn.setTitle("Continuer registering".localized, for: .normal)
+        btn.setTitle("Continue registering".localized, for: .normal)
         btn.layer.cornerRadius = 15
         return btn
     }()
@@ -87,7 +88,7 @@ class PhoneNumberView:UIView  {
         self.navigationView.anchor(top: self.topAnchor, left: self.leadingAnchor, right: self.trailingAnchor,height: 35)
         
         addSubview(label)
-        label.anchor(top: navigationView.bottomAnchor, left: self.leadingAnchor, right: self.trailingAnchor, paddingTop: 20, paddingLeft: 30, paddingRight: 30, height: 40)
+        label.anchor(top: navigationView.bottomAnchor, left: self.leadingAnchor, right: self.trailingAnchor, paddingTop: 20, paddingLeft: 30, paddingRight: 30, height: 50)
         
         addSubview(phonTextField)
         self.phonTextField.anchor(top: label.bottomAnchor, left: self.leadingAnchor, right: self.trailingAnchor, paddingTop: 5, paddingLeft: 30, paddingRight: 30, height: 50)

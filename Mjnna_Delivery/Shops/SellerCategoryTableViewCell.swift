@@ -17,8 +17,8 @@ class SellerCategoryTableViewCell: UITableViewCell {
 
     //MARK:- Component
 
-    lazy var sellerImage: UIImageView = {
-        let iv = UIImageView()
+    lazy var sellerImage: CustomImageView = {
+        let iv = CustomImageView()
         iv.contentMode = .scaleToFill
         iv.anchor(height:180)
         iv.layer.borderColor = UIColor.lightGray.cgColor
@@ -33,9 +33,6 @@ class SellerCategoryTableViewCell: UITableViewCell {
     }()
     lazy var rateView: CosmosView = {
        let v = CosmosView()
-        v.contentMode = .scaleAspectFit
-        v.anchor(width: 100)
-        
        return v
     }()
     lazy var nameAndRateStackView: UIStackView = {
@@ -84,6 +81,7 @@ class SellerCategoryTableViewCell: UITableViewCell {
        let v = UIView()
         
         v.anchor(height:90)
+
         v.addSubview(nameAndRateStackView)
         nameAndRateStackView.anchor(top: v.topAnchor, left: v.leadingAnchor, paddingTop: 10, paddingLeft: 20, height: 20)
 

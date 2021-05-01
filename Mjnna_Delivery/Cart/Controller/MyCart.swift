@@ -143,8 +143,13 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
     }
     
     @objc func browseCategory(sender: UIButton){
-        let firstVC = tabBarController?.viewControllers?[0] as! UINavigationController
-        firstVC.popToRootViewController(animated: false)
+  
+        self.dismiss(animated:true) {
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+             let TabViewController = storyBoard.instantiateViewController(withIdentifier: "rootnav") as! tabBarController
+             TabViewController.selectedIndex = 0
+             UIApplication.shared.keyWindow?.rootViewController = TabViewController
+        }
     }
     
     

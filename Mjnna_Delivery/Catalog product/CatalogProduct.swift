@@ -12,54 +12,57 @@ import Alamofire
 import QuickLook
 
 
-class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIPickerViewDelegate,UIPickerViewDataSource,QLPreviewControllerDelegate, QLPreviewControllerDataSource{
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
+class CatalogProduct: UIViewController ,UIScrollViewDelegate{
+
     
-    
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if(pickerView.tag == 8000 + currentOptionTag){
-            let dict = selectArr[currentOptionTag]
-            return (dict?.count)!
-        }else{
-            return 0
-        }
-    }
     
     //MARK: - Outlets
-    @IBOutlet weak var specialrice: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var collectionViewHeightConstarints: NSLayoutConstraint!
-    @IBOutlet var parentView: UIView!
-    @IBOutlet weak var addToCartView: UIView!
+    
     @IBOutlet weak var productNameLabel: UILabel!
+    @IBOutlet weak var describtionLabel: UILabel!
+
+    @IBOutlet weak var featuredView: UIView!
+    @IBOutlet weak var featuredLabel: UILabel!
+    
+    @IBOutlet weak var stepperView: UIView!
+    
+    @IBOutlet weak var specialPrice: UILabel!
     @IBOutlet weak var productpriceLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var addToCartButton: UIButton!
     @IBOutlet weak var optionView: UIView!
-   
-    @IBOutlet weak var optionViewHeightConstarints: NSLayoutConstraint!
-    @IBOutlet weak var quantityLabel: UILabel!
-    @IBOutlet weak var quantityValue: UILabel!
-    @IBOutlet weak var stepper: UIStepper!
-    @IBOutlet weak var taxAmount: UILabel!
     
+    @IBOutlet weak var yesCheckBoxView: UIView!
+    @IBOutlet weak var yesCheckBoxButton: UIButton!
+    @IBOutlet weak var noCheckBoxButton: UIButton!
+    @IBOutlet weak var noCheckBoxView: UIView!
+
+    @IBOutlet weak var yesLabel: UILabel!
+    @IBOutlet weak var noLabel: UILabel!
+    @IBOutlet weak var optionNameLabel: UILabel!
+    @IBOutlet weak var mainStackView: UIStackView!
+    
+    
+    //MARK:- Comonent
+    
+    lazy var stepper:StepperView = {
+        let st = StepperView()
+        st.minuseButton.addTarget(self, action: #selector(minusePressed), for: .touchUpInside)
+        st.plusButton.addTarget(self, action: #selector(plusPressed), for: .touchUpInside)
+        st.QuantityLabel.text = "\(1)"
+        return st
+    }()
+
     //MARK:- Properties
     var catalogProductViewModel:CatalogProductViewModel!
-    var cellHeight:CGFloat = SCREEN_HEIGHT/2
-    var cellWidth:CGFloat = SCREEN_WIDTH
     var productId:String = ""
     var productName:String = ""
     var productPrice:String = ""
     var productImageUrl:String = ""
-    let defaults = UserDefaults.standard;
-    var imageArrayUrl:NSMutableArray = []
-    var dominantColor:NSMutableArray = []
+    let defaults = UserDefaults.standard
+    var imageArrayUrl:[String] = []
     var selectArr  = [Int:JSON]()
     var selectID  = [Int:String]()
     var keyBoardFlag:Int = 1;
@@ -68,7 +71,7 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDel
     var fileCodeValue = ""
     var optionDictionary = [String:AnyObject]()
     var goToBagFlag:Bool = false
-    var currentOptionTag:Int = 0;
+    var currentOptionTag:Int = 0
     var childZoomingScrollView, parentZoomingScrollView :UIScrollView!
     var imageview,imageZoom : UIImageView!
     var currentTag:NSInteger = 0
@@ -88,36 +91,31 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDel
         
         let nib = UINib(nibName: "CatalogProductImage", bundle:nil)
         self.collectionView.register(nib, forCellWithReuseIdentifier: "catalogimage")
-        scrollView.delegate = self
-        //collectionViewHeightConstarints.constant = SCREEN_HEIGHT/2 + 16
         
         collectionView.delegate = self;
         collectionView.dataSource = self
         collectionView.reloadData()
         if productImageUrl != ""{
-            imageArrayUrl.add(productImageUrl);
+            imageArrayUrl.append(productImageUrl)
         }
         productNameLabel.text = productName
         productpriceLabel.text = productPrice
         self.tabBarController?.tabBar.isHidden = true
         callingHttppApi()
-        addToCartView.backgroundColor = UIColor().HexToColor(hexString: GlobalData.GOLDCOLOR)
-        addToCartView.isHidden = true
+
         
         addToCartButton.setTitle(NetworkManager.sharedInstance.language(key: "addtocart"), for: .normal)
         
-        stepper.tintColor = UIColor().HexToColor(hexString: GlobalData.BUTTON_COLOR)
+     
        
         addToCartButton.setTitleColor(UIColor.white, for: .normal)
         
         addToCartButton.layer.cornerRadius = 5;
         addToCartButton.layer.masksToBounds = true
         
-        quantityLabel.text = "qty".localized
-        specialrice.text = ""
-        addToCartView.backgroundColor = UIColor().HexToColor(hexString: GlobalData.GOLDCOLOR)
-//        NotificationCenter.default.addObserver(self, selector: #selector(customerHasLocation(_:)), name: .availablelocation, object: nil)
+        setupView()
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
            self.tabBarController?.tabBar.isHidden = true
@@ -127,64 +125,152 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDel
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    //MARK:- Actions
-//    @objc
-//    func customerHasLocation(_ notification:Notification){
-//        if let available = notification.object as? Bool{
-//            availableLocation = available
-//        }
-//    }
-//
-    @IBAction func stepperClick(_ sender: UIStepper) {
-        quantityValue.text = String(format:"%d",Int(sender.value))
+    func setupView(){
+        self.viewLoaded(isLoaded: false)
+        
+        let goldColor = UIColor().HexToColor(hexString: GlobalData.GOLDCOLOR)
+        
+        addToCartButton.layer.cornerRadius = addToCartButton.frame.height/2
+        addToCartButton.backgroundColor = goldColor
+        
+        featuredView.layer.cornerRadius = 5
+        featuredView.backgroundColor = goldColor
+        featuredLabel.text = "Featured product".localized
+        productpriceLabel.textColor = #colorLiteral(red: 0.7414126992, green: 0, blue: 0.09025795013, alpha: 1)
+        pageControl.isUserInteractionEnabled = false
+        
+        stepperView.addSubview(stepper)
+        stepper.anchor(top: stepperView.topAnchor, bottom: stepperView.bottomAnchor, left: stepperView.leadingAnchor, right: stepperView.trailingAnchor)
+        
+        designCheckBox(view: yesCheckBoxView, button: yesCheckBoxButton, tag: 0)
+        designCheckBox(view: noCheckBoxView, button: noCheckBoxButton, tag: 1)
+        
+    }
+    func viewLoaded(isLoaded:Bool){
+        self.pageControl.isHidden = !isLoaded
+        self.collectionView.isHidden = !isLoaded
+        self.mainStackView.isHidden = !isLoaded
     }
     
-    
+    func designCheckBox(view:UIView,button:UIButton,tag:Int){
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.gray.cgColor
+        view.layer.cornerRadius = view.frame.height/2
+        button.tag = tag
+        button.layer.cornerRadius = button.frame.height/2
+        button.addTarget(self, action: #selector(choicePressed), for: .touchUpInside)
+    }
+    //MARK:- Actions
+  
+    @objc func choicePressed(_ sender: UIButton) {
+        selectedChoice(tag: sender.tag)
+    }
+ 
+    @objc func minusePressed(_ sender:UIButton){
+        stepperButtons(isEnabled: false)
+        if let stringQuantity = stepper.QuantityLabel.text{
+            guard  var quantity = Int(stringQuantity)  else {
+                return
+            }
+                if quantity == 1 {
+                    stepper.QuantityLabel.text = "\(1)"
+                    stepperButtons(isEnabled: true)
+                }else{
+                    quantity -= 1
+                    stepper.QuantityLabel.text = "\(quantity)"
+                    stepperButtons(isEnabled: true)
+                }
+
+        }
+    }
+    @objc func plusPressed(_ sender:UIButton){
+        stepperButtons(isEnabled: false)
+        let maxQuantity:Int = 19
+        if let stringQuantity = stepper.QuantityLabel.text{
+            guard  var quantity = Int(stringQuantity)  else {
+                return
+            }
+                if quantity < maxQuantity || quantity == maxQuantity {
+                    quantity += 1
+                    stepper.QuantityLabel.text = "\(quantity)"
+                    stepperButtons(isEnabled: true)
+
+                }else{
+                    //TODO: show user message that he crossed the limit of allawed quatity for item
+                    stepperButtons(isEnabled: true)
+                }
+        
+        }
+    }
     @IBAction func dismissKeyboard(_ sender: Any) {
         view.endEditing(true)
-    }
-    
-    
-    
-    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
-        return 1
-    }
-    
-    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-        return self.previewItem as QLPreviewItem
-    }
-    
-    //MARK:- CollectionView Methods
-    func collectionView(_ view: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageArrayUrl.count
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "catalogimage", for: indexPath) as! CatalogProductImage
-        
-        cell.imageView.loadImageFrom(url:imageArrayUrl.object(at: indexPath.row) as! String , dominantColor: "ffffff")
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openImage))
-        cell.imageView.addGestureRecognizer(tapGesture)
-        return cell;
-        
     }
     
     @objc func openImage(_sender : UITapGestureRecognizer){
         self.zoomAction()
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width:cellWidth , height:cellHeight)
+    @IBAction func addToCartAction(_ sender: UIButton) {
+        optionDictionary = [String:AnyObject]()
         
+        
+        for i in 0..<self.catalogProductViewModel.getOptions.count {
+            let dict = JSON(self.catalogProductViewModel.getOptions[i])
+            print(dict)
+        
+        }
+
+            whichApiToProcess = "addtocart"
+            self.callingHttppApi()
+    }
+    @objc func handleDoubleTap(_ gestureRecognizer: UIGestureRecognizer) {
+        let scroll = parentZoomingScrollView.viewWithTag(888888) as! UIScrollView
+        let childScroll = scroll.viewWithTag(90000 + currentTag) as! UIScrollView
+        let newScale: CGFloat = scroll.zoomScale * 1.5
+        let zoomRect = self.zoomRect(forScale: newScale, withCenter: gestureRecognizer.location(in: gestureRecognizer.view))
+        childScroll.zoom(to: zoomRect, animated: true)
     }
     
+    
+    @objc func closeZoomTap(_ gestureRecognizer: UIGestureRecognizer) {
+        let currentWindow = UIApplication.shared.keyWindow!
+        currentWindow.viewWithTag(888)!.removeFromSuperview()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView){
+        let myCollectionView = collectionView
+        if scrollView == myCollectionView{
+            let witdh = scrollView.frame.width - (scrollView.contentInset.left*2)
+            let index = scrollView.contentOffset.x / witdh
+            let roundedIndex = round(index)
+            pageControl.currentPage = Int(roundedIndex)
+        }
+    }
+    func stepperButtons(isEnabled:Bool){
+        stepper.minuseButton.isEnabled = isEnabled
+        stepper.plusButton.isEnabled = isEnabled
+    }
+    
+    func selectedChoice(tag:Int){
+        let goldColor:UIColor = UIColor().HexToColor(hexString: GlobalData.GOLDCOLOR)
+        let grayColor:UIColor = .gray
+        if tag == 0 {
+            yesCheckBoxButton.backgroundColor = goldColor
+            yesCheckBoxView.layer.borderColor = goldColor.cgColor
+            
+            noCheckBoxView.layer.borderColor = grayColor.cgColor
+            noCheckBoxButton.backgroundColor = .clear
+        }else{
+            yesCheckBoxButton.backgroundColor = .clear
+            yesCheckBoxView.layer.borderColor = grayColor.cgColor
+            
+            noCheckBoxView.layer.borderColor = goldColor.cgColor
+            noCheckBoxButton.backgroundColor = goldColor
+        }
+        
+    }
+
+    //MARK:- Handler
     
     func loginRequest(){
         var loginRequest = [String:String]();
@@ -217,44 +303,14 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDel
         DispatchQueue.main.async{
             NetworkManager.sharedInstance.showLoader()
             let sessionId = self.defaults.object(forKey:"token");
+         
             self.view.isUserInteractionEnabled = false
-            
-            if self.whichApiToProcess == "clearCart"{
-                NetworkManager.sharedInstance.showLoader()
-                var requstParams = [String:String]()
-                requstParams["token"] = sessionId as? String
-                NetworkManager.sharedInstance.callingNewHttpRequest(params:requstParams , apiname:"cart/clear", cuurentView: self){success,responseObject in
-                    if success == 1 {
-                        let dict = responseObject as! NSDictionary;
-                        if dict.object(forKey: "fault") != nil{
-                            let fault = dict.object(forKey: "fault") as! Bool;
-                            if fault == true{
-                                self.loginRequest()
-                            }
-                        }else{
-                            NetworkManager.sharedInstance.dismissLoader()
-                            self.view.isUserInteractionEnabled = true;
-                            let dict = (responseObject as! NSDictionary)
-                            
-                            self.doFurtherProcessingWithResult()
-                            if dict.object(forKey: "error") != nil{
-                               
-                            }
-                            self.whichApiToProcess = "addtocart"
-                            self.callingHttppApi()
-                            
-                        }
-                    }else if success == 2{
-                        NetworkManager.sharedInstance.dismissLoader()
-                        self.callingHttppApi();
-                    }
-                }
-            }
+
             if self.whichApiToProcess == "addtocart"{
                 var requstParams = [String:String]();
                 requstParams["product_id"] = self.productId
                 requstParams["token"] = sessionId as? String
-                requstParams["quantity"] = self.quantityValue.text
+                requstParams["quantity"] = self.stepper.QuantityLabel.text
                 do {
                     let jsonSortData =  try JSONSerialization.data(withJSONObject: self.optionDictionary, options: .prettyPrinted)
                     let jsonSortString:String = NSString(data: jsonSortData, encoding: String.Encoding.utf8.rawValue)! as String
@@ -270,7 +326,7 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDel
                         let dict = responseObject as! NSDictionary;
                         NetworkManager.sharedInstance.dismissLoader()
                         if dict.object(forKey: "error") != nil{
-                            if (dict.object(forKey: "error") as! String == "authentication required"){
+                            if (dict.object(forKey: "error") as? String == "authentication required"){
                                 self.loginRequest()
                             }
                             else{
@@ -307,11 +363,13 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDel
                 }
             }
             else{
-                self.parentView.isUserInteractionEnabled = false
+           
                 var requstParams = [String:Any]();
                 requstParams["product_id"] = self.productId
                 requstParams["token"] = sessionId
-                requstParams["lang"] = "en"
+                if let lang = sharedPrefrence.object(forKey: "language") as? String{
+                    requstParams["lang"] = lang
+                }
                 NetworkManager.sharedInstance.callingHttpRequest(params:requstParams, apiname:"product/details", cuurentView: self){success,responseObject in
                     if success == 1{
                         let dict = responseObject as! NSDictionary;
@@ -325,7 +383,7 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDel
                             
                             
                             self.view.isUserInteractionEnabled = true
-                            self.parentView.isUserInteractionEnabled = true
+         
                             let data = JSON(responseObject as! NSDictionary)
                             var ProductDict = [String: Any]()
                             ProductDict["name"] = data["product"]["name"].stringValue
@@ -345,10 +403,8 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDel
                             
                             
                             self.catalogProductViewModel = CatalogProductViewModel(productData:JSON(responseObject as! NSDictionary))
-                            self.doFurtherProcessingWithResult();
-                                
-                                
-                            
+                            self.doFurtherProcessingWithResult()
+    
                             NetworkManager.sharedInstance.dismissLoader()
                             
                         }
@@ -361,29 +417,6 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDel
         }
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        for cell: UICollectionViewCell in self.collectionView.visibleCells {
-            if let indexPathValue = self.collectionView.indexPath(for: cell){
-                self.pageControl.currentPage = indexPathValue.row
-            }
-        }
-        
-    }
-    
-    
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.tag == 888888{
-            let pageWidth: CGFloat = self.parentZoomingScrollView.frame.size.width
-            let page = floor((self.parentZoomingScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1
-            self.currentTag = NSInteger(page)
-            self.pager.currentPage = Int(page)
-        }
-        let actualHeight = scrollView.contentOffset.y+scrollView.frame.size.height;
-        
-        addToCartView.isHidden = false;
-    }
-    
     
     func doFurtherProcessingWithResult(){
         DispatchQueue.main.async{
@@ -392,227 +425,51 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDel
             self.productpriceLabel.text = self.catalogProductViewModel.getPrice
             
             
-            self.taxAmount.text =  self.catalogProductViewModel.catalogProductModel.descriptionData.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+            self.describtionLabel.text =  self.catalogProductViewModel.catalogProductModel.descriptionData.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
            
             self.imageArrayUrl = []
             for i in 0..<self.catalogProductViewModel.getProductImages.count{
-                self.imageArrayUrl.add(self.catalogProductViewModel.getProductImages[i].imageURL)
+                let imageUrl = self.catalogProductViewModel.getProductImages[i].imageURL
+                self.imageArrayUrl.append(imageUrl)
                 
             }
             self.collectionView.reloadData()
+            print(self.imageArrayUrl)
             self.pageControl.numberOfPages = self.imageArrayUrl.count
             if self.imageArrayUrl.count == 1{
                 self.pageControl.isHidden = true
             }
             
             //MARK: - Options
-            self.specialrice.isHidden = true;
+            self.specialPrice.isHidden = true
             if self.catalogProductViewModel.getSpecialprice != 0 && self.catalogProductViewModel.getSpecialprice  > 0{
                 self.productpriceLabel.text = self.catalogProductViewModel.catalogProductModel.formatted_special;
                 
                 let attributeString = NSMutableAttributedString(string: self.catalogProductViewModel.getPrice)
                 attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 1, range: NSRange(location: 0, length: attributeString.length))
-                self.specialrice.attributedText = attributeString
-                self.specialrice.isHidden = false
-                self.specialrice.textColor = UIColor().HexToColor(hexString: GlobalData.DARKGREY)
+                self.specialPrice.attributedText = attributeString
+                self.specialPrice.isHidden = false
+                self.specialPrice.textColor = UIColor().HexToColor(hexString: GlobalData.DARKGREY)
             }
-            
-            
-            var Y:CGFloat = 0
-            
-            if self.catalogProductViewModel.getOption.count > 0 {
-                
-                for i in 0..<self.catalogProductViewModel.getOption.count {
-                    let dict = JSON(self.catalogProductViewModel.getOption[i]);
-                    let optionLbl = UILabel(frame: CGRect(x: 5, y: Y, width: self.optionView.frame.size.width - 10, height: 30))
-                    optionLbl.textColor = UIColor.black
-                    optionLbl.backgroundColor = UIColor.clear
-                    optionLbl.font = UIFont(name: BOLDFONT, size: 15)
-                    if dict["required"].intValue == 1{
-                        optionLbl.text = dict["name"].stringValue+" "+GlobalData.ASTERISK
-                    }else{
-                        optionLbl.text = dict["name"].stringValue
-                    }
-                    self.optionView.addSubview(optionLbl)
-                    Y += 30;
-                   
-                    if dict["max_select"].intValue == 1 {
-                        let subOptionView = UIView(frame: CGRect(x: 5, y: Y, width: self.optionView.frame.size.width - 10, height: 30))
-                        subOptionView.isUserInteractionEnabled = true
-                        self.optionView.addSubview(subOptionView)
-                        subOptionView.tag = i
-                        self.radioId[i] = ""
-                        Y += 30;
-                        let productOptionArray : JSON = JSON(dict["choices"].arrayObject!)
-                        let buttonArray:NSMutableArray = []
-                        var internalY:CGFloat = 0
-                        for j in 0..<productOptionArray.count {
-                            let btn = RadioButton(frame: CGRect(x: 5, y: internalY, width: subOptionView.frame.size.width, height: 30))
-                            btn.setTitle(productOptionArray[j]["name"].stringValue, for: .normal)
-                            btn.setTitleColor(UIColor.darkGray, for: .normal)
-                            btn.titleLabel?.font = UIFont.init(name: REGULARFONT, size: 13.0)
-                            btn.setImage(UIImage(named: "unchecked.png"), for: .normal)
-                            btn.setImage(UIImage(named: "checked.png"), for: .selected)
-                            if let languageCode =  sharedPrefrence.object(forKey: "language") as? String{
-                                if languageCode == "ar"{
-                                    btn.contentHorizontalAlignment = .right
-                                }else{
-                                    btn.contentHorizontalAlignment = .left
-                                }
-                            }
-                            btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 0)
-                            btn.addTarget(self, action: #selector(self.onRadioButtonValueChangedAccount), for:.touchUpInside)
-                            btn.tag = j;
-                            subOptionView.addSubview(btn)
-                            internalY += 40;
-                            buttonArray.add(btn)
-                        }
-                        var paymentInformationContainerFrame = subOptionView.frame
-                        paymentInformationContainerFrame.size.height = internalY
-                        subOptionView.frame = paymentInformationContainerFrame
-                        let radioButton:RadioButton = RadioButton()
-                        radioButton.groupButtons = buttonArray as! [RadioButton]
-                        
-                        Y += internalY;
-                        
-                    } else {
-                        let subOptionView = UIView(frame: CGRect(x: 5, y: Y, width: self.optionView.frame.size.width - 10, height: 30))
-                        subOptionView.isUserInteractionEnabled = true
-                        subOptionView.tag = 8000 + i;
-                        self.optionView.addSubview(subOptionView)
-                        Y += 30;
-                        let productOptionArray : JSON = JSON(dict["choices"].arrayObject!)
-                        var internalY:CGFloat = 0
-                        for j in 0..<productOptionArray.count {
-                            let checkBox = UISwitch(frame: CGRect(x:10, y:internalY+10, width:40, height:40))
-                            checkBox.isOn = false
-                            checkBox.tag = j
-                            subOptionView.addSubview(checkBox)
-                            let name = UILabel(frame: CGRect(x: checkBox.frame.size.width+25, y: internalY+10, width: self.optionView.frame.size.width - 60, height: 30))
-                            name.textColor = UIColor.black
-                            name.backgroundColor = UIColor.clear
-                            name.textAlignment = .left
-                            name.font = UIFont.init(name: REGULARFONT, size: 13.0)
-                            
-                            if productOptionArray[j]["price"].stringValue != "" && productOptionArray[j]["price"].stringValue != "false"{
-                                name.text = productOptionArray[j]["name"].stringValue+" ("+productOptionArray[j]["price"].stringValue+")"
-                            }else{
-                                name.text = productOptionArray[j]["name"].stringValue
-                            }
-                            subOptionView.addSubview(name)
-                            internalY += 40;
-                        }
-                        var paymentInformationContainerFrame = subOptionView.frame
-                        paymentInformationContainerFrame.size.height = internalY
-                        subOptionView.frame = paymentInformationContainerFrame
-                        Y += internalY;
-                    }
-                    self.optionViewHeightConstarints.constant = Y
-                }
-            }
-            
-        }
-        
-    }
-    
-    
-    @objc func onRadioButtonValueChangedAccount(_ sender: RadioButton) {
-        if ((sender.selected) != nil){
-            let dict = JSON(self.catalogProductViewModel.getOption[(sender.superview?.tag)!]);
-            if dict["type"].stringValue == "radio"{
-                let productOptionArray : JSON = JSON(dict["choices"].arrayObject!)
-                radioId[(sender.superview?.tag)!] = productOptionArray[sender.tag]["choices"].stringValue
-            }
-        }
-    }
-    
-    @objc func selectOptionPicker(textField: UITextField){
-        currentOptionTag = textField.tag - 7000
-        let selectPicker = UIPickerView()
-        selectPicker.tag = 8000 + currentOptionTag;
-        textField.inputView = selectPicker
-        
-        selectPicker.delegate = self
-        let dict = selectArr[currentOptionTag]
-        if (dict?.count)! > 0{
-            if dict![0]["price"].stringValue != "" && dict![0]["price"].stringValue != "false"{
-                let str : String = dict![0]["name"].stringValue + "(" + dict![0]["price_prefix"].stringValue + dict![0]["price"].stringValue + ")"
-                textField.text = str
+            let options = self.catalogProductViewModel.getOptions
+            if options.count != 0{
+                self.optionView.isHidden = false
+                let option = self.catalogProductViewModel.getOptions[0]
+                self.yesLabel.text = option.choices[0].name
+                self.noLabel.text = option.choices[1].name
+                self.optionNameLabel.text = option.name
             }else{
-                let str : String = dict![0]["name"].stringValue
-                textField.text = str
+                self.optionView.isHidden = true
             }
-            selectID[currentOptionTag] = dict![0]["product_option_value_id"].stringValue
-        }
-        
-    }
-    
-    
-    @IBAction func addToCartAction(_ sender: UIButton) {
-        let isValid = 0;
-        var errorMessage:String = "pleaseselect".localized+" "
-        optionDictionary = [String:AnyObject]()
-        
-        
-        for i in 0..<self.catalogProductViewModel.getOption.count {
-            let dict = JSON(self.catalogProductViewModel.getOption[i]);
+            print(self.catalogProductViewModel.isFeatured)
+            self.featuredView.isHidden = !self.catalogProductViewModel.isFeatured
+            self.viewLoaded(isLoaded: true)
             
-          if dict["max_select"].intValue == 1{
-                    optionDictionary[dict["id"].stringValue] = radioId[i] as AnyObject
-                
-            } else {
-                let checkBoxArry:NSMutableArray = []
-                let productOptionArray : JSON = JSON(dict["choices"].arrayObject!)
-                print(productOptionArray)
-                let  checkBoxView = self.optionView.viewWithTag(8000 + i);
-                for j in 0..<productOptionArray.count {
-                    let switchValue = checkBoxView?.viewWithTag(j) as! UISwitch
-                    if switchValue.isOn{
-                        checkBoxArry.add(productOptionArray[j]["id"].stringValue)
-                    }
-                }
-                if checkBoxArry.count == 0{
-                    //isValid = 1;
-                    errorMessage = errorMessage+dict["name"].stringValue
-                    break
-                }else{
-                    optionDictionary[dict["id"].stringValue] = checkBoxArry
-                }
-            }
         }
-        
-        if isValid == 1{
-            NetworkManager.sharedInstance.showErrorSnackBar(msg: errorMessage)
-            goToBagFlag = false
-        }else{
-            whichApiToProcess = "addtocart"
-            self.callingHttppApi()
-        }
-    }
-    
-    func openProduct(productId:String,productName:String){
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let initViewController: CatalogProduct? = (sb.instantiateViewController(withIdentifier: "catalogproduct") as? CatalogProduct)
-        initViewController?.productId = productId;
-        initViewController?.productName = productName
-        initViewController?.modalTransitionStyle = .flipHorizontal
-        self.navigationController?.pushViewController(initViewController!, animated: true)
-        
         
     }
     
-        
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier! == "gotodescription") {
-            /*let viewController:Description = segue.destination as UIViewController as! Description
-            viewController.descriptionData = catalogProductViewModel.getdescriptionData*/
-        } else if (segue.identifier! == "specifiaction") {
-//            let viewController:CatalogSpecification = segue.destination as UIViewController as! CatalogSpecification
-//            viewController.catalogProductViewModel = self.catalogProductViewModel
-        }
-    }
-    
+    //MARK: - Zoom functions
     func zoomAction(){
         let homeDimView = UIView(frame: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(SCREEN_WIDTH), height: CGFloat(SCREEN_HEIGHT)))
         homeDimView.backgroundColor = UIColor.white
@@ -646,7 +503,6 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDel
             imageZoom = UIImageView(frame: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(SCREEN_WIDTH), height: CGFloat(SCREEN_HEIGHT - 120)))
             imageZoom.image = UIImage(named: "ic_placeholder.png")
             imageZoom.contentMode = .scaleAspectFit
-            imageZoom.loadImageFrom(url:imageArrayUrl[i] as! String , dominantColor: "ffffff")
             
             imageZoom.isUserInteractionEnabled = true
             imageZoom.tag = 10
@@ -692,13 +548,7 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDel
         }
     }
     
-    @objc func handleDoubleTap(_ gestureRecognizer: UIGestureRecognizer) {
-        let scroll = parentZoomingScrollView.viewWithTag(888888) as! UIScrollView
-        let childScroll = scroll.viewWithTag(90000 + currentTag) as! UIScrollView
-        let newScale: CGFloat = scroll.zoomScale * 1.5
-        let zoomRect = self.zoomRect(forScale: newScale, withCenter: gestureRecognizer.location(in: gestureRecognizer.view))
-        childScroll.zoom(to: zoomRect, animated: true)
-    }
+
     
     func zoomRect(forScale scale: CGFloat, withCenter center: CGPoint) -> CGRect {
         var zoomRect = CGRect(x: 0, y: 0, width: 0, height: 0)
@@ -712,11 +562,46 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate,UICollectionViewDel
     }
     
     
+   
+}
+
+
+extension CatalogProduct : UICollectionViewDelegate,UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
+    func collectionView(_ view: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imageArrayUrl.count
+    }
     
-    @objc func closeZoomTap(_ gestureRecognizer: UIGestureRecognizer) {
-        let currentWindow = UIApplication.shared.keyWindow!
-        currentWindow.viewWithTag(888)!.removeFromSuperview()
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "catalogimage", for: indexPath) as! CatalogProductImage
+        
+        cell.imageView.loadImageFrom(url:imageArrayUrl[indexPath.row], dominantColor: "ffffff")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openImage))
+        cell.imageView.addGestureRecognizer(tapGesture)
+        return cell;
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellHeight = collectionView.frame.height
+        let cellWidth = collectionView.frame.width
+        return CGSize(width:cellWidth , height:cellHeight)
+        
     }
     
 }
 
+extension CatalogProduct: QLPreviewControllerDelegate,QLPreviewControllerDataSource {
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        return self.previewItem as QLPreviewItem
+    }
+}

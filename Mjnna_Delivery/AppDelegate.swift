@@ -48,7 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let realmCurrentVersion = 1
     var deviceTokenData = ""
     var window: UIWindow?
-
     override init() {
         super.init()
         UIFont.overrideInitialize()
@@ -62,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         
         //Requiered to signin with google
         GIDSignIn.sharedInstance().clientID = SocialAccounts.googleID

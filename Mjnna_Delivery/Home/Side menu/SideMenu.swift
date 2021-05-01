@@ -326,7 +326,8 @@ private class SideMenuCell: UITableViewCell {
     lazy var Label:UILabel = {
        let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        let fontSize = screenWidth * 0.04
+        label.font = UIFont.boldSystemFont(ofSize: fontSize)
         label.anchor(height:25)
         return label
     }()
@@ -347,7 +348,10 @@ private class SideMenuCell: UITableViewCell {
         return sv
     }()
     
-    
+    var screen:CGRect = CGRect()
+    var screenWidth:CGFloat = 0
+    var screenHeight:CGFloat = 0
+
     //MARK:- Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -365,6 +369,10 @@ private class SideMenuCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     private func setup(){
+        
+        screen = UIScreen.main.bounds
+        screenWidth = screen.width
+        screenHeight = screen.height
         self.backgroundColor = .clear
         self.layer.cornerRadius = 7
         self.selectionStyle = .none

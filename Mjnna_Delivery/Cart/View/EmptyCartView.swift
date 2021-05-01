@@ -28,7 +28,7 @@ class EmptyCartView: UIView{
     lazy var browsButton: UIButton = {
         let btn = UIButton()
         btn.layer.cornerRadius = 20
-        btn.setTitle(NetworkManager.sharedInstance.language(key: "browsecategory"), for: .normal)
+        btn.setTitle("Borowse categories".localized, for: .normal)
         btn.backgroundColor = UIColor().HexToColor(hexString: GlobalData.GOLDCOLOR)
         return btn
     }()

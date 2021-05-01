@@ -82,6 +82,7 @@ class SignInUpViewController: UIViewController ,GIDSignInDelegate,ActionsDelegat
         }
     }
     func cancelPressed(_ sender: UIButton) {
+        self.view.endEditing(true)
         signinupView.animtePhoneNumberViewWithKeyBoard(animate: false, viewController: self)
     }
     
@@ -136,9 +137,8 @@ class SignInUpViewController: UIViewController ,GIDSignInDelegate,ActionsDelegat
                 if let data = result as? NSDictionary{
                     let user = SocialAuthenticationsModles.FacebookUser(user: data)
                     print("facebook user: \(user)")
-//                    let userToRegister = SocialAccount(firstName: user.firstName, lastName: user.lastName, email: user.email, phoneNumber: "")
-                    let testUser = SocialAccount(firstName: "gmal", lastName: "lfdndk", email: "gggjjg@gmail.com", phoneNumber: "")
-                    self.checkIsNewUser(user: testUser)
+                    let userToRegister = SocialAccount(firstName: user.firstName, lastName: user.lastName, email: user.email, phoneNumber: "")
+                    self.checkIsNewUser(user: userToRegister)
                    
                 }
             }
@@ -156,6 +156,7 @@ class SignInUpViewController: UIViewController ,GIDSignInDelegate,ActionsDelegat
                     }else{
                         let newUser = SocialAccount(firstName: user.firstName, lastName: user.lastName, email: user.email, phoneNumber: "")
                         self.socialUserToRegister = newUser
+                        self.view.endEditing(false)
                         self.signinupView.animtePhoneNumberViewWithKeyBoard(animate: true, viewController: self)
                     }
                }

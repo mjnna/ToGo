@@ -91,8 +91,8 @@ extension StoresCategoryCell :UICollectionViewDelegateFlowLayout{
 }
 class StoreCategoryCell: UICollectionViewCell {
     
-    lazy var typeImageView: UIImageView = {
-        let iv = UIImageView()
+    lazy var typeImageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.contentMode = .scaleAspectFit
         iv.anchor(width:55,height:55)
         iv.backgroundColor = .red

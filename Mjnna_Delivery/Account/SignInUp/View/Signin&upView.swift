@@ -103,8 +103,17 @@ class SigninUpView: UIView{
         bt.setAttributedTitle(myNormalAttributedTitle, for: .normal)
         let image = #imageLiteral(resourceName: "G+")
         image.withRenderingMode(.alwaysOriginal)
-        bt.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 90)
-        bt.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
+        var spacing:CGFloat  = 0
+        if let lang = sharedPrefrence.object(forKey: "language") as? String{
+            if lang  == "ar" {
+                spacing = -2
+            }else{
+                spacing = 2
+            }
+        }
+        // the amount of spacing to appear between image and title
+        bt.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: spacing)
+        bt.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: 0)
         bt.setImage(image, for: .normal)
         bt.addTarget(delegate, action: #selector(delegate.signInWithGoogle(_:)), for: .touchUpInside)
 
@@ -121,8 +130,16 @@ class SigninUpView: UIView{
                                                                       NSAttributedString.Key.foregroundColor:UIColor.white])
         bt.setAttributedTitle(myNormalAttributedTitle, for: .normal)
         let image = #imageLiteral(resourceName: "facebook")
-        bt.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 80)
-        bt.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
+        var spacing:CGFloat  = 0
+        if let lang = sharedPrefrence.object(forKey: "language") as? String{
+            if lang  == "ar" {
+                spacing = -2
+            }else{
+                spacing = 2
+            }
+        } // the amount of spacing to appear between image and title
+        bt.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: spacing)
+        bt.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: 0)
         image.withRenderingMode(.alwaysOriginal)
         bt.setImage(image, for: .normal)
         bt.addTarget(delegate, action: #selector(delegate.signInWithFacebook(_:)), for: .touchUpInside)
@@ -207,7 +224,6 @@ class SigninUpView: UIView{
         if animate {
             phonNumberView.phonTextField.becomeFirstResponder()
         }
-        viewController.view.endEditing(animate)
         bottomAnchorr?.isActive = animate
         topAnchorr?.isActive = !animate
         self.autoLayoutIfneeded()

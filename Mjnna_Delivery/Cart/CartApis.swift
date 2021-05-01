@@ -38,6 +38,10 @@ class CartApis{
 
            NetworkManager.sharedInstance.showLoader()
            requstParams["token"] = userToken(viewController: viewController)
+            if let lang = sharedPrefrence.object(forKey: "language") as? String{
+                print(lang)
+                requstParams["lang"] = lang
+            }
            NetworkManager.sharedInstance.callingHttpRequest(params:requstParams, apiname:"cart/details", cuurentView: viewController){success,responseObject in
                if success == 1 {
                    let dict = responseObject as! NSDictionary;
@@ -62,6 +66,7 @@ class CartApis{
             self.requstParams["quantity"] = quantity
             print(productId)
             self.requstParams["cart_product_id"] = productId
+            
        
             NetworkManager.sharedInstance.callingNewHttpRequest(params:self.requstParams as! Dictionary<String, String>, apiname:"cart/edit", cuurentView: viewController){success,responseObject in
                 if success == 1 {
