@@ -45,6 +45,12 @@ class SellerCategoryViewController: UIViewController {
         lb.isHidden = true
         return lb
     }()
+    lazy var emptyView:UIImageView = {
+       let iv = UIImageView()
+        iv.image = #imageLiteral(resourceName: "emptyView")
+        iv.isHidden = true
+        return iv
+    }()
 
     //MARK:- Properties
     
@@ -86,7 +92,7 @@ class SellerCategoryViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        detectSelectedBarItem()
     }
     
     func setupVeiw(){
@@ -98,6 +104,14 @@ class SellerCategoryViewController: UIViewController {
         NSLayoutConstraint.activate([
             labelMessgae.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             labelMessgae.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        self.view.addSubview(emptyView)
+        let width:CGFloat = self.view.frame.width/1.5
+        emptyView.anchor(width:width ,height: width)
+        NSLayoutConstraint.activate([
+            emptyView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            emptyView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     func designNavigationBar(){
@@ -154,11 +168,21 @@ class SellerCategoryViewController: UIViewController {
     func detectSelectedBarItem(){
         if let index = self.tabBarController?.selectedIndex {
             if index == 1 {
-                self.title = "Account".localized
+                self.title = "Stores".localized
                 searchBarView.isHidden = false
                 getAllshops(filter: StoresFilter(minOrder: 0, fastDelivery: true, page: 0, pageLength: 5, rate: 0, name: ""))
             }
         }
+    }
+    
+    func checkforAvailableStores(stores:[Store]){
+        self.tableView.isHidden = stores.isEmpty
+        self.emptyView.isHidden = !stores.isEmpty
+        if !stores.isEmpty{
+            self.tableView.reloadData()
+        }
+        NetworkManager.sharedInstance.dismissLoader()
+
     }
     
     func getAllshops(filter:StoresFilter){
@@ -172,7 +196,6 @@ class SellerCategoryViewController: UIViewController {
                     self.storeCollectionModel.removeAll()
                     self.tableView.reloadData()
                     self.labelMessgae.isHidden = false
-                    
                 }else{
                     self.labelMessgae.isHidden = true
                     self.allStores = stores
@@ -207,10 +230,8 @@ class SellerCategoryViewController: UIViewController {
                     if dict["error"] != nil{
                        //display the error to the customer
                     }else{
-                        NetworkManager.sharedInstance.dismissLoader()
                         self.storeCollectionModel = StoreData(data: dict["stores"]).stores
-                        self.tableView.reloadData()
-
+                        self.checkforAvailableStores(stores:self.storeCollectionModel)
                     }
                 }
                 else{

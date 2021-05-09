@@ -243,7 +243,7 @@
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.88607090710000003" green="0.74281734229999996" blue="0.050171703099999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="93" id="8BT-yp-Qf2"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="93" id="8BT-yp-Qf2"/>
                                                             <constraint firstAttribute="trailing" secondItem="MtK-p3-adl" secondAttribute="trailing" constant="5" id="KdG-Ce-6Re"/>
                                                             <constraint firstAttribute="bottom" secondItem="MtK-p3-adl" secondAttribute="bottom" constant="5" id="kCy-Fk-TPI"/>
                                                             <constraint firstItem="MtK-p3-adl" firstAttribute="leading" secondItem="GOu-aQ-uRL" secondAttribute="leading" constant="5" id="qfg-I5-XOH"/>

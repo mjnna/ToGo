@@ -643,15 +643,16 @@ empty = "فارغة";
 //MARK: - LocationView
 "Add Location" = "أضف موقع جديد";
 "View Location" = "عرض علي الخريطة";
-"Selected Location" ="الموقع المحدد";
+"Selected location" ="الموقع المحدد";
 
 //MARK: - LocationDetails View
 "Set as default Location" = "تحديد كموقع حالي";
-"Street: " = "الشارع: ";
+"Street" = "الشارع";
 "Building" = "بناية رقم";
 "Appartment" = "رقم الشقة";
-"Flowor" = "الطابق";
+"Floor" = "الطابق";
 "Selected Location" = "الموقع المختار";
+"save" = "حفظ";
 
 //MARK: - Cart
 "Total " = "الإجمالي ";

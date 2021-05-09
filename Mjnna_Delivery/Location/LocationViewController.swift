@@ -20,11 +20,7 @@ class LocationViewController: UIViewController {
         super.viewDidLoad()
         self.locationsTable.delegate = self
         self.locationsTable.dataSource = self
-//        if #available(iOS 11.0, *) {
-//            locationsTable.contentInsetAdjustmentBehavior = .never
-//        } else {
-//            automaticallyAdjustsScrollViewInsets = false
-//        }
+
         designNavigationBar()
         self.navigationItem.title = ""
         self.callingHttppApi()

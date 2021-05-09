@@ -11,48 +11,36 @@ import MapKit
 
 class LocationDetailsViewController: UIViewController {
 
-    @IBOutlet weak var LocationDescription: UILabel!
-    
     @IBOutlet weak var StreetTxt: UILabel!
-    
     @IBOutlet weak var StreetVal: UILabel!
-    
     @IBOutlet weak var BuildingTxt: UILabel!
-    
     @IBOutlet weak var BuildingVal: UILabel!
-    
     @IBOutlet weak var AppartmentTxt: UILabel!
-    
     @IBOutlet weak var AppartmentVal: UILabel!
-    
     @IBOutlet weak var StoreyTxt: UILabel!
-        
     @IBOutlet weak var StoreyVal: UILabel!
-    
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var setCurrentLocationButton: ShadowButton!
-    
-    @IBAction func SetLocationTapped(_ sender: Any) {
-        callingSetHttppApi()
-    }
-    
+   
     var locationId:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        StreetTxt.text = "Street: ".localized
+        StreetTxt.text = "Street".localized
         BuildingTxt.text = "Building".localized
         AppartmentTxt.text = "Appartment".localized
         StoreyTxt.text = "Flowor".localized
         callingHttppApi()
-        map.isZoomEnabled = false
-        map.isScrollEnabled = false
-        map.isUserInteractionEnabled = false
+        
         let title = "Set as default Location".localized
         setCurrentLocationButton.addTitle(title: title, fontSize: 20)
+
         setCurrentLocationButton.addCorner(with: 25)
         setCurrentLocationButton.backgroundColor = UIColor().HexToColor(hexString: GlobalData.GOLDCOLOR)
-        // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func SetLocationTapped(_ sender: Any) {
+        callingSetHttppApi()
     }
     
     func loginRequest(){

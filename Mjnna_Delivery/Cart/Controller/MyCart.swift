@@ -31,6 +31,20 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
         return v
     }()
     
+    lazy var popupView: AddLocationPopup = {
+        let v = AddLocationPopup()
+        v.button.addTarget(self, action: #selector(addLocationPreesed), for: .touchUpInside)
+        return v
+    }()
+    
+    lazy var bullerEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        return blurEffectView
+    }()
+    
     //MARK:- Properties
     let defaults = UserDefaults.standard
     var productId:String!
@@ -41,7 +55,9 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
     var cartProductId:String!
     var quantity:String!
     var cartViewModel: CartViewModel?
-    var availableLocation:Bool = false
+
+    var topAnchorr: NSLayoutConstraint?
+    var bottomAnchorr: NSLayoutConstraint?
     
     //MARK:- Init
     override func viewDidLoad() {
@@ -52,12 +68,10 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.clearCartData), name: NSNotification.Name(rawValue: "cartclearnotification"), object: nil)
         self.tabBarController?.tabBar.isHidden = true
-        NotificationCenter.default.addObserver(self, selector: #selector(userSetLocation(_:)), name: .availablelocation, object: nil)
-        
+      
         setupView()
         refreshCartProductsList()
         checkCartIsEmpty()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,10 +99,8 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
             pricesView.isHidden = false
             emptyCartView.isHidden = true
         }else{
-            
             pricesView.isHidden = true
             emptyCartView.isHidden = false
-
         }
     }
     
@@ -106,43 +118,85 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
         checkoutButton.backgroundColor = UIColor().HexToColor(hexString: GlobalData.GOLDCOLOR)
         
         self.view.addSubview(emptyCartView)
+        emptyCartView.anchor( left: self.view.leadingAnchor, right: self.view.trailingAnchor,height: (self.view.frame.width/2) + 110)
         NSLayoutConstraint.activate([
             emptyCartView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
             emptyCartView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
 
         ])
-        emptyCartView.anchor( left: self.view.leadingAnchor, right: self.view.trailingAnchor,height: (self.view.frame.width/2) + 110)
 
+        
+        self.view.addSubview(popupView)
+        popupView.anchor(width:self.view.frame.width/1.5,height: 140)
+        NSLayoutConstraint.activate([
+            popupView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        ])
+        topAnchorr = popupView.topAnchor.constraint(equalTo: self.view.bottomAnchor)
+        topAnchorr?.isActive = true
+        
+        let paddingBottom:CGFloat = self.view.frame.height/2 - 70
+        bottomAnchorr = popupView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,constant: -paddingBottom)
+        bottomAnchorr?.isActive = false
               
         cartTableView.register(UINib(nibName: "PriceCellTableViewCell", bundle: nil), forCellReuseIdentifier: "PriceCellTableViewCell")
         cartTableView.register(CartTableViewCell.self, forCellReuseIdentifier: "cell")
         cartTableView.register(UINib(nibName: "ExtraCartTableViewCell", bundle: nil), forCellReuseIdentifier: "extracell")
         self.setupTableView()
-
         
+            
+        let totalWord = "Total ".localized
+        self.totalPriceLabel.text = totalWord
+        
+   
+        let subTotalWord = "Sub total ".localized
+        self.subTotalLabel.text =  subTotalWord
+   
+        let deliveryWord = "Delivery ".localized
+        self.deliveryPriceLabel.text = deliveryWord
+    
     }
+    
+    func animteAdddLocationPopup(animate:Bool){
+        cartTableView.isUserInteractionEnabled = !animate
+        trashButton.isEnabled = !animate
+        cartTableView.isScrollEnabled = !animate
+        checkoutButton.isEnabled = !animate
+        bottomAnchorr?.isActive = animate
+        topAnchorr?.isActive = !animate
+        if animate {
+            self.view.addSubview(self.bullerEffectView)
+            self.view.bringSubviewToFront(popupView)
+        }else{
+            self.bullerEffectView.removeFromSuperview()
+        }
+        self.autoLayoutIfneeded()
+    }
+    
+    
+    func autoLayoutIfneeded(){
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
 
     //MARK:- Actions
-  
-    @objc func userSetLocation(_ notification:Notification) {
-        if let available = notification.object as? Bool {
-            availableLocation = available
-            if available == true{
-                
-            }else{
-//                let vc = UIStoryboard.init(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: "LocationList")
-//                self.modalPresentationStyle = .overCurrentContext
-//                self.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
-        
+    @objc
+    func addLocationPreesed(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "NewLocation") as! NewLocationViewController
+        vc.fromCart = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
-    @objc func clearCartData(_ note: Notification) {
+    
+    @objc
+    func clearCartData(_ note: Notification) {
         CartApis.shared.clearCartProducts(viewController: self)
         refreshCartProductsList()
     }
     
-    @objc func browseCategory(sender: UIButton){
+    @objc
+    func browseCategory(sender: UIButton){
   
         self.dismiss(animated:true) {
             let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -264,11 +318,10 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
             }
         }
     }
-    
-    
+
     func refreshCartProductsList(){
         NetworkManager.sharedInstance.showLoader()
-        CartApis.shared.getCartProducts(viewController: self) { (data) in
+        CartApis.shared.getCartProducts(viewController: self) { data,locations  in
             self.cartViewModel = data
             guard let products = self.cartViewModel?.getProductData else {return}
             if products.isEmpty {
@@ -276,6 +329,29 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
                 NetworkManager.sharedInstance.dismissLoader()
 
             }else{
+                print("locations??????? \(locations)")
+                if locations.isEmpty{
+                    self.animteAdddLocationPopup(animate: true)
+                }else{
+                    self.animteAdddLocationPopup(animate: false)
+                    if let totalValue = self.cartViewModel?.getTotalAmount[2].text{
+                        
+                        let totalWord = "Total ".localized
+                        let fullString = totalWord + totalValue
+                        self.totalPriceLabel.attributedText = self.coloringSpacificWrod(fullString: fullString, colerdWord: totalValue,color:#colorLiteral(red: 0.7414126992, green: 0, blue: 0.09025795013, alpha: 1))
+                        
+                    }
+                    if let subTotal = self.cartViewModel?.getTotalAmount[1].text {
+                        let subTotalWord = "Sub total ".localized
+                        let fullString = subTotalWord + subTotal
+                        self.subTotalLabel.attributedText =  self.coloringSpacificWrod(fullString: fullString, colerdWord: subTotal, color: #colorLiteral(red: 0.7414126992, green: 0, blue: 0.09025795013, alpha: 1))
+                    }
+                    if let deliveryPrice = self.cartViewModel?.getTotalAmount[0].text {
+                        let deliveryWord = "Delivery ".localized
+                        let fullString = deliveryWord + deliveryPrice
+                        self.deliveryPriceLabel.attributedText =  self.coloringSpacificWrod(fullString: fullString, colerdWord: deliveryPrice, color: #colorLiteral(red: 0.7414126992, green: 0, blue: 0.09025795013, alpha: 1))
+                    }
+                }
                 self.cartHasAvailableProducts(available: true)
                 self.cartTableView.reloadData()
                 NetworkManager.sharedInstance.dismissLoader()
@@ -385,24 +461,6 @@ extension MyCart:UITableViewDelegate, UITableViewDataSource {
                 cell.stepperView.minuseButton.tag = indexPath.row
                 cell.stepperView.plusButton.tag = indexPath.row
 
-                
-                if let totalValue = cartViewModel.getTotalAmount[2].text{
-                    
-                    let totalWord = "Total ".localized
-                    let fullString = totalWord + totalValue
-                    totalPriceLabel.attributedText = coloringSpacificWrod(fullString: fullString, colerdWord: totalValue,color:#colorLiteral(red: 0.7414126992, green: 0, blue: 0.09025795013, alpha: 1))
-                    
-                }
-                if let subTotal = cartViewModel.getTotalAmount[1].text {
-                    let subTotalWord = "Sub total ".localized
-                    let fullString = subTotalWord + subTotal
-                    self.subTotalLabel.attributedText =  coloringSpacificWrod(fullString: fullString, colerdWord: subTotal, color: #colorLiteral(red: 0.7414126992, green: 0, blue: 0.09025795013, alpha: 1))
-                }
-                if let deliveryPrice = cartViewModel.getTotalAmount[0].text {
-                    let deliveryWord = "Delivery ".localized
-                    let fullString = deliveryWord + deliveryPrice
-                    self.deliveryPriceLabel.attributedText =  coloringSpacificWrod(fullString: fullString, colerdWord: deliveryPrice, color: #colorLiteral(red: 0.7414126992, green: 0, blue: 0.09025795013, alpha: 1))
-                }
             }
         
             let Gesture1 = UITapGestureRecognizer(target: self, action: #selector(self.viewProduct))

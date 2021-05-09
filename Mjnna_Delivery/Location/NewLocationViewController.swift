@@ -25,18 +25,14 @@ class NewLocationViewController: UIViewController, FloatingPanelControllerDelega
     var GoogleMapView:GMSMapView!
     
     var locationManager = CLLocationManager()
-     
     var didFindMyLocation = false
-    
     var geoCoder :CLGeocoder!
-//    var locationData:LocationData!
-//    var delegate:MapDataHandlerdelegate!
+    var fromCart:Bool = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Google map
-        //let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 48.857165, longitude: 2.354613, zoom: 8.0)
-        //mapView.camera = camera
+
         self.tabBarController?.tabBar.isHidden = true
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -59,8 +55,11 @@ class NewLocationViewController: UIViewController, FloatingPanelControllerDelega
         fpc.set(contentViewController: contentVc)
         fpc.addPanel(toParent: self)
         
+        
     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.post(name: .fromCart, object: fromCart)
         self.tabBarController?.tabBar.isHidden = true
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -68,6 +67,7 @@ class NewLocationViewController: UIViewController, FloatingPanelControllerDelega
         self.tabBarController?.tabBar.isHidden = false
     }
     
+   
     func gotoPlaces(){
         TextSearch.resignFirstResponder()
         let acController = GMSAutocompleteViewController()
@@ -171,21 +171,21 @@ extension NewLocationViewController: GMSMapViewDelegate {
                         }
                         // Street address
                         if let street = placeMark.thoroughfare {
-                            self.menuVc?.SreetLabel.text = street.trimmingCharacters(in:.whitespacesAndNewlines)
+                            self.menuVc?.streetTextField.text = street.trimmingCharacters(in:.whitespacesAndNewlines)
                             print(street)
                         }
                         // City
                         if let city = placeMark.subAdministrativeArea {
-                            self.menuVc?.SelectedLocation.text = city.trimmingCharacters(in:.whitespacesAndNewlines)
+                            self.menuVc?.selectedLocation.text = city.trimmingCharacters(in:.whitespacesAndNewlines)
                             print(city)
                         }
                         else if let country = placeMark.country {
-                            self.menuVc?.SelectedLocation.text = country.trimmingCharacters(in:.whitespacesAndNewlines)
+                            self.menuVc?.selectedLocation.text = country.trimmingCharacters(in:.whitespacesAndNewlines)
                             print(country)
                         }
                         else
                         {
-                            self.menuVc?.SelectedLocation.text = "not defined".localized
+                            self.menuVc?.selectedLocation.text = "not defined".localized
                         }
                         // Zip code
                         if let zip = placeMark.isoCountryCode {

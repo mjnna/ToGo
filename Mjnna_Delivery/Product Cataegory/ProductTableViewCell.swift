@@ -163,15 +163,20 @@ class ProductTableViewCell: UITableViewCell{
 
     }
     
-    func configure(image:String,name:String,describtion:String,price:String,isFeatured:Bool,id:String){
-        productImageView.loadImageFrom(url: image)
+    func configure(image:String,name:String,describtion:String,price:String,isFeatured:Int,id:String){
+        productImageView.loadImage(stringURL: image)
         nameLabel.text = name
         describtionLabel.text = describtion
         let currencyWord = " SAR".localized
         priceLabel.text = price + currencyWord
-        print(id)
         productId = id
-        featuredView.isHidden = isFeatured
+        if isFeatured == 0 {
+            featuredView.isHidden = true
+        }else if isFeatured == 1 {
+            featuredView.isHidden = false
+        }else{
+            
+        }
         
     }
 

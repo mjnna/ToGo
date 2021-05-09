@@ -148,7 +148,7 @@ class SellerCategoryTableViewCell: UITableViewCell {
         sellerName.text = title
         rateView.rating = Double(rate)!
         descriptionn.text = description
-        sellerImage.loadImageFrom(url: url)
+        sellerImage.loadImage(stringURL: url)
         isStoreSupportFastDelivery(isFast: isFast)
     }
     

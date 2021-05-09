@@ -11,4 +11,6 @@ extension Notification.Name {
     static let subMenu = Notification.Name("subMenu")
     static let availablelocation
         = Notification.Name("availablelocation")
+    static let fromCart
+        = Notification.Name("fromCart")
 }

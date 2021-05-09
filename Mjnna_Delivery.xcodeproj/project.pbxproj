@@ -16,6 +16,7 @@
 		1860B41A260BE6A50070C064 /* CartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1860B419260BE6A50070C064 /* CartButtonView.swift */; };
 		1865397B2619C95C00B198C5 /* AllShopsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1865397A2619C95C00B198C5 /* AllShopsApi.swift */; };
 		186DF7B0263B17E400C0EDA6 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186DF7AF263B17E400C0EDA6 /* ProductTableViewCell.swift */; };
+		187118BA263F7EF7005698AD /* AddLocationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187118B9263F7EF7005698AD /* AddLocationPopup.swift */; };
 		187EA29D2623A510003D0A8E /* PraivecyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187EA29C2623A510003D0A8E /* PraivecyViewController.swift */; };
 		187EA2A12625CF53003D0A8E /* L102Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187EA2A02625CF53003D0A8E /* L102Language.swift */; };
 		1887864E262DB52000E3489F /* Iphone 11 Pro Max.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1887864D262DB52000E3489F /* Iphone 11 Pro Max.gif */; };
@@ -86,7 +87,6 @@
 		98CFCBD12477A48E00CC7C88 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCAAA2477A48A00CC7C88 /* ProductModel.swift */; };
 		98CFCBD22477A48E00CC7C88 /* CartShipmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCAAC2477A48A00CC7C88 /* CartShipmentModel.swift */; };
 		98CFCBD52477A48E00CC7C88 /* CartShipmentApplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCAAF2477A48A00CC7C88 /* CartShipmentApplyCell.swift */; };
-		98CFCBD62477A48E00CC7C88 /* CartShipmentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCAB02477A48A00CC7C88 /* CartShipmentController.swift */; };
 		98CFCBD82477A48E00CC7C88 /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCAB22477A48A00CC7C88 /* CartModel.swift */; };
 		98CFCBDA2477A48E00CC7C88 /* MyCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCAB42477A48A00CC7C88 /* MyCart.swift */; };
 		98CFCBDC2477A48E00CC7C88 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCAB62477A48A00CC7C88 /* CartTableViewCell.swift */; };
@@ -188,6 +188,7 @@
 		1860B419260BE6A50070C064 /* CartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButtonView.swift; sourceTree = "<group>"; };
 		1865397A2619C95C00B198C5 /* AllShopsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllShopsApi.swift; sourceTree = "<group>"; };
 		186DF7AF263B17E400C0EDA6 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		187118B9263F7EF7005698AD /* AddLocationPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationPopup.swift; sourceTree = "<group>"; };
 		187EA29C2623A510003D0A8E /* PraivecyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PraivecyViewController.swift; sourceTree = "<group>"; };
 		187EA2A02625CF53003D0A8E /* L102Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L102Language.swift; sourceTree = "<group>"; };
 		1887864D262DB52000E3489F /* Iphone 11 Pro Max.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Iphone 11 Pro Max.gif"; sourceTree = "<group>"; };
@@ -266,7 +267,6 @@
 		98CFCAAA2477A48A00CC7C88 /* ProductModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		98CFCAAC2477A48A00CC7C88 /* CartShipmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartShipmentModel.swift; sourceTree = "<group>"; };
 		98CFCAAF2477A48A00CC7C88 /* CartShipmentApplyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartShipmentApplyCell.swift; sourceTree = "<group>"; };
-		98CFCAB02477A48A00CC7C88 /* CartShipmentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartShipmentController.swift; sourceTree = "<group>"; };
 		98CFCAB22477A48A00CC7C88 /* CartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
 		98CFCAB42477A48A00CC7C88 /* MyCart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCart.swift; sourceTree = "<group>"; };
 		98CFCAB62477A48A00CC7C88 /* CartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
@@ -481,6 +481,7 @@
 				18E99A4B263635D200222AA5 /* Cells */,
 				18E99A48263610CD00222AA5 /* EmptyCartView.swift */,
 				18E99A442634F42C00222AA5 /* StepperView.swift */,
+				187118B9263F7EF7005698AD /* AddLocationPopup.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -507,7 +508,6 @@
 			isa = PBXGroup;
 			children = (
 				98CFCAB42477A48A00CC7C88 /* MyCart.swift */,
-				98CFCAB02477A48A00CC7C88 /* CartShipmentController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -583,7 +583,6 @@
 				98CFCA932477A48900CC7C88 /* Product Cataegory */,
 				98CFCB242477A48B00CC7C88 /* Catalog product */,
 				185511E9262CA3B00015E8CD /* Order */,
-				98CFCBBB2477A48E00CC7C88 /* Empty View */,
 				98CFCAAB2477A48A00CC7C88 /* Cart */,
 				5DD9CE09259B138300864383 /* Location */,
 				98CFCB652477A48D00CC7C88 /* NetworkManager.swift */,
@@ -629,6 +628,7 @@
 		5DD9CE09259B138300864383 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				98CFCBBB2477A48E00CC7C88 /* Empty View */,
 				5DD9CE0C259B150400864383 /* LocationViewController.swift */,
 				5DD9CE0E259B165C00864383 /* LocationTableViewCell.swift */,
 				5DD9CE0F259B165C00864383 /* LocationTableViewCell.xib */,
@@ -1151,7 +1151,6 @@
 				98CFCBCD2477A48E00CC7C88 /* OrderHistory.swift in Sources */,
 				98CFCC7F2477A48E00CC7C88 /* NotificationTableViewCell.swift in Sources */,
 				98CFCBD12477A48E00CC7C88 /* ProductModel.swift in Sources */,
-				98CFCBD62477A48E00CC7C88 /* CartShipmentController.swift in Sources */,
 				98CFCC962477A48E00CC7C88 /* CustomerLogin.swift in Sources */,
 				98CFCC002477A48E00CC7C88 /* SwiftyJSON.swift in Sources */,
 				98CFCBD52477A48E00CC7C88 /* CartShipmentApplyCell.swift in Sources */,
@@ -1173,6 +1172,7 @@
 				98CFCC8C2477A48E00CC7C88 /* ContactUsModel.swift in Sources */,
 				98CFCC8D2477A48E00CC7C88 /* ContactUSController.swift in Sources */,
 				98CFCBDA2477A48E00CC7C88 /* MyCart.swift in Sources */,
+				187118BA263F7EF7005698AD /* AddLocationPopup.swift in Sources */,
 				185511E6262C96270015E8CD /* AppConfiguration.swift in Sources */,
 				5DD9CE15259C7DD400864383 /* NewLocationViewController.swift in Sources */,
 				98CFCBC02477A48E00CC7C88 /* ProductCollectionModel.swift in Sources */,

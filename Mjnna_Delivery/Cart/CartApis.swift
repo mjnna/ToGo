@@ -33,7 +33,7 @@ class CartApis{
         return token
     }
     
-    func getCartProducts(viewController:MyCart,compleation: @escaping(CartViewModel) -> Void) {
+    func getCartProducts(viewController:MyCart,compleation: @escaping(CartViewModel,[Locations]) -> Void) {
         DispatchQueue.main.async{ [self] in
 
            NetworkManager.sharedInstance.showLoader()
@@ -49,8 +49,11 @@ class CartApis{
                     viewController.loginRequest()
                    }else{
                        viewController.view.isUserInteractionEnabled = true
-                        compleation(CartViewModel(data: JSON(responseObject as! NSDictionary)))
-                       NetworkManager.sharedInstance.dismissLoader()
+                    getLocations(viewController: viewController) { (loc) in
+                        compleation(CartViewModel(data: JSON(responseObject as! NSDictionary)), loc)
+                           NetworkManager.sharedInstance.dismissLoader()
+                    }
+                  
                    }
                }else if success == 2{
                    NetworkManager.sharedInstance.dismissLoader()
@@ -121,6 +124,29 @@ class CartApis{
     }
     
  
+    func getLocations(viewController:UIViewController,completion:@escaping([Locations]) -> Void){
+            var requstParams = [String:String]()
+            requstParams["token"] = self.userToken(viewController: viewController)
+            
+                NetworkManager.sharedInstance.callingHttpRequest(params:requstParams, apiname:"location/list",cuurentView: viewController){val,responseObject in
+                    if val == 1 {
+                        let dict = JSON(responseObject as! NSDictionary)
+                        if dict["error"] != nil{
+                            NotificationCenter.default.post(name: .availablelocation, object: false)
+                        }else{
+                            
+                            let locations = LocationsData(data: dict["locations"]).locations
+                            completion(locations)
+                        }
+                    }else{
+                        self.getLocations(viewController: viewController) { (loc) in
+                            completion(loc)
+                        }
+                    }
+                }
+     
+        
+    }
     
  
 }

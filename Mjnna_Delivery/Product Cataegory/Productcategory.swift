@@ -353,14 +353,8 @@ extension Productcategory:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ProductTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProductTableViewCell
         let product = productCollectionViewModel.getProductCollectionData[indexPath.row]
-        
-        var isFeatured: Bool = false
-        if product.isFeatured == 0 {
-            isFeatured = false
-        }else{
-            isFeatured = true
-        }
-        cell.configure(image: product.productImage, name: product.productName, describtion: product.descriptionData, price: product.price, isFeatured:isFeatured , id: product.id)
+     
+        cell.configure(image: product.productImage, name: product.productName, describtion: product.descriptionData, price: product.price, isFeatured:product.isFeatured , id: product.id)
 
         cell.productImageView.tag = indexPath.row
         let Gesture2 = UITapGestureRecognizer(target: self, action: #selector(self.viewProducts))

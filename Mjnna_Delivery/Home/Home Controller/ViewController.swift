@@ -117,29 +117,17 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         RefreshView.layer.cornerRadius = 10
         RefreshView.layer.masksToBounds = true
         RefreshView.isHidden = true
-//        self.navigationController?.isNavigationBarHidden = true
-//        self.tabBarController?.tabBar.isHidden = true
-//        let launchScreen = UIStoryboard(name: "LaunchScreen", bundle: nil)
-//        launchView = launchScreen.instantiateInitialViewController()
-//        if let imageView =  launchView.view.viewWithTag(999) as? UIImageView{
-//            if let data =  self.getCurrentLaunchImage(){
-//                imageView.image = data
-//            }
-//        }
-//
     
         self.tabBarController?.delegate = self
         
         refreshControl = UIRefreshControl()
-        
-        
+    
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         if #available(iOS 10.0, *) {
             homeTableView.refreshControl = refreshControl
         } else {
             homeTableView.backgroundView = refreshControl
         }
-        
         
         ThemeManager.applyTheme(bar:(self.navigationController?.navigationBar)!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor().HexToColor(hexString: GlobalData.NAVIGATION_TINTCOLOR)]
@@ -149,14 +137,11 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         // IQKeyboard Manager Setting
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "done".localized
         IQKeyboardManager.shared.toolbarTintColor = UIColor().HexToColor(hexString: GlobalData.BUTTON_COLOR)
-        
-            //self.setupTableFooterView()
-//            self.view.addSubview(launchView!.view)
             self.navigationItem.title = NetworkManager.sharedInstance.language(key: "applicationname")
             searchBar.placeholder = NetworkManager.sharedInstance.language(key: "searchentirestore")
             refreshingLabel.text = "refreshing".localized
         
-            self.callingHttppApi()
+        self.callingHttppApi()
         let token = sharedPrefrence.object(forKey: "token")
         if(token != nil){
             self.getLocation()
@@ -167,12 +152,14 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         setupMainTableView()
         
     }
+    
     func localizeTabBar() {
         let items = self.tabBarController?.tabBar.items
         items?[0].title = "Home".localized
         items?[1].title = "Stores".localized
         items?[2].title = "Account".localized
     }
+    
     func setupMainTableView(){
         homeViewModel  = HomeViewModel()
         self.homeViewModel.homeViewController = self
@@ -443,7 +430,7 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
                         button.setTitle(self.location, for: .normal)
                         button.titleLabel?.font =  UIFont(name: "System", size: 14)
                         //button.addTarget(self, action: #selector(self.changeClick), for: .touchUpInside)
-                        self.navigationItem.titleView = button
+//                        self.navigationItem.titleView = button
                         
                     }                    
                 }
@@ -507,38 +494,23 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
                     self.view.isUserInteractionEnabled = true
                     let dict = JSON(responseObject as! NSDictionary)
                     if dict["error"].stringValue != ""{
-                        //self.loginRequest()
+                        self.loginRequest()
                     }else{
                         self.homeData = dict
                         if let refreshControl = self.refreshControl{
                             refreshControl.endRefreshing()
-                            
                         }
                         
                         self.homeViewModel.getData(data: dict) {
                             (data : Bool) in
                             if data {
                                 self.homeTableView.reloadDataWithAutoSizingCellWorkAround()
-//                                UIView.animate(withDuration: 1, animations: {
-//                                    let imageView =  self.launchView.view.viewWithTag(999) as? UIImageView
-//                                    imageView?.transform = CGAffineTransform(scaleX: 1.7, y: 1.7)
-//                                    imageView?.alpha = 0.0;
-//                                }) { _ in
-//                                    self.launchView!.view.removeFromSuperview()
-//                                    self.navigationController?.isNavigationBarHidden = false
-//                                    self.tabBarController?.tabBar.isHidden = false
-//                                }
-                                
+
                                 // store the data to data base
                                 if let data = NetworkManager.sharedInstance.json(from: responseObject as! NSDictionary){
                                     DBManager.sharedInstance.storeDataToDataBase(data: data, ApiName: "common/homepage", dataBaseObject: self.dataBaseObject)
                                 }
-                                /*
-                                if self.homeViewModel.cartCount > 0{
-                                    self.tabBarController!.tabBar.items?[1].badgeValue = "\(self.homeViewModel.cartCount)"
-                                    NetworkManager.sharedInstance.updateCartShortCut(count:"\(self.homeViewModel.cartCount)" , succ: true)
-                                }
-                                */
+
                                 if sharedPrefrence.object(forKey: "appstartlan") == nil{
                                     sharedPrefrence.set(self.homeViewModel.defaultLanguage, forKey: "language")
                                     sharedPrefrence.set(self.homeViewModel.defaultLanguage, forKey: "appstartlan")
@@ -550,16 +522,7 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
                                             UIView.appearance().semanticContentAttribute = .forceRightToLeft
                                         }
                                     }
-//                                    
-//                                    let rootviewcontroller: UIWindow = ((UIApplication.shared.delegate?.window)!)!
-//                                    rootviewcontroller.rootViewController = self.storyboard?.instantiateViewController(withIdentifier: "rootnav")
-//                                    let mainwindow = (UIApplication.shared.delegate?.window!)!
-//                                    mainwindow.backgroundColor = UIColor(hue: 0.6477, saturation: 0.6314, brightness: 0.6077, alpha: 0.8)
-//                                    UIView.transition(with: mainwindow, duration: 0.55001, options: .transitionFlipFromLeft, animations: { () -> Void in
-//                                        
-//                                    }) { (finished) -> Void in
-//                                    }
-                                    
+
                                     
                                 }
                                 

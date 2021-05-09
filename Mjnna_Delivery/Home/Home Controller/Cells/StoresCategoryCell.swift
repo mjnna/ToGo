@@ -62,7 +62,8 @@ extension StoresCategoryCell: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StoreCategoryCell
-        cell.typeImageView.loadImageFrom(url:storeCollectionModel[indexPath.row].thumbnail , dominantColor: "")
+        let imageUrl = storeCollectionModel[indexPath.row].thumbnail
+        cell.typeImageView.loadImage(stringURL: imageUrl)
         cell.typeTitleLabel.text = storeCollectionModel[indexPath.row].name
         return cell
     }
@@ -95,7 +96,6 @@ class StoreCategoryCell: UICollectionViewCell {
         let iv = CustomImageView()
         iv.contentMode = .scaleAspectFit
         iv.anchor(width:55,height:55)
-        iv.backgroundColor = .red
         return iv
     }()
 

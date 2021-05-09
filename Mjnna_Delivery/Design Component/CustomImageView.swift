@@ -8,44 +8,34 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 let imageCashe = NSCache<AnyObject,AnyObject>()
 
 class CustomImageView: UIImageView{
    
-    var task: URLSessionDataTask!
     let acvtivityIndecator = UIActivityIndicatorView(style: .gray)
 
     func loadImage(stringURL: String ){
         
         self.image = nil
         addActivityIndecator()
-        if let task = task{
-        task.cancel()
-        }
        
-        if let url = URL(string: stringURL){
-        if let imagefromCashe = imageCashe.object(forKey: url.absoluteString as AnyObject) as? UIImage{
-           image = imagefromCashe
-           removeActivityIndecator()
-           return
-        }
-        
-        task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-             guard
-                 let data = data ,
-                 let newImage = UIImage(data: data)
-                 else{
-                     print("could't load the image")
-                     return
-             }
-            imageCashe.setObject(newImage, forKey: url.absoluteString as AnyObject)
-             DispatchQueue.main.async {
-                 self.image = newImage
-                 self.removeActivityIndecator()
-             }
-        }
-        task.resume()
+        let imageURL = (BASE_DOMAIN + stringURL).removingPercentEncoding
+        if let urlString = imageURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed){
+            SDImageCache.shared.config.maxDiskSize = 60 * 60 * 24 * 7
+            
+            self.sd_setImage(with: URL(string: urlString)) { (image, error, cacheType, url) in
+                if error != nil{
+                    self.image = UIImage(named: "ic_placeholder.png")
+                    self.removeActivityIndecator()
+                }else{
+                    self.backgroundColor = UIColor.white
+                    self.removeActivityIndecator()
+
+                }
+                
+            }
         }
      }
     

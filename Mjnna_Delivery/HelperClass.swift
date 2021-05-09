@@ -414,9 +414,6 @@ extension UITableView {
         self.reloadData()
         self.setNeedsLayout()
         self.layoutIfNeeded()
-        self.reloadData()
-        
-        
     }
 }
 

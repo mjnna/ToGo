@@ -64,7 +64,7 @@ class ApisServices {
                             let resultJson = JSON(dict)
                             let token = resultJson["token"].stringValue
                             compleation(token,"")
-                            self.doFurtherProcessing(resultJson: resultJson, user: user, viewController: viewController)
+                            self.doFurtherProcessing(resultJson: resultJson, viewController: viewController)
                         }
                     }else if success == 2{
                         NetworkManager.sharedInstance.dismissLoader()
@@ -79,16 +79,16 @@ class ApisServices {
                 }
             }
     }
-     private func doFurtherProcessing(resultJson: JSON,user: SocialAccount,viewController:UIViewController){
+     private func doFurtherProcessing(resultJson: JSON,viewController:UIViewController){
         let welcomMsg = "welcome".localised + " "+(resultJson["user"]["ar_name"].stringValue)+" "+(resultJson["user"]["en_name"].stringValue)
         NetworkManager.sharedInstance.showSuccessSnackBar(msg:welcomMsg)
         defaults.set(resultJson["token"].stringValue, forKey: "token")
         defaults.set(resultJson["user"]["customer_id"].stringValue, forKey: "customer_id")
-        defaults.set(user.email, forKey: "email")
-        defaults.set(user.firstName, forKey: "first_name")
-        defaults.set("", forKey: "image")
-        defaults.set(user.lastName, forKey: "last-name")
-        defaults.set(user.phoneNumber, forKey: "phone")
+        defaults.set(resultJson["user"]["current_language"].stringValue, forKey: "language")
+        defaults.set(resultJson["user"]["email"].stringValue, forKey: "email")
+        defaults.set(resultJson["user"]["ar_name"].stringValue, forKey: "first_name")
+        defaults.set(resultJson["user"]["en_name"].stringValue, forKey: "last-name")
+        defaults.set(resultJson["user"]["phone"].stringValue, forKey: "phone")
         defaults.synchronize()
 
         NetworkManager.sharedInstance.showSuccessSnackBar(msg: welcomMsg)

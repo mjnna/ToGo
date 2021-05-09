@@ -63,25 +63,20 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate{
     var productImageUrl:String = ""
     let defaults = UserDefaults.standard
     var imageArrayUrl:[String] = []
-    var selectArr  = [Int:JSON]()
-    var selectID  = [Int:String]()
-    var keyBoardFlag:Int = 1;
     var whichApiToProcess:String = ""
-    var radioId = [Int: String]()
-    var fileCodeValue = ""
-    var optionDictionary = [String:AnyObject]()
-    var goToBagFlag:Bool = false
-    var currentOptionTag:Int = 0
+
     var childZoomingScrollView, parentZoomingScrollView :UIScrollView!
     var imageview,imageZoom : UIImageView!
     var currentTag:NSInteger = 0
     var pager:UIPageControl!
     var weatherData:Data?
-    var fileName:String!
     var isCart:Bool = false
     var previewItem:URL!
-    var productOptionArray : JSON!
-    var availableLocation:Bool = false
+
+    var dictOption = [String:AnyObject]()
+
+    let goldColor:UIColor = UIColor().HexToColor(hexString: GlobalData.GOLDCOLOR)
+    let grayColor:UIColor = .gray
     
     //MARK: - View Life Cycle Methods
     override func viewDidLoad() {
@@ -102,12 +97,9 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate{
         productpriceLabel.text = productPrice
         self.tabBarController?.tabBar.isHidden = true
         callingHttppApi()
-
         
         addToCartButton.setTitle(NetworkManager.sharedInstance.language(key: "addtocart"), for: .normal)
-        
-     
-       
+
         addToCartButton.setTitleColor(UIColor.white, for: .normal)
         
         addToCartButton.layer.cornerRadius = 5;
@@ -141,11 +133,18 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate{
         
         stepperView.addSubview(stepper)
         stepper.anchor(top: stepperView.topAnchor, bottom: stepperView.bottomAnchor, left: stepperView.leadingAnchor, right: stepperView.trailingAnchor)
+       
+        yesCheckBoxButton.backgroundColor = .clear
+        yesCheckBoxView.layer.borderColor = grayColor.cgColor
+        
+        noCheckBoxView.layer.borderColor = goldColor.cgColor
+        noCheckBoxButton.backgroundColor = goldColor
         
         designCheckBox(view: yesCheckBoxView, button: yesCheckBoxButton, tag: 0)
         designCheckBox(view: noCheckBoxView, button: noCheckBoxButton, tag: 1)
         
     }
+
     func viewLoaded(isLoaded:Bool){
         self.pageControl.isHidden = !isLoaded
         self.collectionView.isHidden = !isLoaded
@@ -160,10 +159,13 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate{
         button.layer.cornerRadius = button.frame.height/2
         button.addTarget(self, action: #selector(choicePressed), for: .touchUpInside)
     }
+    
     //MARK:- Actions
   
     @objc func choicePressed(_ sender: UIButton) {
-        selectedChoice(tag: sender.tag)
+        let tag = sender.tag
+        selectedChoice(tag:tag )
+     
     }
  
     @objc func minusePressed(_ sender:UIButton){
@@ -211,18 +213,17 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate{
     }
     
     @IBAction func addToCartAction(_ sender: UIButton) {
-        optionDictionary = [String:AnyObject]()
-        
-        
-        for i in 0..<self.catalogProductViewModel.getOptions.count {
-            let dict = JSON(self.catalogProductViewModel.getOptions[i])
-            print(dict)
-        
+        if self.catalogProductViewModel.getOptions.isEmpty{
+            
+        }else{
+            var optionDict = JSON(self.catalogProductViewModel.getOptions[0])
         }
-
-            whichApiToProcess = "addtocart"
-            self.callingHttppApi()
+        
+      
+        whichApiToProcess = "addtocart"
+        self.callingHttppApi()
     }
+    
     @objc func handleDoubleTap(_ gestureRecognizer: UIGestureRecognizer) {
         let scroll = parentZoomingScrollView.viewWithTag(888888) as! UIScrollView
         let childScroll = scroll.viewWithTag(90000 + currentTag) as! UIScrollView
@@ -252,8 +253,7 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate{
     }
     
     func selectedChoice(tag:Int){
-        let goldColor:UIColor = UIColor().HexToColor(hexString: GlobalData.GOLDCOLOR)
-        let grayColor:UIColor = .gray
+    
         if tag == 0 {
             yesCheckBoxButton.backgroundColor = goldColor
             yesCheckBoxView.layer.borderColor = goldColor.cgColor
@@ -312,7 +312,7 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate{
                 requstParams["token"] = sessionId as? String
                 requstParams["quantity"] = self.stepper.QuantityLabel.text
                 do {
-                    let jsonSortData =  try JSONSerialization.data(withJSONObject: self.optionDictionary, options: .prettyPrinted)
+                    let jsonSortData =  try JSONSerialization.data(withJSONObject: self.dictOption, options: .prettyPrinted)
                     let jsonSortString:String = NSString(data: jsonSortData, encoding: String.Encoding.utf8.rawValue)! as String
                     requstParams["options"] = jsonSortString
                 }
@@ -330,15 +330,12 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate{
                                 self.loginRequest()
                             }
                             else{
-
                                 let  AC = UIAlertController(title: NetworkManager.sharedInstance.language(key: "alert"), message: "You Can't order from more than one store at once, clear cart?".localized, preferredStyle: .alert)
                                 let okBtn = UIAlertAction(title: NetworkManager.sharedInstance.language(key: "yes"), style:.default, handler: {(_ action: UIAlertAction) -> Void in
                                         self.whichApiToProcess = "clearCart"
                                         self.callingHttppApi()
-                                      
                                 })
                                 let cancelBtn = UIAlertAction(title: NetworkManager.sharedInstance.language(key: "no"), style:.destructive, handler: {(_ action: UIAlertAction) -> Void in
-                                    
                                 })
                                 AC.addAction(okBtn)
                                 AC.addAction(cancelBtn)
@@ -461,7 +458,6 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate{
             }else{
                 self.optionView.isHidden = true
             }
-            print(self.catalogProductViewModel.isFeatured)
             self.featuredView.isHidden = !self.catalogProductViewModel.isFeatured
             self.viewLoaded(isLoaded: true)
             

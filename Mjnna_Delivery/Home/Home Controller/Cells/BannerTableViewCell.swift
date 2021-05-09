@@ -14,37 +14,6 @@ import UIKit
 import FSPagerView
 
 
-extension BannerTableCell:FSPagerViewDataSource,FSPagerViewDelegate {
-
-    public func numberOfItems(in pagerView: FSPagerView) -> Int {
-        return bannerCollectionModel.count
-    }
-    
-    public func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
-        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index) as! BannerCell
-        cell.bannerImageView.loadImageFrom(url:bannerCollectionModel[index].imageUrl , dominantColor: bannerCollectionModel[index].dominant_color)
-        cell.categoryName.text = bannerCollectionModel[index].bannerName
-        
-
-        return cell
-    }
-    
-    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-        pagerView.deselectItem(at: index, animated: true)
-        pagerView.scrollToItem(at: index, animated: true)
-        
-        delegate.bannerProductClick(type: bannerCollectionModel[index].bannerType, image: bannerCollectionModel[index].imageUrl, id: bannerCollectionModel[index].bannerLink,title:bannerCollectionModel[index].bannerName)
-        
-        self.pageControl.currentPage = index
-    }
-    
-    func pagerViewDidScroll(_ pagerView: FSPagerView) {
-        guard self.pageControl.currentPage != pagerView.currentIndex else {
-            return
-        }
-        self.pageControl.currentPage = pagerView.currentIndex // Or Use KVO with property "currentIndex"
-    }
-}
 
 class BannerTableCell: UITableViewCell {
     
@@ -133,12 +102,45 @@ class BannerTableCell: UITableViewCell {
     
 
 }
+extension BannerTableCell:FSPagerViewDataSource,FSPagerViewDelegate {
+
+    public func numberOfItems(in pagerView: FSPagerView) -> Int {
+        return bannerCollectionModel.count
+    }
+    
+    public func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index) as! BannerCell
+        cell.bannerImageView.loadImageFrom(url:bannerCollectionModel[index].imageUrl , dominantColor: bannerCollectionModel[index].dominant_color)
+        cell.categoryName.text = bannerCollectionModel[index].bannerName
+        
+
+        return cell
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
+        pagerView.deselectItem(at: index, animated: true)
+        pagerView.scrollToItem(at: index, animated: true)
+        
+        delegate.bannerProductClick(type: bannerCollectionModel[index].bannerType, image: bannerCollectionModel[index].imageUrl, id: bannerCollectionModel[index].bannerLink,title:bannerCollectionModel[index].bannerName)
+        
+        self.pageControl.currentPage = index
+    }
+    
+    func pagerViewDidScroll(_ pagerView: FSPagerView) {
+        guard self.pageControl.currentPage != pagerView.currentIndex else {
+            return
+        }
+        self.pageControl.currentPage = pagerView.currentIndex // Or Use KVO with property "currentIndex"
+    }
+}
+
 
 class BannerCell: FSPagerViewCell {
     
     lazy var bannerImageView: UIImageView = {
        let iv = UIImageView()
-        iv.contentMode = .scaleToFill
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
         iv.layer.cornerRadius = 10
         iv.layer.opacity = 0.8
         iv.backgroundColor = .black
@@ -152,19 +154,10 @@ class BannerCell: FSPagerViewCell {
        let lb = UILabel()
         lb.textColor = .white
         lb.font = UIFont.systemFont(ofSize: 17)
-        lb.textAlignment = .left
         lb.anchor(height:15)
         return lb
     }()
-    
-//    lazy var stackView : UIStackView = {
-//        let sv = UIStackView(arrangedSubviews: [categoryName,categoryDescription])
-//        sv.alignment = .center
-//        sv.spacing = 10
-//        sv.distribution = .fill
-//        sv.axis = .vertical
-//        return sv
-//    }()
+
     override init(frame: CGRect) {
       super.init(frame: frame)
        self.setup()
@@ -179,6 +172,9 @@ class BannerCell: FSPagerViewCell {
         addSubview(bannerImageView)
         bannerImageView.anchor(top: self.topAnchor, bottom: self.bottomAnchor, left: self.leadingAnchor, right: self.trailingAnchor)
         
+        categoryName.anchor(bottom: self.bottomAnchor, left: self.leadingAnchor, right: self.trailingAnchor, paddingBottom: 30, paddingLeft: 20, paddingRight: 20,height: 20)
+        
     }
     
 }
+

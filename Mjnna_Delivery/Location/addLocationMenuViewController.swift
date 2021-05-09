@@ -11,28 +11,48 @@ import MapKit
 import CoreLocation
 
 class addLocationMenuViewController: UIViewController {
-    @IBOutlet weak var SreetLabel: UITextField!
+    @IBOutlet weak var streetTextField: UITextField!
     
-    @IBOutlet weak var BuildingLabel: UITextField!
+    @IBOutlet weak var buildingTextField: UITextField!
     
-    @IBOutlet weak var AppartmentLabel: UITextField!
+    @IBOutlet weak var appartmentTextField: UITextField!
     
-    @IBOutlet weak var StoreyLabel: UITextField!
+    @IBOutlet weak var floorTextField: UITextField!
     
-    @IBOutlet weak var SaveButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     
-    @IBOutlet weak var SelectedLocation: UILabel!
+    @IBOutlet weak var selectedLocation: UILabel!
     
     
-    var longitude : Double = 0.0
-    var latitude : Double = 0.0
+    var longitude: Double = 0.0
+    var latitude: Double = 0.0
+    var backToCart: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tabBarController?.tabBar.isHidden = true
-        SaveButton.layer.cornerRadius = 10
-        SaveButton.layer.masksToBounds = true
-        SaveButton.titleLabel?.text = "save".localized
+        
+        self.selectedLocation.text = "Selected location".localized
+        self.streetTextField.placeholder = "Street".localized
+        self.buildingTextField.placeholder = "Building".localized
+        self.appartmentTextField.placeholder = "Appartment".localized
+        self.floorTextField.placeholder = "Floor".localized
+
+        saveButton.layer.cornerRadius = 10
+        saveButton.layer.masksToBounds = true
+        saveButton.titleLabel?.text = "save".localized
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(fromCartFlagUpdated(_:)), name: .fromCart, object: nil)
+    }
+    
+    //MARK: - Actions
+    
+    @objc func fromCartFlagUpdated(_ notifcation:Notification){
+        if let notification = notifcation.object as? Bool {
+            backToCart = notification
+        }
     }
     
     @IBAction func saveTapped(_ sender: Any) {
@@ -67,10 +87,10 @@ class addLocationMenuViewController: UIViewController {
         var requstParams = [String:String]()
         requstParams["token"] = sessionId
         
-        requstParams["street"] = self.SreetLabel.text
-        requstParams["building"] = self.BuildingLabel.text
-        requstParams["apartment"] = self.AppartmentLabel.text
-        requstParams["storey"] = self.StoreyLabel.text
+        requstParams["street"] = self.streetTextField.text
+        requstParams["building"] = self.buildingTextField.text
+        requstParams["apartment"] = self.appartmentTextField.text
+        requstParams["storey"] = self.floorTextField.text
         requstParams["latitude"] = String(format: "%f", self.latitude)
         requstParams["longitude"] = String(format: "%f", self.longitude)
         
@@ -88,13 +108,15 @@ class addLocationMenuViewController: UIViewController {
                                else{
                                 NetworkManager.sharedInstance.dismissLoader()
                                 NetworkManager.sharedInstance.showSuccessSnackBar(msg: "Your Location Has Been Added Successfully".localized)
-                                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                let locViewController = storyBoard.instantiateViewController(withIdentifier: "locDetails") as! LocationDetailsViewController
-                                locViewController.locationId = dict["id"].stringValue
-                                self.modalPresentationStyle = .overFullScreen
-                                self.navigationController?.pushViewController(locViewController, animated: true)
-                                // go to the details page
-                                
+                                let storyBoard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
+                                if self.backToCart {
+                                    self.navigationController?.popViewController(animated: true)
+                                }else{
+                                    let locViewController = storyBoard.instantiateViewController(withIdentifier: "locDetails") as! LocationDetailsViewController
+                                    locViewController.locationId = dict["id"].stringValue
+                                    self.modalPresentationStyle = .overFullScreen
+                                    self.navigationController?.pushViewController(locViewController, animated: true)
+                                }
                                }
                                
                            }

@@ -36,8 +36,11 @@ class SideMenu: UIView {
         let lb = UILabel()
         lb.textAlignment = .left
         lb.textColor = .black
+        lb.lineBreakMode = .byWordWrapping
+        lb.numberOfLines  = 0
         lb.font = UIFont.systemFont(ofSize: 14)
         lb.text = "customer@gmail.com"
+        lb.anchor(height:35)
         return lb
     }()
     lazy var userPhoneNumber: UILabel = {
@@ -152,7 +155,7 @@ class SideMenu: UIView {
         self.backgroundColor = #colorLiteral(red: 0.997813046, green: 0.7226907611, blue: 0, alpha: 1)
         
         addSubview(userInfoStackView)
-        userInfoStackView.anchor(top: self.topAnchor, left: self.leadingAnchor, right: self.trailingAnchor, paddingTop: 30, paddingLeft: 20, paddingRight: 20, height:70)
+        userInfoStackView.anchor(top: self.topAnchor, left: self.leadingAnchor, right: self.trailingAnchor, paddingTop: 30, paddingLeft: 20, paddingRight: 20, height:80)
         
         
         addSubview(tableView)
