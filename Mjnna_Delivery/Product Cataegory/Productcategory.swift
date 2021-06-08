@@ -126,7 +126,16 @@ class Productcategory: UIViewController {
     
     @objc
     func cartPressed (){
-        self.performSegue(withIdentifier: "cart", sender: nil)
+        if defaults.object(forKey:"token") != nil{
+            self.performSegue(withIdentifier: "cart", sender: nil)
+        }else{
+            self.dismiss(animated:true) {
+                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                 let TabViewController = storyBoard.instantiateViewController(withIdentifier: "rootnav") as! tabBarController
+                 TabViewController.selectedIndex = 2
+                 UIApplication.shared.keyWindow?.rootViewController = TabViewController
+            }
+        }
     }
     
     @objc func browseCategory(sender: UIButton){

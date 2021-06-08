@@ -379,13 +379,13 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
     
 
 
-    func checkOutAsGuest(alertAction: UIAlertAction!) {
-        self.performSegue(withIdentifier: "proceddToCheckout", sender: self)
-    }
-    
-    func registerAndCheckOut(alertAction: UIAlertAction!) {
-        self.performSegue(withIdentifier: "cartToCreateAccount", sender: self)
-    }
+//    func checkOutAsGuest(alertAction: UIAlertAction!) {
+//        self.performSegue(withIdentifier: "proceddToCheckout", sender: self)
+//    }
+//    
+//    func registerAndCheckOut(alertAction: UIAlertAction!) {
+//        self.performSegue(withIdentifier: "cartToCreateAccount", sender: self)
+//    }
     
     func existingUser(alertAction: UIAlertAction!) {
         let tabBarController = UIApplication.shared.keyWindow?.rootViewController as! UITabBarController

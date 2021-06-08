@@ -52,15 +52,17 @@ class SideMenu: UIView {
         return lb
     }()
     lazy var userInfoStackView: UIStackView  = {
-        var sv = UIStackView()
+        var sv = UIStackView(arrangedSubviews: [welcomeLabel,userName,userEmail,userPhoneNumber])
         if defaults.object(forKey: "token") != nil {
+            userName.isHidden = false
             userEmail.isHidden = false
             userPhoneNumber.isHidden = false
-            sv = UIStackView(arrangedSubviews: [userName,userEmail,userPhoneNumber])
+            welcomeLabel.isHidden = true
         }else{
+            welcomeLabel.isHidden = false
+            userName.isHidden = true
             userEmail.isHidden = true
             userPhoneNumber.isHidden = true
-            sv = UIStackView(arrangedSubviews: [welcomeLabel,userEmail,userPhoneNumber])
         }
         sv.distribution = .fillEqually
         sv.alignment = .leading
@@ -69,7 +71,7 @@ class SideMenu: UIView {
         return sv
     }()
     
-    lazy var tableView: UITableView = {
+    lazy var menuTableView: UITableView = {
         let tableView = UITableView()
         tableView.isScrollEnabled = false
         tableView.register(SideMenuCell.self, forCellReuseIdentifier: "cell")
@@ -158,11 +160,11 @@ class SideMenu: UIView {
         userInfoStackView.anchor(top: self.topAnchor, left: self.leadingAnchor, right: self.trailingAnchor, paddingTop: 30, paddingLeft: 20, paddingRight: 20, height:80)
         
         
-        addSubview(tableView)
-        tableView.anchor(top: userInfoStackView.bottomAnchor, left: self.leadingAnchor, right: self.trailingAnchor, paddingTop: 25, paddingLeft: 20, paddingRight: 20,height: 50*8)
+        addSubview(menuTableView)
+        menuTableView.anchor(top: userInfoStackView.bottomAnchor, left: self.leadingAnchor, right: self.trailingAnchor, paddingTop: 25, paddingLeft: 20, paddingRight: 20,height: 50*8)
         
         addSubview(bottomStackView)
-        bottomStackView.anchor(top: tableView.bottomAnchor, bottom: self.bottomAnchor, paddingTop: 10, paddingBottom: 30, height: 65)
+        bottomStackView.anchor(top: menuTableView.bottomAnchor, bottom: self.bottomAnchor, paddingTop: 10, paddingBottom: 30, height: 65)
         
         NSLayoutConstraint.activate([
             bottomStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -207,11 +209,20 @@ class SideMenu: UIView {
         }
     }
     
-    //Handler
-    func loadMenu(){
-        setCustomerData()
-   
-        if defaults.object(forKey: "token") != nil{
+    func updateUIbasedOnUSerStatus(isGuest: Bool){
+        userName.isHidden = !isGuest
+        userEmail.isHidden = !isGuest
+        userPhoneNumber.isHidden = !isGuest
+        welcomeLabel.isHidden = isGuest
+        if !isGuest{
+            dataSource = [CellContnet(image: #imageLiteral(resourceName: "ic_discover"), title: "Discover".localized),
+                          CellContnet(image: #imageLiteral(resourceName: "ic_nav_support"), title: "About us".localized),
+                          CellContnet(image: #imageLiteral(resourceName: "ic_nav_support"), title: "Contact us".localized),
+                          CellContnet(image: #imageLiteral(resourceName: "privacy"), title: "Privacy&Policy".localized),
+                          CellContnet(image: #imageLiteral(resourceName: "ic_nav_profile"), title: "Log in".localized),
+                          CellContnet(image: #imageLiteral(resourceName: "ic_nav_profile"), title: "Register".localized)
+                          ]
+        }else{
             dataSource = [CellContnet(image: #imageLiteral(resourceName: "ic_discover"), title: "Discover".localized),
                           CellContnet(image: #imageLiteral(resourceName: "ic_nav_profile"), title: "My Account".localized),
                           CellContnet(image: #imageLiteral(resourceName: "ic_order_history"), title: "My Orders".localized),
@@ -221,18 +232,15 @@ class SideMenu: UIView {
                           CellContnet(image: #imageLiteral(resourceName: "privacy"), title: "Privacy&Policy".localized),
                           CellContnet(image: #imageLiteral(resourceName: "ic_logout"), title: "Logout".localized)
                           ]
-        }else{
-            dataSource = [CellContnet(image: #imageLiteral(resourceName: "ic_discover"), title: "Discover".localized),
-                          CellContnet(image: #imageLiteral(resourceName: "ic_nav_support"), title: "About us".localized),
-                          CellContnet(image: #imageLiteral(resourceName: "ic_nav_support"), title: "Contact us".localized),
-                          CellContnet(image: #imageLiteral(resourceName: "privacy"), title: "Privacy&Policy".localized),
-                          CellContnet(image: #imageLiteral(resourceName: "ic_nav_profile"), title: "Log in".localized),
-                          CellContnet(image: #imageLiteral(resourceName: "ic_nav_profile"), title: "Register".localized)
-                          ]
         }
-        tableView.reloadData()
-        self.tableView.selectRow(at: defaultSelectedRow, animated: true, scrollPosition: .none)
-
+    }
+    
+    //Handler
+    func loadMenu(){
+        setCustomerData()
+        updateUIbasedOnUSerStatus(isGuest: defaults.object(forKey: "token") != nil)
+        menuTableView.reloadData()
+        self.menuTableView.selectRow(at: defaultSelectedRow, animated: true, scrollPosition: .none)
     }
     func setCustomerData(){
         let defaults = UserDefaults.standard
@@ -266,8 +274,8 @@ class SideMenu: UIView {
 extension SideMenu:UITableViewDelegate,UITableViewDataSource {
     
     func setupDelegates(){
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        self.menuTableView.delegate = self
+        self.menuTableView.dataSource = self
        
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

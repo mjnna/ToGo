@@ -65,8 +65,8 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
     
     lazy var sideMenu: SideMenu = {
         let sm = SideMenu()
-        sm.tableView.backgroundColor = .clear
-        sm.tableView.separatorStyle = .none
+        sm.menuTableView.backgroundColor = .clear
+        sm.menuTableView.separatorStyle = .none
       
         return sm
     }()
@@ -249,6 +249,7 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
                     let okBtn = UIAlertAction(title: NetworkManager.sharedInstance.language(key: "ok"), style: .default, handler: {(_ action: UIAlertAction) -> Void in
                         self.whichApiToProcess = ""
                         self.logoutCustomer()
+                        self.sideMenu.loadMenu()
                     })
                     let noBtn = UIAlertAction(title: NetworkManager.sharedInstance.language(key: "cancel"), style: .destructive, handler: {(_ action: UIAlertAction) -> Void in
                     })
@@ -313,7 +314,7 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         sideMenuOpen = !sideMenuOpen
         if sideMenuOpen {
             let indexPath = IndexPath(row: 0, section: 0)
-            sideMenu.tableView.selectRow(at: indexPath , animated: false, scrollPosition: .none)
+            sideMenu.menuTableView.selectRow(at: indexPath , animated: false, scrollPosition: .none)
             animateSideMenu(animate: true)
         }else{
             animateSideMenu(animate: false)
