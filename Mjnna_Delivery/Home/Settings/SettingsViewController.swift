@@ -133,7 +133,6 @@ extension SettingsViewController: UITableViewDelegate,UITableViewDataSource {
         
         cell.accessoryType = .none
         cell.textLabel?.alingment()
-        print(languageData[indexPath.row])
         let data = languageData[indexPath.row]
         cell.textLabel?.text = data.title.localized
         if sharedPrefrence.object(forKey: "language") != nil{
@@ -149,31 +148,13 @@ extension SettingsViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Language".localized
     }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-       
-        let myLabel = UILabel()
-        if let lang = sharedPrefrence.object(forKey: "language") as? String {
-            if lang == "ar" {
-                
-                myLabel.frame = CGRect(x:90 ,y:8, width: 320, height: 25)
-                myLabel.font = UIFont.boldSystemFont(ofSize: 18)
 
-            }else{
-                myLabel.font = UIFont.boldSystemFont(ofSize:   15)
-                myLabel.frame = CGRect(x: 20, y:8, width: 320, height: 25)
-            }
-        }
-      
-        myLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
-        headerView.addSubview(myLabel)
-        headerView.backgroundColor = #colorLiteral(red: 0.8954392076, green: 0.8995835781, blue: 0.909712553, alpha: 1)
-
-        return headerView
-    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.languageCode = languageData[indexPath.row].code
         self.callingLanguageHttppApi()
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+      return  40
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

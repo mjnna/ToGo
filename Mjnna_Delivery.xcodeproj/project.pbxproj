@@ -383,7 +383,7 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		185511E8262CA3860015E8CD /* Shops */ = {
+		185511E8262CA3860015E8CD /* Stores */ = {
 			isa = PBXGroup;
 			children = (
 				1865397A2619C95C00B198C5 /* AllShopsApi.swift */,
@@ -391,7 +391,7 @@
 				5D6402F524C7273F007912EF /* SellerCategoryTableViewCell.swift */,
 				18EEA628261CEE3500F235CB /* SearchBarView.swift */,
 			);
-			path = Shops;
+			path = Stores;
 			sourceTree = "<group>";
 		};
 		185511E9262CA3B00015E8CD /* Order */ = {
@@ -578,7 +578,7 @@
 				98CFCB1B2477A48B00CC7C88 /* Language Switcher */,
 				5D54E35624CE8D4D008C9995 /* logo */,
 				185511E7262CA3030015E8CD /* Home */,
-				185511E8262CA3860015E8CD /* Shops */,
+				185511E8262CA3860015E8CD /* Stores */,
 				98CFCB8B2477A48D00CC7C88 /* Account */,
 				98CFCA932477A48900CC7C88 /* Product Cataegory */,
 				98CFCB242477A48B00CC7C88 /* Catalog product */,
@@ -1329,8 +1329,8 @@
 				CODE_SIGN_ENTITLEMENTS = "Mjnna_Delivery/To Go KSA.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.3;
-				DEVELOPMENT_TEAM = 62QT92WGA3;
+				CURRENT_PROJECT_VERSION = 1.6;
+				DEVELOPMENT_TEAM = NCFUW4MMA2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mjnna_Delivery/ZenDesk\\ Framework",
@@ -1355,13 +1355,13 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D MARKETPLACE -D HYPERLOCAL";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mjnna.togoo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mjnna.togo;
 				PRODUCT_NAME = "To Go KSA";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Mjnna_Delivery/Mjnna_Delivery-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1375,8 +1375,8 @@
 				CODE_SIGN_ENTITLEMENTS = "Mjnna_Delivery/To Go KSA.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.3;
-				DEVELOPMENT_TEAM = 62QT92WGA3;
+				CURRENT_PROJECT_VERSION = 1.6;
+				DEVELOPMENT_TEAM = NCFUW4MMA2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mjnna_Delivery/ZenDesk\\ Framework",
@@ -1401,12 +1401,12 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D MARKETPLACE -D HYPERLOCAL";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mjnna.togoo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mjnna.togo;
 				PRODUCT_NAME = "To Go KSA";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Mjnna_Delivery/Mjnna_Delivery-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

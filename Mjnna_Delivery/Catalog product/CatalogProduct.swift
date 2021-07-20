@@ -72,8 +72,9 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate{
     var weatherData:Data?
     var isCart:Bool = false
     var previewItem:URL!
-
-    var dictOption = [String:AnyObject]()
+    
+    var optionSelected:Bool = false
+    
 
     let goldColor:UIColor = UIColor().HexToColor(hexString: GlobalData.GOLDCOLOR)
     let grayColor:UIColor = .gray
@@ -213,13 +214,6 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate{
     }
     
     @IBAction func addToCartAction(_ sender: UIButton) {
-        if self.catalogProductViewModel.getOptions.isEmpty{
-            
-        }else{
-            var optionDict = JSON(self.catalogProductViewModel.getOptions[0])
-        }
-        
-      
         whichApiToProcess = "addtocart"
         self.callingHttppApi()
     }
@@ -257,15 +251,16 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate{
         if tag == 0 {
             yesCheckBoxButton.backgroundColor = goldColor
             yesCheckBoxView.layer.borderColor = goldColor.cgColor
-            
             noCheckBoxView.layer.borderColor = grayColor.cgColor
             noCheckBoxButton.backgroundColor = .clear
+            optionSelected = true
         }else{
             yesCheckBoxButton.backgroundColor = .clear
             yesCheckBoxView.layer.borderColor = grayColor.cgColor
-            
             noCheckBoxView.layer.borderColor = goldColor.cgColor
             noCheckBoxButton.backgroundColor = goldColor
+            optionSelected = false
+
         }
         
     }
@@ -311,14 +306,20 @@ class CatalogProduct: UIViewController ,UIScrollViewDelegate{
                 requstParams["product_id"] = self.productId
                 requstParams["token"] = sessionId as? String
                 requstParams["quantity"] = self.stepper.QuantityLabel.text
-                do {
-                    let jsonSortData =  try JSONSerialization.data(withJSONObject: self.dictOption, options: .prettyPrinted)
-                    let jsonSortString:String = NSString(data: jsonSortData, encoding: String.Encoding.utf8.rawValue)! as String
-                    requstParams["options"] = jsonSortString
+                if (self.optionSelected){
+                    requstParams["options"] = String(self.catalogProductViewModel.getOptions[0].id)
+                }else{
+                    let dictOption = [String:AnyObject]()
+                    do {
+                        let jsonSortData =  try JSONSerialization.data(withJSONObject: dictOption, options: .prettyPrinted)
+                        let jsonSortString:String = NSString(data: jsonSortData, encoding: String.Encoding.utf8.rawValue)! as String
+                        requstParams["options"] = jsonSortString
+                    }
+                    catch {
+                        print(error.localizedDescription)
+                    }
                 }
-                catch {
-                    print(error.localizedDescription)
-                }
+              
                 
                 
                 NetworkManager.sharedInstance.callingNewHttpRequest(params:requstParams, apiname:"cart/add", cuurentView: self){success,responseObject in

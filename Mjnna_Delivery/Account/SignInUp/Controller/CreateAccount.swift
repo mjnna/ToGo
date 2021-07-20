@@ -50,7 +50,6 @@ class CreateAccount: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
     var isSeller:Bool = false
     
     
-    
     public var movetoSignal:String = "customerLogin"
     @IBOutlet weak var registerButton: UIButton!
     let defaults = UserDefaults.standard
@@ -59,16 +58,12 @@ class CreateAccount: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
     @IBOutlet weak var mainView: UIView!
     var whichApiToProcess:String = ""
     
-    
-    
     @IBAction func agreeSwitchAction(_ sender: UISwitch) {
         let mySwitch = (sender )
         if mySwitch.isOn {
             agreeStr = "1"
         }
     }
-    
-    
     
     func setPasswordField(passwordField:HideShowPasswordTextField )
     {
@@ -81,6 +76,7 @@ class CreateAccount: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
         //passwordField.layer.addSublayer(Border)
         //passwordField.borderStyle = .none
     }
+    
     func setTextField(textField:UIFloatLabelTextField )
     {
         let Border = CAShapeLayer()
@@ -132,18 +128,14 @@ class CreateAccount: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
         yourpersonnelDetailsLabel.text = NetworkManager.sharedInstance.language(key:"yourpersoneldetails")
         
         yourpasswordlabel.text = NetworkManager.sharedInstance.language(key:"yourpassword")
-       
-        
+    
         let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
         let underlineAttributedString = NSAttributedString(string: NetworkManager.sharedInstance.language(key:"privacypolicy"), attributes: underlineAttribute)
         privacypolicyLabel.attributedText = underlineAttributedString
         
-        
-        
         let tap1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CreateAccount.privacyPolicy))
         privacypolicyLabel.addGestureRecognizer(tap1)
-        
-        
+    
         firstNameTextField.textColor = UIColor.black
         lastNameTextField.textColor = UIColor.black
         emailTextField.textColor = UIColor.black
@@ -192,20 +184,32 @@ class CreateAccount: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
                 }
                 NetworkManager.sharedInstance.callingNewHttpRequest(params:requstParams, apiname:"customer/register", cuurentView: self){success,responseObject in
                     if success == 1 {
-                        let dict = responseObject as! NSDictionary;
+                        let dict = responseObject as! NSDictionary
                         if dict.object(forKey: "error") != nil{
                             // return the error to the user
-
-                            NetworkManager.sharedInstance.showErrorSnackBar(msg:"invalid credentials".localised)
+                            
+                            let resultJson = JSON(dict)
+                            let error = resultJson["error"]
+                        
+                            if (!error.isEmpty){
+                                let phoneErrorMessage = error["phone"].array?[0].stringValue
+                                let emailErrorMessage = error["email"].array?[0].stringValue
+                                if (!(phoneErrorMessage?.isEmpty ?? false) ){
+                                    NetworkManager.sharedInstance.showErrorSnackBar(msg:phoneErrorMessage ?? "invalid credentials")
+                                }else{
+                                    NetworkManager.sharedInstance.showErrorSnackBar(msg:emailErrorMessage ?? "invalid credentials")
+                                }
+                                
+                            }
+                            
                             self.view.isUserInteractionEnabled = true
+                            NetworkManager.sharedInstance.dismissLoader()
                             //self.registerButton.stopAnimation(animationStyle: .expand, completion: {
                               //  self.navigationController?.popViewController(animated: true)
                             //})
-                            
                         }else{
                             self.view.isUserInteractionEnabled = true
                             NetworkManager.sharedInstance.dismissLoader()
-                            let resultDict = responseObject as! NSDictionary
                             let resultJson = JSON(dict)
                             if self.whichApiToProcess == "addCustomer"{
                                 self.doFurtherProcessing(resultJson: resultJson)
@@ -230,9 +234,7 @@ class CreateAccount: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
             defaults.set("", forKey: "image")
             defaults.set(self.lastNameTextField.text, forKey: "last-name")
             defaults.set(self.mobilrNumberTextField.text, forKey: "phone")
-                
             defaults.synchronize()
-            
         NetworkManager.sharedInstance.showSuccessSnackBar(msg: welcomMsg)
         self.tabBarController?.selectedIndex = 0
         

@@ -185,6 +185,7 @@ class ProductTableViewCell: UITableViewCell{
     }
     
     func addToCart(productId: String) {
+        DispatchQueue.main.async {
             NetworkManager.sharedInstance.showLoader()
             let sessionId = UserDefaults.standard.object(forKey:"token");
             
@@ -193,18 +194,24 @@ class ProductTableViewCell: UITableViewCell{
                 requstParams["product_id"] = productId
                 requstParams["token"] = sessionId as? String
                 requstParams["quantity"] = "1"
-                requstParams["options"] = "{}"
+        let dictOption = [String:AnyObject]()
+        do {
+            let jsonSortData =  try JSONSerialization.data(withJSONObject: dictOption, options: .prettyPrinted)
+            let jsonSortString:String = NSString(data: jsonSortData, encoding: String.Encoding.utf8.rawValue)! as String
+            requstParams["options"] = jsonSortString
+        }
+        catch {
+            print(error.localizedDescription)
+        }
                 
                 NetworkManager.sharedInstance.callingNewHttpRequest(params:requstParams, apiname:"cart/add", cuurentView: self.parentContainerViewController()!){success,responseObject in
                     if success == 1{
                         let dict = responseObject as! NSDictionary;
                         NetworkManager.sharedInstance.dismissLoader()
                         if dict.object(forKey: "error") != nil{
-                            if (dict.object(forKey: "error") as? String == "authentication required"){
-                                //self.loginRequest()
-                            }
-                            else{
-                                NetworkManager.sharedInstance.showErrorSnackBar(msg: "You Can't order from more than one store at once".localized)
+                            let json = JSON(responseObject!)
+                            if let errorMessage = json["error"].string {
+                                NetworkManager.sharedInstance.showErrorSnackBar(msg: errorMessage)
                             }
                             
                         }else{
@@ -219,6 +226,8 @@ class ProductTableViewCell: UITableViewCell{
                         NetworkManager.sharedInstance.dismissLoader()
                     }
                 }
+        }
+           
     }
     
 }

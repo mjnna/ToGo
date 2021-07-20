@@ -19,7 +19,7 @@ class SellerCategoryTableViewCell: UITableViewCell {
 
     lazy var sellerImage: CustomImageView = {
         let iv = CustomImageView()
-        iv.contentMode = .scaleToFill
+        iv.contentMode = .scaleAspectFill
         iv.anchor(height:180)
         iv.layer.borderColor = UIColor.lightGray.cgColor
         iv.layer.borderWidth = 0.5

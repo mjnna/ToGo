@@ -42,6 +42,7 @@ class MyProfile: UIViewController,UIScrollViewDelegate {
     
         self.navigationItem.title = "guestprofile".localized
         
+        
         bannerImageView = UIImageView(image: UIImage(named: "beverley"))
         self.navigationController?.navigationBar.isHidden = true
     }

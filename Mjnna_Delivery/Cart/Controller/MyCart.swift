@@ -232,7 +232,14 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
         productName = product.productName
         productPrice = product.price
         imageUrl = product.productImgUrl
-        self.performSegue(withIdentifier: "myproduct", sender: self)
+            let vc = UIStoryboard.init(name: "Shops", bundle: Bundle.main).instantiateViewController(withIdentifier: "productDetails") as! CatalogProduct
+            vc.productImageUrl = self.imageUrl
+            vc.productId = self.productId
+            vc.productName = self.productName
+            vc.productPrice = self.productPrice
+            vc.isCart = true
+            self.modalPresentationStyle = .overCurrentContext
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -272,6 +279,7 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
         let okBtn = UIAlertAction(title:NetworkManager.sharedInstance.language(key: "remove"), style: .default, handler: {(_ action: UIAlertAction) -> Void in
             if let product = self.cartViewModel?.getProductData[sender.tag]{
                 CartApis.shared.updateCartProducts(viewController: self, productId: "\(product.cartProductId)", quantity: "0")
+
             }
         })
         let noBtn = UIAlertAction(title:NetworkManager.sharedInstance.language(key: "cancel"), style: .destructive, handler: {(_ action: UIAlertAction) -> Void in
@@ -323,13 +331,14 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
         NetworkManager.sharedInstance.showLoader()
         CartApis.shared.getCartProducts(viewController: self) { data,locations  in
             self.cartViewModel = data
+            
             guard let products = self.cartViewModel?.getProductData else {return}
+            NotificationCenter.default.post(name: .cartBadge, object: data.totalProducts)
             if products.isEmpty {
                 self.cartHasAvailableProducts(available: false)
                 NetworkManager.sharedInstance.dismissLoader()
 
             }else{
-                print("locations??????? \(locations)")
                 if locations.isEmpty{
                     self.animteAdddLocationPopup(animate: true)
                 }else{
@@ -377,15 +386,6 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
         }
     }
     
-
-
-//    func checkOutAsGuest(alertAction: UIAlertAction!) {
-//        self.performSegue(withIdentifier: "proceddToCheckout", sender: self)
-//    }
-//    
-//    func registerAndCheckOut(alertAction: UIAlertAction!) {
-//        self.performSegue(withIdentifier: "cartToCreateAccount", sender: self)
-//    }
     
     func existingUser(alertAction: UIAlertAction!) {
         let tabBarController = UIApplication.shared.keyWindow?.rootViewController as! UITabBarController
@@ -404,17 +404,6 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
 //        self.performSegue(withIdentifier: "myproduct", sender: self)
 //    }
 //
-   
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier! == "myproduct") {
-            let viewController:CatalogProduct = segue.destination as UIViewController as! CatalogProduct
-            viewController.productImageUrl = self.imageUrl
-            viewController.productId = self.productId
-            viewController.productName = self.productName
-            viewController.productPrice = self.productPrice
-            viewController.isCart = true
-        }
-    }
 
     
 }
@@ -446,8 +435,10 @@ extension MyCart:UITableViewDelegate, UITableViewDataSource {
                 let currency:String = "SAR".localized
 
                 cell.priceLabel.text = product.subTotal + currency
-                cell.productImageView.loadImageFrom(url:product.productImgUrl)
-            
+
+                
+                cell.productImageView.loadImage(stringURL: product.productImgUrl )
+
                 cell.descriptionLabel.text = product.desc
             
             

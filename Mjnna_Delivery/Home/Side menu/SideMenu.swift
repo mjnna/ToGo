@@ -247,14 +247,12 @@ class SideMenu: UIView {
         
         var fullName:String = ""
         if let firtName =  defaults.object(forKey: "first_name".localized) as? String {
-            print(fullName)
             fullName.append(firtName)
         }
         
         if let lastName = defaults.object(forKey: "last-name".localized) as? String {
             fullName.append(" ")
             fullName.append(lastName)
-            print(lastName)
         }
         
         userName.text = fullName

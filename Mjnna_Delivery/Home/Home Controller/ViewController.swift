@@ -152,6 +152,10 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         setupMainTableView()
         
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        animateSideMenu(animate: false)
+    }
     
     func localizeTabBar() {
         let items = self.tabBarController?.tabBar.items
@@ -199,7 +203,6 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         leftAnchor.isActive = false
     }
     func designNavigationBar(){
-        
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.gray.cgColor
         self.navigationController?.navigationBar.layer.shadowOffset = CGSize(1.0, 2.0)
         self.navigationController?.navigationBar.layer.shadowRadius = 1.0
@@ -208,7 +211,9 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
     }
     //MARK:- Actions
     @objc func subMenuPressed(_ notification: Notification) {
-        self.animateSideMenu(animate: false)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.animateSideMenu(animate: false)
+           }
        handleMenu(notification: notification)
     }
     
@@ -230,20 +235,23 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
                 case .myAccount:
                     self.tabBarController?.selectedIndex = 2
                 case .myAddresses:
-    //                self.performSegue(withIdentifier: "locationList", sender: nil)
-                    let vc = UIStoryboard.init(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: "LocationList")
-                    self.modalPresentationStyle = .overCurrentContext
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        let vc = UIStoryboard.init(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: "LocationList")
+                        self.modalPresentationStyle = .overCurrentContext
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 case .myOrders:
-                    self.performSegue(withIdentifier: "orderhistory", sender: nil)
-                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        self.performSegue(withIdentifier: "orderhistory", sender: nil)
+                    }
                 case .aboutus:
                     print("aboutus")
                 case .contactus:
                     print("contactus")
                 case .privacy:
-                    self.performSegue(withIdentifier: "privacy", sender: nil)
-                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        self.performSegue(withIdentifier: "privacy", sender: nil)
+                    }
                 case .logout:
                     let AC = UIAlertController(title: NetworkManager.sharedInstance.language(key: "message"), message: NetworkManager.sharedInstance.language(key: "logoutmessagewarning"), preferredStyle: .alert)
                     let okBtn = UIAlertAction(title: NetworkManager.sharedInstance.language(key: "ok"), style: .default, handler: {(_ action: UIAlertAction) -> Void in
@@ -597,9 +605,9 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier! == "sellerCategory") {
             self.view.endEditing(true)
-            let backItem = UIBarButtonItem()
-            backItem.title = typeName
-            navigationItem.backBarButtonItem = backItem
+//            let backItem = UIBarButtonItem()
+//            backItem.title = typeName
+//            navigationItem.backBarButtonItem = backItem
             let viewController:SellerCategoryViewController = segue.destination as UIViewController as! SellerCategoryViewController
             viewController.typeId = typeId
             viewController.typeName = typeName

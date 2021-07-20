@@ -168,7 +168,7 @@ class SellerCategoryViewController: UIViewController {
     func detectSelectedBarItem(){
         if let index = self.tabBarController?.selectedIndex {
             if index == 1 {
-                self.title = "Stores".localized
+//                self.navigationController?.title = "Stors".localized
                 searchBarView.isHidden = false
                 getAllshops(filter: StoresFilter(minOrder: 0, fastDelivery: true, page: 0, pageLength: 5, rate: 0, name: ""))
             }
@@ -268,7 +268,6 @@ extension SellerCategoryViewController: UITableViewDelegate,UITableViewDataSourc
             return allStores.count
         }
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SellerCategoryTableViewCell
         if allStores.isEmpty{

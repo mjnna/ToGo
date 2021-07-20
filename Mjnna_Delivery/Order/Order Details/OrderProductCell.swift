@@ -123,8 +123,14 @@ class OrderProductCell: UITableViewCell {
 
     }
     
-    func configure(image:[String],name:String,whight:String,quantity:Int,price:String){
-        productImageView.loadImageFrom(url: image[0])
+    func configure(images:[String],name:String,whight:String,quantity:Int,price:String){
+        if let imageUrl = images.last{
+            productImageView.loadImageFrom(url:imageUrl)
+        }else{
+            
+            productImageView.loadImageFrom(url:images[0])
+        }
+        
         let weightWord = "Weight: ".localized
         let quantityWord = "Quantity: ".localized
         nameLabel.text = name

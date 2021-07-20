@@ -35,7 +35,6 @@ class CartApis{
     
     func getCartProducts(viewController:MyCart,compleation: @escaping(CartViewModel,[Locations]) -> Void) {
         DispatchQueue.main.async{ [self] in
-
            NetworkManager.sharedInstance.showLoader()
            requstParams["token"] = userToken(viewController: viewController)
             if let lang = sharedPrefrence.object(forKey: "language") as? String{
@@ -46,7 +45,7 @@ class CartApis{
                if success == 1 {
                    let dict = responseObject as! NSDictionary;
                    if dict.object(forKey: "error") != nil{
-                    viewController.loginRequest()
+                    NetworkManager.sharedInstance.dismissLoader()
                    }else{
                        viewController.view.isUserInteractionEnabled = true
                     getLocations(viewController: viewController) { (loc) in
@@ -88,7 +87,6 @@ class CartApis{
                         else{
                             NetworkManager.sharedInstance.showSuccessSnackBar(msg: "cart updated successfully".localized)
                             viewController.refreshCartProductsList()
-                            
                         }
                     }
                 }else if success == 2{
@@ -113,7 +111,7 @@ class CartApis{
                         NetworkManager.sharedInstance.showSuccessSnackBar(msg: "cart updated successfully".localized)
                         viewController.cartViewModel = nil
                         viewController.refreshCartProductsList()
-                        
+
                     }
                 }else if success == 2{
                     NetworkManager.sharedInstance.dismissLoader()

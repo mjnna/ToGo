@@ -161,8 +161,9 @@ class CustomerLogin: UIViewController   {
                         let dict = responseObject as! NSDictionary;
                         if dict.object(forKey: "error") != nil{
                             // return the error to the user
-
-                            NetworkManager.sharedInstance.showErrorSnackBar(msg:"invalid credentials".localised)
+                            let resultJson = JSON(dict)
+                            let errorMessage = resultJson["error"].stringValue
+                            NetworkManager.sharedInstance.showErrorSnackBar(msg:errorMessage)
                             self.loginButton.stopAnimation(animationStyle: .expand, completion: {
                                 self.navigationController?.popViewController(animated: true)
                             })

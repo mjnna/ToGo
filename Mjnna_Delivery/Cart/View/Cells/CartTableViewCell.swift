@@ -55,8 +55,8 @@ class CartTableViewCell: UITableViewCell {
         return st
     }()
     
-    lazy var productImageView: UIImageView = {
-       let iv = UIImageView()
+    lazy var productImageView: CustomImageView = {
+       let iv = CustomImageView()
         iv.anchor(width: 100, height:100)
        return iv
     }()
@@ -140,7 +140,6 @@ class CartTableViewCell: UITableViewCell {
                     stepperView.QuantityLabel.text = "\(quantity)"
                     myCartViewModel.setDataToCartModel(data: "\(quantity)", pos: sender.tag)
                     delegate.updateAPICall(index: sender.tag)
-                    NetworkManager.sharedInstance.showInfoSnackBar(msg: "updatecartplease".localized);
                     stepperButtons(isEnabled: true)
                 }
 
@@ -158,7 +157,6 @@ class CartTableViewCell: UITableViewCell {
                     stepperView.QuantityLabel.text = "\(quantity)"
                     myCartViewModel.setDataToCartModel(data: "\(quantity)", pos: sender.tag)
                     delegate.updateAPICall(index: sender.tag)
-                    NetworkManager.sharedInstance.showInfoSnackBar(msg: "updatecartplease".localized);
                     stepperButtons(isEnabled: true)
 
                 }else{

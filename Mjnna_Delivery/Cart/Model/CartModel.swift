@@ -29,7 +29,8 @@ class CartModel: NSObject {
         self.desc = data["description"].stringValue
         self.price = data["price"].stringValue
         self.subTotal = data["total_price"].stringValue
-        self.productImgUrl = data["thumb"].stringValue
+        let images = data["images"].arrayValue
+        self.productImgUrl = images[0].stringValue
         self.productId = data["products_id"].stringValue
         self.optionData = data["options"].arrayValue
         self.quantity = data["quantity"].stringValue

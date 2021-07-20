@@ -28,8 +28,6 @@ class AccountViewController: UIViewController {
     }
     //MARK:- Handler
     func designNavigationBar(){
-        self.title = "Account".localized
-
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.gray.cgColor
         self.navigationController?.navigationBar.layer.shadowOffset = CGSize(1.0, 2.0)
         self.navigationController?.navigationBar.layer.shadowRadius = 1.0

@@ -147,12 +147,11 @@ extension OrderDetailsViewController : UITableViewDelegate,UITableViewDataSource
                 cell.configure(storeName: order.store, InoviceNo: order.id, statusId: order.order_status_id, total: order.total_price)
                 cell.getStatus(viewController: self)
             }
-            
             return  cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! OrderProductCell
             let product = orderProducts[indexPath.row]
-            cell.configure(image: product.images, name: product.name, whight: product.totalWeight, quantity: product.quantity, price: product.totalPrice)
+            cell.configure(images: product.images, name: product.name, whight: product.totalWeight, quantity: product.quantity, price: product.totalPrice)
             return  cell
         }
     }

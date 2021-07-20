@@ -80,3 +80,14 @@ class CreateAccountViewModel {
     
     
 }
+
+
+// MARK: - Error
+struct RegisterError: Codable {
+    let error: ErrorClass
+}
+
+// MARK: - ErrorClass
+struct ErrorClass: Codable {
+    let phone: [String]
+}

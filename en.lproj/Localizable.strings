@@ -592,5 +592,10 @@ pinlocationaddress = "Pin Location Address";
 detectlocation = "Detecting location...";
 enteryourlocation = "Enter your Location";
 Discover = "Discover";
+PrivacyPolicy = "Privacy & Policy";
+deliveryDateMessage = "You must select the delivery date";
+
 "icG-2Y-APz.title" = "Stores";
 
+
+Notes = "Notes (Optional)";

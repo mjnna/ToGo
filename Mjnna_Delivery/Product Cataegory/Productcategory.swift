@@ -220,7 +220,12 @@ class Productcategory: UIViewController {
                     else{
                         NetworkManager.sharedInstance.dismissLoader()
                         self.categoryCollectionViewModel = StoreCategoryCollectionViewModel(data:JSON(responseObject as! NSDictionary))
-                        self.categoryId = self.categoryCollectionViewModel.storeCategoryCollectionModel[0].id
+
+                        if self.categoryCollectionViewModel.storeCategoryCollectionModel.isEmpty {
+                            print("no category found")
+                        }else{
+                            self.categoryId = self.categoryCollectionViewModel.storeCategoryCollectionModel[0].id
+                        }
                         self.categoryCollectionView.delegate = self
                         self.categoryCollectionView.dataSource = self
                         self.categoryCollectionView.reloadData()

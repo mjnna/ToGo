@@ -38,13 +38,15 @@ class CheckOutViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-      
+    
         callingLocationHttppApi()
         setupView()
     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        callingLocationHttppApi()
         self.tabBarController?.tabBar.isHidden = true
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
@@ -71,17 +73,28 @@ class CheckOutViewController: UIViewController {
         DeliveryDateText.text = "Delivery Date".localized
         ChangeAddresButton.setTitle("change".localized, for: .normal)
         
+        DateView.layer.cornerRadius = 10
+                
        setupDatePicker()
         //Notes view
-        NotesText.text = "Notes".localized
-        if(fastDelivery == 1){
-            DateView.isHidden = true
-        }else{
-            DateView.isHidden = false
-        }
+        self.supportFastDelivery()
         
     }
+   
+    
     func setupDatePicker(){
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: Date())
+        let currentMonth = calendar.component(.month, from: Date())
+        let currentDay = calendar.component(.day, from: Date())
+
+
+        guard let maximumDate = calendar.date(from: DateComponents(year: currentYear  ,month: currentMonth,day: currentDay + 1))?.addingTimeInterval(-1) else {
+            fatalError("Couldn't get next year")
+        }
+        datePicker.minimumDate = maximumDate
+//        print(datePicker.maximumDate ?? "")
+        
         datePicker.addTarget(self, action: #selector(dateDidChanged), for: .valueChanged)
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
@@ -101,21 +114,32 @@ class CheckOutViewController: UIViewController {
     
     @IBAction func ChangeAddressTapped(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        let LocationsController = storyBoard.instantiateViewController(withIdentifier: "LocationsList") as! LocationViewController
+        let LocationsController = storyBoard.instantiateViewController(withIdentifier: "LocationList") as! LocationViewController
         LocationsController.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(LocationsController, animated: true)
-        
     }
     @objc
     func dateDidChanged(){
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
+        formatter.dateFormat = "yyyy-MM-dd"
         deliveryDateTextField.text = formatter.string(from: datePicker.date)
     }
+   
     //MAR:- Handler
- 
-
+    
+    func supportFastDelivery(){
+        if(fastDelivery == 1){
+            DateView.isHidden = true
+            DeliveryDateText.isHidden = true
+        }else{
+            NotesText.text = "Notes".localized
+            DateView.isHidden = false
+            DeliveryDateText.isHidden = false
+        }
+    }
+    
     func loginRequest(){
         var loginRequest = [String:String]();
         
@@ -145,9 +169,25 @@ class CheckOutViewController: UIViewController {
         // this is for the cod method
         requstParams["payment_method_id"] = "1"
         requstParams["note"] = NotesValue.text
-//        requesParms["date"] =
         
+        let selectedDate = deliveryDateTextField.text
+        if (fastDelivery == 0) {
+            if let dateText = selectedDate {
+                if (!dateText.isEmpty){
+                requstParams["date"] = dateText
+                checkOut(requstParams: requstParams)
+                }else{
+                    NetworkManager.sharedInstance.showErrorSnackBar(msg: "deliveryDateMessage".localized)
+                }
+            }
+        }else{
+            checkOut(requstParams: requstParams)
+        }
+    
         
+    }
+  
+    func checkOut(requstParams:[String:String]){
         NetworkManager.sharedInstance.callingNewHttpRequest(params:requstParams, apiname:"order/checkout",cuurentView: self){val,responseObject in
                            if val == 1 {
                                self.view.isUserInteractionEnabled = true

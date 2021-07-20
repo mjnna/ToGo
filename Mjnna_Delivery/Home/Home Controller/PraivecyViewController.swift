@@ -10,10 +10,7 @@ import UIKit
 import WebKit
 class PrivecyViewController: UIViewController {
 
-
-
-
-    let webView:UIWebView = UIWebView()
+    let webView:WKWebView = WKWebView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +22,7 @@ class PrivecyViewController: UIViewController {
 
     }
     private func setup(){
+        self.title = "PrivacyPolicy".localized
         view.addSubview(webView)
         webView.anchor(top: view.safeAreaLayoutGuide.topAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, left: view.leadingAnchor, right: view.trailingAnchor)
         openPrivacy()
@@ -34,7 +32,7 @@ class PrivecyViewController: UIViewController {
     func openPrivacy(){
         if let url:URL = URL(string: "https://togoksa.com/home/privacy"){
             let urlRequest: URLRequest = URLRequest(url: url)
-            webView.loadRequest(urlRequest)
+            webView.load(urlRequest)
             self.tabBarController?.tabBar.isHidden = true
         }
     }

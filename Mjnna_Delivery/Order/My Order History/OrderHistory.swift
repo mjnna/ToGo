@@ -25,7 +25,6 @@ class OrderHistory: UIViewController {
     var emptyView:EmptyNewAddressView!
     var whichApiToProcess:String = ""
     var order_productId:String = ""
-    
     var orderId : String = ""
     var sessionId: Int = 0
     

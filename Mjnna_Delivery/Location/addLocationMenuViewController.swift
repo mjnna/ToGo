@@ -56,6 +56,7 @@ class addLocationMenuViewController: UIViewController {
     }
     
     @IBAction func saveTapped(_ sender: Any) {
+        
         callingHttppApi()
     }
     
@@ -102,6 +103,24 @@ class addLocationMenuViewController: UIViewController {
                                   //display the error to the customer
                                 if dict["error"] == "authentication required"{
                                     self.loginRequest()
+                                }
+                                
+                                let error = dict["error"]
+                            
+                                if (!error.isEmpty){
+                                    let buildingErrorMessage = error["building"].array?[0].stringValue
+                                    let apartmentErrorMessage = error["apartment"].array?[0].stringValue
+                                    let storeyErrorMessage = error["storey"].array?[0].stringValue
+
+
+                                    if (buildingErrorMessage != nil){
+                                        NetworkManager.sharedInstance.showErrorSnackBar(msg:buildingErrorMessage ?? "invalid credentials")
+                                    }else if(apartmentErrorMessage != nil){
+                                        NetworkManager.sharedInstance.showErrorSnackBar(msg:apartmentErrorMessage ?? "invalid credentials")
+                                    }else{
+                                        NetworkManager.sharedInstance.showErrorSnackBar(msg:storeyErrorMessage ?? "invalid credentials")
+                                    }
+                                    
                                 }
                                 
                                }

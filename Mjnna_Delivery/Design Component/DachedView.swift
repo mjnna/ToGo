@@ -49,7 +49,7 @@ class DashedTextView: UITextView{
         
     }
     private func setup(){
-    
+        self.layer.cornerRadius = 10
         borderLayer.strokeColor = UIColor.gray.cgColor
         borderLayer.lineDashPattern = [6, 6]
         borderLayer.fillColor = nil

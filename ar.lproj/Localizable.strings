@@ -575,6 +575,10 @@ pinlocationaddress = "دبوس عنوان الموقع";
 detectlocation = "كشف موقع...";
 enteryourlocation = "أدخل الموقع الخاص بك";
 Discover = "استكشف";
+
+PrivacyPolicy = "سياسة الإستخدام";
+deliveryDateMessage = "يجب اختيار تاريخ التوصيل";
+
 "Latest Product" = "أحدث المنتجات";
 "Feature Product" = "المنتج المميز";
 "Best Product" = "أفضل منتج";
@@ -695,3 +699,5 @@ empty = "فارغة";
 "Continue registering"= "متابعة التسجيل";
 "Cancel" = "إلغاء";
 "Enter your phone Number to continue Registring" = "ادخل رقم الجوال لكمال عملية التسجيل";
+
+Notes = "ملاحظلات (اختياري) ";
