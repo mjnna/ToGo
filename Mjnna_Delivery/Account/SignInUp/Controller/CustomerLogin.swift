@@ -48,6 +48,7 @@ class CustomerLogin: UIViewController   {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
 
+        
         loginButton.setTitle(NetworkManager.sharedInstance.language(key: "login"), for: .normal)
         forgotpasswordButton.setTitle(NetworkManager.sharedInstance.language(key:"forgotpassword"), for: .normal)
        
@@ -164,12 +165,9 @@ class CustomerLogin: UIViewController   {
                             let resultJson = JSON(dict)
                             let errorMessage = resultJson["error"].stringValue
                             NetworkManager.sharedInstance.showErrorSnackBar(msg:errorMessage)
-                            self.loginButton.stopAnimation(animationStyle: .expand, completion: {
-                                self.navigationController?.popViewController(animated: true)
+                            self.loginButton.stopAnimation(animationStyle: .normal,completion: {
                             })
-                            
                         }else{
-                            
                             self.doFurtherProcessingWithResult(data:responseObject!)
                         }
                         

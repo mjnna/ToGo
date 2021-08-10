@@ -196,7 +196,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="1Vj-n5-3fm"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                 <state key="normal" title="LOG IN">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -866,7 +866,7 @@
     </scenes>
     <designables>
         <designable name="YWB-NI-OMQ">
-            <size key="intrinsicContentSize" width="51" height="30"/>
+            <size key="intrinsicContentSize" width="50" height="30"/>
         </designable>
     </designables>
     <resources>

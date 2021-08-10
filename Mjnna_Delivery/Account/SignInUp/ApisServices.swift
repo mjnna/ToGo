@@ -47,12 +47,12 @@ class ApisServices {
                         let dict = responseObject as! NSDictionary;
                         if dict.object(forKey: "error") != nil{
                             // return the error to the user
-                            if let error = dict.object(forKey: "error") as? String{
-                                print("our respons: \(String(describing: responseObject))")
-                                compleation("",error)
-                            }
+                            
                             NetworkManager.sharedInstance.dismissLoader()
-                            NetworkManager.sharedInstance.showErrorSnackBar(msg:"invalid credentials".localised)
+                            let json = JSON(responseObject!)
+                            if (!json["error"].stringValue.isEmpty){
+                                NetworkManager.sharedInstance.showErrorSnackBar(msg:json["error"].stringValue)
+                            }
                             viewController.view.isUserInteractionEnabled = true
                             //self.registerButton.stopAnimation(animationStyle: .expand, completion: {
                               //  self.navigationController?.popViewController(animated: true)
