@@ -343,6 +343,9 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
                     self.animteAdddLocationPopup(animate: true)
                 }else{
                     self.animteAdddLocationPopup(animate: false)
+                    guard let count = self.cartViewModel?.getTotalAmount.count, count >= 2 else {
+                        return
+                    }
                     if let totalValue = self.cartViewModel?.getTotalAmount[2].text{
                         
                         let totalWord = "Total ".localized

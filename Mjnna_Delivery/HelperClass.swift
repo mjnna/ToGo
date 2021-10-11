@@ -18,7 +18,6 @@ let SCREEN_HEIGHT = ((UIApplication.shared.statusBarOrientation == .portrait) ||
 
 let sharedPrefrence = UserDefaults.standard;
 
-
 struct GlobalVariables {
     static var proceedToCheckOut:Bool = false
     static var hometableView:UITableView!
@@ -87,7 +86,6 @@ extension String {
 
 extension String{
     
-    
     func isValid(name:String)->Bool{
         var errorMessage:String = NetworkManager.sharedInstance.language(key: "pleasefill")+" "
         
@@ -99,7 +97,6 @@ extension String{
             errorMessage = errorMessage+"valid".localized+" "+name
             NetworkManager.sharedInstance.showErrorSnackBar(msg: errorMessage)
             return false
-            
         }else{
             return true
         }
@@ -116,7 +113,7 @@ extension String{
         return emailPred.evaluate(with: self)
     }
     
-    
+     
 }
 
 

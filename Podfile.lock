@@ -5,7 +5,7 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
-  - Cosmos (11.0.3)
+  - Cosmos (23.0.0)
   - FBSDKCoreKit (9.1.0):
     - FBSDKCoreKit/Basics (= 9.1.0)
     - FBSDKCoreKit/Core (= 9.1.0)
@@ -182,7 +182,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
-  - Cosmos (~> 11.0)
+  - Cosmos (~> 23.0)
   - FBSDKLoginKit
   - Firebase/Analytics
   - Firebase/Core (= 5.20.1)
@@ -248,7 +248,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
-  Cosmos: eb506859929f4add2d2aec822a27efb2f718a95d
+  Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   FBSDKCoreKit: a00fe2efd780c195a5e09201bf51c56106245b40
   FBSDKLoginKit: d98498c598ec09de657385a9349a1f21119b7f86
   Firebase: 2f5235e62f141cb86181c3af0dfe4509706351ac
@@ -284,6 +284,6 @@ SPEC CHECKSUMS:
   SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
   TransitionButton: 36283346e17c64775a1b3bc3a7a72940a367de1f
 
-PODFILE CHECKSUM: 283c25ba2861b2472323f358802d3ff3515cc8e9
+PODFILE CHECKSUM: 7639cc83deaf1a555cbe3c64c15fa61fda886700
 
 COCOAPODS: 1.10.1

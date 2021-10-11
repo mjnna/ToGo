@@ -13,14 +13,11 @@ import SwiftMessages
 import WebKit
 import MaterialComponents.MaterialActivityIndicator
 
-
-
 var queue = OperationQueue()
 var profileImageCache = NSCache<AnyObject, AnyObject>()
 let defaults = UserDefaults.standard;
 let activityIndicator = MDCActivityIndicator()
 var homeAPIRequest = HOST_NAME + "common/getHomepage"
-
 
 
 class NetworkManager:NSObject{
@@ -31,7 +28,6 @@ class NetworkManager:NSObject{
             static let instance = NetworkManager()
         }
         return Singleton.instance
-        
     }
     
     func callingNewHttpRequest( params: Dictionary<String,String>,
@@ -39,8 +35,7 @@ class NetworkManager:NSObject{
     cuurentView: UIViewController,
     requestType: HTTPMethod = .post,
     includeHost: Bool = true,
-    taskCallback: @escaping (Int, AnyObject?) -> Void)
-    {
+    taskCallback: @escaping (Int, AnyObject?) -> Void) {
         var headers = HTTPHeaders()
         let urlString  = includeHost ? (HOST_NAME + apiname) : (BASE_DOMAIN + apiname)
         var lang = ""

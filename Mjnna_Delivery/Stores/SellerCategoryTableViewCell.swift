@@ -16,7 +16,6 @@ import TransitionButton
 class SellerCategoryTableViewCell: UITableViewCell {
 
     //MARK:- Component
-
     lazy var sellerImage: CustomImageView = {
         let iv = CustomImageView()
         iv.contentMode = .scaleAspectFill

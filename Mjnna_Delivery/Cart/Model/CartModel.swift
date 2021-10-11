@@ -79,6 +79,7 @@ class CartViewModel{
             let dict = data["totals"][i];
             amountTotal.append(TotalAmount(data: dict))
         }
+        
         let total = TotalAmount()
         total.title = "the Delivery price depands on your set location"
         amountTotal.append(total)

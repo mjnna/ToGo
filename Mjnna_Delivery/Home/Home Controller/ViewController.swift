@@ -10,13 +10,6 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
     
     
     
-    func typeClick(name: String, ID: String, thumbnail: String) {
-        typeId = ID
-        typeName = name
-        typeImage = thumbnail
-        self.performSegue(withIdentifier: "sellerCategory", sender: self)
-    }
-    
  
     
     //MARK:- Outlet
@@ -152,9 +145,17 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         setupMainTableView()
         
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         animateSideMenu(animate: false)
+    }
+    
+    func typeClick(name: String, ID: String, thumbnail: String) {
+        typeId = ID
+        typeName = name
+        typeImage = thumbnail
+        self.performSegue(withIdentifier: "sellerCategory", sender: self)
     }
     
     func localizeTabBar() {
