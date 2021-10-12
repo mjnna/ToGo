@@ -2,12 +2,14 @@
 # platform :ios, '9.0'
 
 target 'Mjnna_Delivery' do
-  # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-
-  # Pods for Mjnna_Delivery
-
 pod 'Alamofire', '~> 5.2'
+pod 'Moya/RxSwift', '~> 14.0.0'
+pod 'RxSwift', '~> 5'
+pod 'RxCocoa', '~> 5'
+pod "RxGesture", '~> 3.0'
+pod 'SQLite.swift', '~> 0.12.2'
+pod 'Kingfisher', '~> 5.15.8'
 
 pod 'GoogleMaps', '= 3.9.0'
 pod 'GooglePlaces', '= 3.9.0'

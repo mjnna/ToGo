@@ -14,8 +14,6 @@ import MaterialComponents
 class CustomerLogin: UIViewController   {
     
     @IBOutlet var ParentView: UIView!
-    
-    
     @IBOutlet var emailTextField: MDCTextField!
     @IBOutlet var passwordTextField: MDCTextField!
     
@@ -155,7 +153,8 @@ class CustomerLogin: UIViewController   {
                 if regToken != "" {
                     requstParams["device_id"] = regToken
                 }
-                NetworkManager.sharedInstance.callingNewHttpRequest(params:requstParams, apiname:"login", cuurentView: self)
+                NetworkManager.sharedInstance.callingNewHttpRequest(params:requstParams,
+                                                                    apiname:"login", cuurentView: self)
                 {success,responseObject in
                     if success == 1 {
                         NetworkManager.sharedInstance.dismissLoader()

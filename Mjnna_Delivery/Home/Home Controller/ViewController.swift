@@ -280,7 +280,12 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
             case .privacy:
                 self.performSegue(withIdentifier: "privacy", sender: nil)
             case .login:
-                self.tabBarController?.selectedIndex = 2
+//                self.tabBarController?.selectedIndex = 2
+                if let vc = getViewController(storyboard: UIStoryboard(name: "AuthStoryboard", bundle: nil), sceneID: "LoginViewController") as? LoginViewController{
+                    navigationController?.pushViewController(vc, animated: true)
+                }
+                
+            break
             case .signup:
                 self.tabBarController?.selectedIndex = 2
             default:
