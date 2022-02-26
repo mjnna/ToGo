@@ -185,6 +185,11 @@
 		98CFCCB22477A48E00CC7C88 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCBBA2477A48E00CC7C88 /* HomeModel.swift */; };
 		98CFCCB32477A48E00CC7C88 /* EmptyNewAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCBBC2477A48E00CC7C88 /* EmptyNewAddressView.swift */; };
 		98CFCCB42477A48E00CC7C88 /* EmptyNewAddress.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CFCBBD2477A48E00CC7C88 /* EmptyNewAddress.xib */; };
+		E33644DC275C23E2008576B6 /* ReserveTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33644DB275C23E2008576B6 /* ReserveTableVC.swift */; };
+		E3922FD027892CD900AD203D /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3922FCF27892CD800AD203D /* ContactUsVC.swift */; };
+		E3ED5BF6275C44DA008C9DE2 /* SlotsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ED5BF4275C44DA008C9DE2 /* SlotsCVC.swift */; };
+		E3ED5BF7275C44DA008C9DE2 /* SlotsCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3ED5BF5275C44DA008C9DE2 /* SlotsCVC.xib */; };
+		E3F919F927A9A85D00687552 /* CompleteResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F919F827A9A85D00687552 /* CompleteResetPassword.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -391,6 +396,11 @@
 		98CFCBBA2477A48E00CC7C88 /* HomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		98CFCBBC2477A48E00CC7C88 /* EmptyNewAddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyNewAddressView.swift; sourceTree = "<group>"; };
 		98CFCBBD2477A48E00CC7C88 /* EmptyNewAddress.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyNewAddress.xib; sourceTree = "<group>"; };
+		E33644DB275C23E2008576B6 /* ReserveTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTableVC.swift; sourceTree = "<group>"; };
+		E3922FCF27892CD800AD203D /* ContactUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
+		E3ED5BF4275C44DA008C9DE2 /* SlotsCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotsCVC.swift; sourceTree = "<group>"; };
+		E3ED5BF5275C44DA008C9DE2 /* SlotsCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlotsCVC.xib; sourceTree = "<group>"; };
+		E3F919F827A9A85D00687552 /* CompleteResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteResetPassword.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -420,6 +430,7 @@
 		185511E7262CA3030015E8CD /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				E33644DA275C23C4008576B6 /* ReserveTable */,
 				185511ED262CA55A0015E8CD /* Side menu */,
 				18EEA620261BCB8900F235CB /* Settings */,
 				98CFCBA22477A48E00CC7C88 /* Home Controller */,
@@ -494,6 +505,7 @@
 				98CFCABC2477A48A00CC7C88 /* CreateAccount.swift */,
 				98CFCB9A2477A48D00CC7C88 /* CustomerLogin.swift */,
 				5D54E34B24CD3296008C9995 /* SignInUpViewController.swift */,
+				E3F919F827A9A85D00687552 /* CompleteResetPassword.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -623,6 +635,7 @@
 				98CFCB1B2477A48B00CC7C88 /* Language Switcher */,
 				5D54E35624CE8D4D008C9995 /* logo */,
 				185511E7262CA3030015E8CD /* Home */,
+				E3922FCE27892CAE00AD203D /* ContactUs */,
 				185511E8262CA3860015E8CD /* Stores */,
 				98CFCB8B2477A48D00CC7C88 /* Account */,
 				98CFCA932477A48900CC7C88 /* Product Cataegory */,
@@ -1151,6 +1164,32 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		E33644DA275C23C4008576B6 /* ReserveTable */ = {
+			isa = PBXGroup;
+			children = (
+				E3ED5BF3275C44B6008C9DE2 /* SlotsCVC */,
+				E33644DB275C23E2008576B6 /* ReserveTableVC.swift */,
+			);
+			path = ReserveTable;
+			sourceTree = "<group>";
+		};
+		E3922FCE27892CAE00AD203D /* ContactUs */ = {
+			isa = PBXGroup;
+			children = (
+				E3922FCF27892CD800AD203D /* ContactUsVC.swift */,
+			);
+			path = ContactUs;
+			sourceTree = "<group>";
+		};
+		E3ED5BF3275C44B6008C9DE2 /* SlotsCVC */ = {
+			isa = PBXGroup;
+			children = (
+				E3ED5BF4275C44DA008C9DE2 /* SlotsCVC.swift */,
+				E3ED5BF5275C44DA008C9DE2 /* SlotsCVC.xib */,
+			);
+			path = SlotsCVC;
+			sourceTree = "<group>";
+		};
 		FD09CE5F9FCBF25E53ECB678 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1267,6 +1306,7 @@
 				98CFCC642477A48E00CC7C88 /* CustomFooterView.xib in Resources */,
 				98CFCC032477A48E00CC7C88 /* ic_password_checkmark@2x.png in Resources */,
 				98CFCC0E2477A48E00CC7C88 /* unchecked.png in Resources */,
+				E3ED5BF7275C44DA008C9DE2 /* SlotsCVC.xib in Resources */,
 				98CFCC492477A48E00CC7C88 /* PasswordTextFieldCell.xib in Resources */,
 				358CC6AF244D968C00AE3A20 /* Assets.xcassets in Resources */,
 				1887864E262DB52000E3489F /* Iphone 11 Pro Max.gif in Resources */,
@@ -1361,6 +1401,7 @@
 				187EA2A12625CF53003D0A8E /* L102Language.swift in Sources */,
 				1860B41A260BE6A50070C064 /* CartButtonView.swift in Sources */,
 				98CFCBCA2477A48E00CC7C88 /* MyOrderTableViewCell.swift in Sources */,
+				E33644DC275C23E2008576B6 /* ReserveTableVC.swift in Sources */,
 				98CFCC622477A48E00CC7C88 /* FooterCell.swift in Sources */,
 				98CFCCB32477A48E00CC7C88 /* EmptyNewAddressView.swift in Sources */,
 				98CFCC042477A48E00CC7C88 /* Property.swift in Sources */,
@@ -1369,11 +1410,13 @@
 				185198D4261229B000369405 /* SocialAccounts.swift in Sources */,
 				3E66269827160D1D00A6F0FB /* LoginRequest.swift in Sources */,
 				188786E2262F3A4600E3489F /* OrderDetailsViewController.swift in Sources */,
+				E3922FD027892CD900AD203D /* ContactUsVC.swift in Sources */,
 				98CFCC7E2477A48E00CC7C88 /* NotificationModel.swift in Sources */,
 				18E99A49263610CD00222AA5 /* EmptyCartView.swift in Sources */,
 				98CFCBCB2477A48E00CC7C88 /* OrderHistoryModel.swift in Sources */,
 				5DD9CE4725AC008200864383 /* OrderRejectedViewController.swift in Sources */,
 				18D0FE1E263DF80500CD35C1 /* CustomImageView.swift in Sources */,
+				E3ED5BF6275C44DA008C9DE2 /* SlotsCVC.swift in Sources */,
 				3E66269A27160FFE00A6F0FB /* ApiError.swift in Sources */,
 				98CFCC072477A48E00CC7C88 /* RadioButton.m in Sources */,
 				3E66269527160C5600A6F0FB /* AuthApiManager.swift in Sources */,
@@ -1461,6 +1504,7 @@
 				5DD9CE15259C7DD400864383 /* NewLocationViewController.swift in Sources */,
 				3E6626D127161A4600A6F0FB /* UserAuthRepository.swift in Sources */,
 				3E66269E2716142100A6F0FB /* UiViewController+Alert.swift in Sources */,
+				E3F919F927A9A85D00687552 /* CompleteResetPassword.swift in Sources */,
 				98CFCBC02477A48E00CC7C88 /* ProductCollectionModel.swift in Sources */,
 				3E500DDE2714DA3E004E71BE /* TOGOUserDefualts.swift in Sources */,
 				18878712262F3FBB00E3489F /* OrderInfoModel.swift in Sources */,
@@ -1617,7 +1661,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Mjnna_Delivery/To Go KSA.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.6;
+				CURRENT_PROJECT_VERSION = 2.0;
 				DEVELOPMENT_TEAM = NCFUW4MMA2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1642,6 +1686,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D MARKETPLACE -D HYPERLOCAL";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mjnna.togo;
 				PRODUCT_NAME = "To Go KSA";
@@ -1663,7 +1708,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Mjnna_Delivery/To Go KSA.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.6;
+				CURRENT_PROJECT_VERSION = 2.0;
 				DEVELOPMENT_TEAM = NCFUW4MMA2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1688,6 +1733,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D MARKETPLACE -D HYPERLOCAL";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mjnna.togo;
 				PRODUCT_NAME = "To Go KSA";

@@ -14,6 +14,7 @@ language = "Language";
 currency = "Currency";
 edityouraccountinfo = "Edit your account information";
 changeyourpassword = "Change your password";
+deleteAccount = "Delete your account";
 modifyyouraddressbook = "Modify your address book entries";
 modifyyourwishlist = "Modify your wishlists";
 logout = " Log out";
@@ -599,3 +600,11 @@ deliveryDateMessage = "You must select the delivery date";
 
 
 Notes = "Notes (Optional)";
+bookTable = "Reserve Table";
+
+theApplePayTransactionWasComplete = "The Apple Pay Transaction Was Complete";
+unableToMakeApplePayTransaction = "Unable To Make Apple Pay Transaction";
+
+theDate = "reservation date";
+theTime = "reservation time";
+numberOfSeats = "number of seats";

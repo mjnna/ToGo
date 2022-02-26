@@ -114,6 +114,12 @@ class CustomerLogin: UIViewController   {
         self.callingHttppApi()
     }
     
+    func completeResetPassword() {
+        let vc = UIStoryboard.init(name: "Account", bundle: Bundle.main).instantiateViewController(withIdentifier: "resetPassword") as! CompleteResetPassword
+        vc.userEmail = userEmail
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func callingHttppApi(){
         DispatchQueue.main.async{
             self.view.isUserInteractionEnabled = false
@@ -123,7 +129,7 @@ class CustomerLogin: UIViewController   {
             if self.whichApiToProcess == "forgotpassword"{
                 NetworkManager.sharedInstance.showLoader()
                 requstParams["email"] = self.userEmail
-                NetworkManager.sharedInstance.callingNewHttpRequest(params:requstParams, apiname:"customer/forgotPassword", cuurentView: self){success,responseObject in
+                NetworkManager.sharedInstance.callingNewHttpRequest(params:requstParams, apiname:"forget-password", cuurentView: self){success,responseObject in
                     if success == 1 {
                         self.view.isUserInteractionEnabled = true
                         NetworkManager.sharedInstance.dismissLoader()
@@ -135,6 +141,7 @@ class CustomerLogin: UIViewController   {
                         }else{
                             if dict["error"].intValue == 0{
                                 NetworkManager.sharedInstance.showSuccessSnackBar(msg: dict["message"].stringValue)
+                                self.completeResetPassword()
                             }else{
                                 NetworkManager.sharedInstance.showInfoSnackBar(msg: dict["message"].stringValue)
                             }
@@ -149,10 +156,12 @@ class CustomerLogin: UIViewController   {
             else{
                 requstParams["email"] = self.emailTextField.text
                 requstParams["password"] = self.passwordTextField.text
+                requstParams["type"] = "customer"
                 let regToken = self.defaults.string(forKey: "deviceToken")
                 if regToken != "" {
                     requstParams["device_id"] = regToken
                 }
+                
                 NetworkManager.sharedInstance.callingNewHttpRequest(params:requstParams,
                                                                     apiname:"login", cuurentView: self)
                 {success,responseObject in
@@ -208,7 +217,7 @@ class CustomerLogin: UIViewController   {
                 self.tabBarController!.tabBar.items?[1].badgeValue = resultJson["cart_total"].stringValue
             }else{
                 self.loginButton.stopAnimation(animationStyle: .expand, completion: {
-                    self.navigationController?.popViewController(animated: true)
+                    self.navigationController?.popToRootViewController(animated: false)
                 })
             }
             self.tabBarController?.selectedIndex = 0

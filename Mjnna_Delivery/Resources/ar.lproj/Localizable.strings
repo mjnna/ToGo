@@ -14,6 +14,7 @@ language = "لغة";
 currency = "دقة";
 edityouraccountinfo = "تعديل المعلومات الخاصة بك الحساب";
 changeyourpassword = "تغير كلمة المرور الخاصة بك";
+deleteAccount = "حذف حسابك";
 modifyyouraddressbook = "تعديل إدخالات دفتر العناوين الخاص بك";
 modifyyourwishlist = "تعديل الأماني الخاص بك";
 logout = "تسجيل الخروج";
@@ -701,3 +702,11 @@ empty = "فارغة";
 "Enter your phone Number to continue Registring" = "ادخل رقم الجوال لكمال عملية التسجيل";
 
 Notes = "ملاحظلات (اختياري) ";
+bookTable = "احجز طاولة";
+
+theApplePayTransactionWasComplete = "اكتملت معاملة Apple Pay.";
+unableToMakeApplePayTransaction = "تعذر إجراء معاملة Apple Pay.";
+theDate = "تاريخ الحجز";
+theTime = "وقت الحجز";
+numberOfSeats = "عدد المقاعد";
+"My Bookings" = "حجوزاتي";

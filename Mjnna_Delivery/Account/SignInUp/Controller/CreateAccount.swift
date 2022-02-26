@@ -236,9 +236,9 @@ class CreateAccount: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
             defaults.set(self.mobilrNumberTextField.text, forKey: "phone")
             defaults.synchronize()
         NetworkManager.sharedInstance.showSuccessSnackBar(msg: welcomMsg)
-        self.tabBarController?.selectedIndex = 0
+//        self.tabBarController?.selectedIndex = 0
         
-        //self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @objc func dismissKeyboard() {

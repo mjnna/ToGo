@@ -38,17 +38,18 @@ class MyProfile: UIViewController,UIScrollViewDelegate {
         tableView.register(UINib(nibName: "ProfileTableViewCell", bundle: nil), forCellReuseIdentifier: "ProfileTableViewCell")
         
         userProfileData = ["edityouraccountinfo".localized,
-                            "changeyourpassword".localized]
+                            "changeyourpassword".localized,
+                            "deleteAccount".localized]
     
         self.navigationItem.title = "guestprofile".localized
         
         
         bannerImageView = UIImageView(image: UIImage(named: "beverley"))
-        self.navigationController?.navigationBar.isHidden = true
+//        self.navigationController?.navigationBar.isHidden = true
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = true
+//        self.navigationController?.navigationBar.isHidden = true
     }
 }
 
@@ -91,6 +92,8 @@ extension MyProfile:UITableViewDelegate,UITableViewDataSource {
             }
             else if indexPath.row == 1{
                 cell.imageView?.image = UIImage(named: "ic_change_password")!
+            } else {
+                cell.imageView?.image = UIImage(named: "order_cancel")!
             }
         return cell
       
@@ -103,6 +106,17 @@ extension MyProfile:UITableViewDelegate,UITableViewDataSource {
                 self.performSegue(withIdentifier: "myProfileToAccountInformation", sender: self)
             }else if indexPath.row == 1{
                 self.performSegue(withIdentifier: "changePassword", sender: self)
+            } else {
+                let AC = UIAlertController(title: NetworkManager.sharedInstance.language(key: "message"), message: NetworkManager.sharedInstance.language(key: "logoutmessagewarning"), preferredStyle: .alert)
+                let okBtn = UIAlertAction(title: NetworkManager.sharedInstance.language(key: "ok"), style: .default, handler: {(_ action: UIAlertAction) -> Void in
+//                    self.logoutCustomer()
+//                    self.sideMenu.loadMenu()
+                })
+                let noBtn = UIAlertAction(title: NetworkManager.sharedInstance.language(key: "cancel"), style: .destructive, handler: {(_ action: UIAlertAction) -> Void in
+                })
+                AC.addAction(okBtn)
+                AC.addAction(noBtn)
+                self.present(AC, animated: true, completion: nil)
             }
       
     }

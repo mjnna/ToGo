@@ -10,6 +10,7 @@ import UIKit
 
 @objc protocol CategoryViewControllerHandlerDelegate: class {
     func typeClick(name:String,ID:String,thumbnail:String)
+    func didTapOnReserveTable()
 }
 
 class StoresCategoryCell : UITableViewCell {
@@ -56,23 +57,36 @@ class StoresCategoryCell : UITableViewCell {
 
 extension StoresCategoryCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return storeCollectionModel.count
+        return storeCollectionModel.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StoreCategoryCell
-        let imageUrl = storeCollectionModel[indexPath.row].thumbnail
-        cell.typeImageView.loadImage(stringURL: imageUrl)
-        cell.typeTitleLabel.text = storeCollectionModel[indexPath.row].name
+        if indexPath.row != storeCollectionModel.count {
+            let imageUrl = storeCollectionModel[indexPath.row].thumbnail
+            cell.typeImageView.loadImage(stringURL: imageUrl)
+            cell.typeTitleLabel.text = storeCollectionModel[indexPath.row].name
+        } else {
+            cell.typeImageView.image = #imageLiteral(resourceName: "2")
+            cell.typeTitleLabel.text = "bookTable".localized
+        }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let name = storeCollectionModel[indexPath.row].name
-        let id = storeCollectionModel[indexPath.row].id
-        let thumbnil = storeCollectionModel[indexPath.row].image
-        delegate.typeClick(name: name, ID: id, thumbnail: thumbnil)
+        
+        if indexPath.row != storeCollectionModel.count {
+            let name = storeCollectionModel[indexPath.row].name
+            let id = storeCollectionModel[indexPath.row].id
+            let thumbnil = storeCollectionModel[indexPath.row].image
+            delegate.typeClick(name: name, ID: id, thumbnail: thumbnil)
+        } else {
+            delegate.didTapOnReserveTable()
+        }
+       
     }
    
     

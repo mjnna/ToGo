@@ -14,4 +14,16 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
     }
 
+    @IBAction func loginButton(_ sender: Any) {
+        //CustomerLogin
+        let vc = UIStoryboard.init(name: "Account", bundle: Bundle.main).instantiateViewController(withIdentifier: "CustomerLogin")
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func signupButton(_ sender: Any) {
+        //CustomerSignup
+        let vc = UIStoryboard.init(name: "Account", bundle: Bundle.main).instantiateViewController(withIdentifier: "CustomerSignup")
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }

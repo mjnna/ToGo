@@ -9,6 +9,7 @@
 import UIKit
 import MaterialComponents
 
+
 class SellerCategoryViewController: UIViewController {
     
     //MARK:- Outlet
@@ -59,13 +60,14 @@ class SellerCategoryViewController: UIViewController {
     
     var typeImage:String = ""
     var storeImage:String = ""
-    
+    var fromReservTable = false
     var storeName:String = ""
     var storeId:String = ""
     var storeCollectionModel = [Store]()
     var allStores = [Store]()
     var subStoreIsAvailable:Bool?
     var isFastDelivery :Bool = true
+    var selectedStore: Store!
     
     //MARK:- Init
     override func viewDidLoad() {
@@ -82,7 +84,12 @@ class SellerCategoryViewController: UIViewController {
         //self.navigationController?.navigationBar.isHidden = true
         self.setupTableView()
         detectSelectedBarItem()
-        presentSubStores()
+        if fromReservTable {
+            searchBarView.isHidden = true
+            callingHttppApiToGetReserveTableResturants()
+        } else {
+            presentSubStores()
+        }
         designNavigationBar()
     }
     
@@ -241,12 +248,48 @@ class SellerCategoryViewController: UIViewController {
             }
     }
     
+    func callingHttppApiToGetReserveTableResturants(){
+        NetworkManager.sharedInstance.showLoader()
+        storeCollectionModel.removeAll()
+        allStores.removeAll()
+        
+        var requstParams = [String:String]()
+        let language = sharedPrefrence.object(forKey: "language")
+        if(language != nil){
+            requstParams["lang"] = language as? String
+        }else{
+            requstParams["lang"] = "en"
+        }
+            
+        NetworkManager.sharedInstance.callingHttpRequest(params:requstParams, apiname:"store/restaurants-for-reservation",cuurentView: self){val,responseObject in
+                if val == 1 {
+                    self.view.isUserInteractionEnabled = true
+                    let dict = JSON(responseObject as! NSDictionary)
+                    print(dict)
+                    if dict["error"] != nil{
+                       //display the error to the customer
+                    }else{
+                        self.storeCollectionModel = StoreData(data: dict["store"]).stores
+                        self.checkforAvailableStores(stores:self.storeCollectionModel)
+                    }
+                }
+                else{
+                    NetworkManager.sharedInstance.dismissLoader()
+                    self.callingHttppApi()
+                }
+            }
+    }
+
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier! == "productSeller") {
             let viewController:Productcategory = segue.destination as UIViewController as! Productcategory
             viewController.storeId = storeId
             viewController.storeName = storeName
             viewController.storeImage = storeImage
+        } else if (segue.identifier! == "productSeller2") {
+            let viewController = segue.destination as UIViewController as! ReserveTableVC
+            viewController.selectedStore = self.selectedStore
         }
     }
 
@@ -288,16 +331,21 @@ extension SellerCategoryViewController: UITableViewDelegate,UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if allStores.isEmpty{
-            storeId = storeCollectionModel[indexPath.row].id
-            storeName = storeCollectionModel[indexPath.row].name
-            storeImage = storeCollectionModel[indexPath.row].image
-            self.performSegue(withIdentifier: "productSeller", sender: self)
-        }else{
-            storeId = allStores[indexPath.row].id
-            storeName = allStores[indexPath.row].name
-            storeImage = allStores[indexPath.row].image
-            self.performSegue(withIdentifier: "productSeller", sender: self)
+        if fromReservTable {
+            self.selectedStore = storeCollectionModel[indexPath.row]
+            self.performSegue(withIdentifier: "productSeller2", sender: self)
+        } else {
+            if allStores.isEmpty{
+                storeId = storeCollectionModel[indexPath.row].id
+                storeName = storeCollectionModel[indexPath.row].name
+                storeImage = storeCollectionModel[indexPath.row].image
+                self.performSegue(withIdentifier: "productSeller", sender: self)
+            }else{
+                storeId = allStores[indexPath.row].id
+                storeName = allStores[indexPath.row].name
+                storeImage = allStores[indexPath.row].image
+                self.performSegue(withIdentifier: "productSeller", sender: self)
+            }
         }
     }
 }
@@ -332,5 +380,4 @@ struct Store{
         isfast = data["fast_delivery"].stringValue
     }
 }
-
 

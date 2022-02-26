@@ -22,6 +22,7 @@ class EmptyCartView: UIView{
         lb.text = NetworkManager.sharedInstance.language(key: "cartempty")
         lb.font = UIFont.systemFont(ofSize: 15)
         lb.textAlignment = .center
+        lb.numberOfLines = 0
         return lb
     }()
     
@@ -59,7 +60,7 @@ class EmptyCartView: UIView{
         self.messageLabel.anchor(top: imageView.bottomAnchor, left: self.leadingAnchor, right: self.trailingAnchor, paddingTop: 30,paddingLeft: 20,paddingRight: 20, height: 35)
         
         self.addSubview(browsButton)
-        browsButton.anchor(top: messageLabel.bottomAnchor,bottom: self.bottomAnchor, paddingTop: 15, width: 150, height: 40)
+        browsButton.anchor(top: messageLabel.bottomAnchor,bottom: self.bottomAnchor, paddingTop: 15, width: 200, height: 40)
         NSLayoutConstraint.activate([
             browsButton.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])

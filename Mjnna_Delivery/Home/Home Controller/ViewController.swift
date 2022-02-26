@@ -8,10 +8,6 @@ import IQKeyboardManagerSwift
 
 class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControllerHandlerDelegate,bannerViewControllerHandlerDelegate,UITabBarControllerDelegate, UICollectionViewDelegate{
     
-    
-    
- 
-    
     //MARK:- Outlet
     @IBOutlet weak var homeTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -19,7 +15,7 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
     @IBOutlet var RefreshView: UIVisualEffectView!
     @IBOutlet var refreshingLabel: UILabel!
 
-  
+  var openReserveTable = false
     //MARK:- View component
     
     lazy var menuNavigationButtonItem: UIBarButtonItem = {
@@ -155,6 +151,7 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         typeId = ID
         typeName = name
         typeImage = thumbnail
+        self.openReserveTable = false
         self.performSegue(withIdentifier: "sellerCategory", sender: self)
     }
     
@@ -162,7 +159,7 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         let items = self.tabBarController?.tabBar.items
         items?[0].title = "Home".localized
         items?[1].title = "Stores".localized
-        items?[2].title = "Account".localized
+//        items?[2].title = "Account".localized
     }
     
     func setupMainTableView(){
@@ -220,7 +217,7 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
     
     func handleMenu(notification:Notification){
         enum customerMenu: Int {
-              case discover = 0, myAccount, myOrders, myAddresses, aboutus, contactus,privacy,logout
+              case discover = 0, myAccount, myOrders, myBookings, myAddresses, aboutus, contactus,privacy,logout
           }
         enum gestMenu: Int {
               case discover = 0, aboutus, contactus,privacy,login,signup
@@ -234,7 +231,15 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
                 case .discover:
                     print("discover")
                 case .myAccount:
-                    self.tabBarController?.selectedIndex = 2
+                    //self.tabBarController?.selectedIndex = 2
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                        let vc = UIStoryboard.init(name: "Account", bundle: Bundle.main).instantiateViewController(withIdentifier: "MyProfileVC")
+//                        self.modalPresentationStyle = .overCurrentContext
+//                        self.navigationController?.pushViewController(vc, animated: true)
+//                    }
+                    let vc = getViewController(storyboard: UIStoryboard(name: "Account", bundle: nil), sceneID: "MyProfileVC")
+                        navigationController?.pushViewController(vc, animated: true)
+                    
                 case .myAddresses:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         let vc = UIStoryboard.init(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: "LocationList")
@@ -245,10 +250,17 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         self.performSegue(withIdentifier: "orderhistory", sender: nil)
                     }
+                case .myBookings:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        self.performSegue(withIdentifier: "bookinghistory", sender: nil)
+                    }
                 case .aboutus:
                     print("aboutus")
+                    self.performSegue(withIdentifier: "privacy", sender: nil)
                 case .contactus:
-                    print("contactus")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        self.performSegue(withIdentifier: "contactUs", sender: nil)
+                    }
                 case .privacy:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         self.performSegue(withIdentifier: "privacy", sender: nil)
@@ -275,8 +287,11 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
                 print("discover")
             case .aboutus:
                 print("aboutus")
+                self.performSegue(withIdentifier: "privacy", sender: nil)
             case .contactus:
-                print("contactus")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.performSegue(withIdentifier: "contactUs", sender: nil)
+                }
             case .privacy:
                 self.performSegue(withIdentifier: "privacy", sender: nil)
             case .login:
@@ -287,7 +302,8 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
                 
             break
             case .signup:
-                self.tabBarController?.selectedIndex = 2
+                let vc = UIStoryboard.init(name: "Account", bundle: Bundle.main).instantiateViewController(withIdentifier: "CustomerSignup")
+                self.navigationController?.pushViewController(vc, animated: true)
             default:
                 break
             }
@@ -489,10 +505,10 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         let navigation:UINavigationController = tabBarController.viewControllers?[tabitem] as! UINavigationController
         navigation.popToRootViewController(animated: true)
         
-        if tabitem != 2{
-            let navigation:UINavigationController = tabBarController.viewControllers?[2] as! UINavigationController
-            navigation.popToRootViewController(animated: true)
-        }
+//        if tabitem != 2{
+//            let navigation:UINavigationController = tabBarController.viewControllers?[2] as! UINavigationController
+//            navigation.popToRootViewController(animated: true)
+//        }
     }
     
     func callingHttppApi(){
@@ -599,6 +615,12 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
         typeId = ID
         typeName = name
         typeImage = thumbnail
+        
+        self.performSegue(withIdentifier: "sellerCategory", sender: self)
+    }
+    
+    func didTapOnReserveTable() {
+        self.openReserveTable = true
         self.performSegue(withIdentifier: "sellerCategory", sender: self)
     }
     
@@ -619,6 +641,7 @@ class ViewController: UIViewController,UISearchBarDelegate,CategoryViewControlle
             viewController.typeName = typeName
             viewController.typeImage = typeImage
             viewController.subStoreIsAvailable = true
+            viewController.fromReservTable = self.openReserveTable
         }
 
 //        }else if (segue.identifier == "subcategory") {

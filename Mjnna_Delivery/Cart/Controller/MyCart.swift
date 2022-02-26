@@ -253,6 +253,9 @@ class MyCart: UIViewController,UpdateCartHandlerDelegate{
                 let newVC = self.storyboard!.instantiateViewController(withIdentifier: "checkoutOrder") as! CheckOutViewController
                 newVC.modalPresentationStyle = .overFullScreen
                 newVC.fastDelivery = cartViewModel.fastDelivery
+                newVC.subTotal = self.cartViewModel?.getTotalAmount[1].text ?? ""
+                newVC.delivery = self.cartViewModel?.getTotalAmount[0].text ?? ""
+                newVC.total = self.cartViewModel?.getTotalAmount[2].text ?? ""
                 self.navigationController?.pushViewController(newVC, animated: true)
                 
             }else{

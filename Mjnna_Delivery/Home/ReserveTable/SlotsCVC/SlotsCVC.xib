@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SlotsCVC" id="gTV-IL-0wX" customClass="SlotsCVC" customModule="To_Go_KSA" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="85" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="85" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qDE-dl-xw1" customClass="DashedView" customModule="To_Go_KSA" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="85" height="50"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="09:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Teh-8A-Vy6">
+                                <rect key="frame" x="4" y="4" width="81" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Teh-8A-Vy6" secondAttribute="bottom" constant="4" id="HxL-2M-tvX"/>
+                            <constraint firstItem="Teh-8A-Vy6" firstAttribute="leading" secondItem="qDE-dl-xw1" secondAttribute="leading" constant="4" id="Zsb-SP-Qpg"/>
+                            <constraint firstAttribute="trailing" secondItem="Teh-8A-Vy6" secondAttribute="trailing" id="gDp-iu-3K4"/>
+                            <constraint firstItem="Teh-8A-Vy6" firstAttribute="top" secondItem="qDE-dl-xw1" secondAttribute="top" constant="4" id="vC4-sl-ngK"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="qDE-dl-xw1" secondAttribute="bottom" id="DVo-9N-dXY"/>
+                <constraint firstAttribute="trailing" secondItem="qDE-dl-xw1" secondAttribute="trailing" id="P1f-NZ-Ww3"/>
+                <constraint firstItem="qDE-dl-xw1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lCl-3U-S9y"/>
+                <constraint firstItem="qDE-dl-xw1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="x9A-j7-Hkj"/>
+            </constraints>
+            <size key="customSize" width="85" height="50"/>
+            <connections>
+                <outlet property="containerDashedView" destination="qDE-dl-xw1" id="Liq-Z3-cIZ"/>
+                <outlet property="slotLabel" destination="Teh-8A-Vy6" id="ivy-TO-7vB"/>
+            </connections>
+            <point key="canvasLocation" x="94.927536231884062" y="83.705357142857139"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

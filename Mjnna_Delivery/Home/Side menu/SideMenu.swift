@@ -226,6 +226,7 @@ class SideMenu: UIView {
             dataSource = [CellContnet(image: #imageLiteral(resourceName: "ic_discover"), title: "Discover".localized),
                           CellContnet(image: #imageLiteral(resourceName: "ic_nav_profile"), title: "My Account".localized),
                           CellContnet(image: #imageLiteral(resourceName: "ic_order_history"), title: "My Orders".localized),
+                          CellContnet(image: #imageLiteral(resourceName: "ic_order_history"), title: "My Bookings".localized),
                           CellContnet(image: #imageLiteral(resourceName: "ic_addresses_nav"), title: "My Addresses".localized),
                           CellContnet(image: #imageLiteral(resourceName: "ic_nav_support"), title: "About us".localized),
                           CellContnet(image: #imageLiteral(resourceName: "ic_nav_support"), title: "Contact us".localized),

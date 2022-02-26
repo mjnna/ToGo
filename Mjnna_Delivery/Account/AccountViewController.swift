@@ -44,7 +44,7 @@ class AccountViewController: UIViewController {
             }
     }
     func showView(isGuest:Bool) {
-        self.navigationController?.navigationBar.isHidden = isGuest
+        //self.navigationController?.navigationBar.isHidden = isGuest
         profileContainerView.isHidden = isGuest
         signinupContainerView.isHidden = !isGuest
     }
